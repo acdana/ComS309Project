@@ -36,7 +36,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
 </dependency>
 </dependencies>
 <build>
-<finalName>JerseyTutorial</finalName>
+<finalName>ComS309Project</finalName>
 <plugins>
 <plugin>
 <groupId>org.eclipse.jetty</groupId>
