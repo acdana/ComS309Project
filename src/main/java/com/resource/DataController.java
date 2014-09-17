@@ -2,6 +2,8 @@ package com.resource;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.Resource;
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
 
@@ -12,14 +14,11 @@ import javax.persistence.EntityManager;
  * @author Alex
  *
  */
-public class DataRetreival implements AbstractDataRetreival {
-
+public class DataController implements AbstractDataController {
+	
 	public ArrayList<String> getAllUsernames(EntityManager em) {
-		
 		Query query = em.createNamedQuery("getAllUsernames");
-		List<Object> rawUsernames = query.getResultList();
-		return ObjectMapper.mapAllUsernames(rawUsernames);
-		
+		return ObjectMapper.mapAllUsernames(query.getResultList());
 	}
 
 }

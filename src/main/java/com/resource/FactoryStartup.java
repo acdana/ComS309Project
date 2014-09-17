@@ -3,6 +3,7 @@ package com.resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 
 
 /**
@@ -10,16 +11,14 @@ import javax.persistence.Persistence;
  * @author Alex
  *
  */
+
 public class FactoryStartup {
+
 	
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("ComS309Project");
+	static EntityManagerFactory emf = Persistence.createEntityManagerFactory("ComS309Project");
 	
-	public EntityManager getOurEntityManager() {
+	public static EntityManager getAnEntityManager() {
 		return emf.createEntityManager();
-	}
-   
-	public void closeEntityManager(EntityManager em) {
-		em.close();
 	}
 	
 	public void closeEntityManagerFactory(EntityManagerFactory emf) {

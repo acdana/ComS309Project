@@ -9,6 +9,6 @@ import javax.persistence.EntityManager;
  * @author Alex
  *
  */
-public interface AbstractDataRetreival {
+public interface AbstractDataController {
 	public ArrayList<String> getAllUsernames(EntityManager em);
 }
