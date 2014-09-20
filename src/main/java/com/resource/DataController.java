@@ -1,9 +1,7 @@
 package com.resource;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import javax.annotation.Resource;
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
 
@@ -14,7 +12,9 @@ import javax.persistence.EntityManager;
  * @author Alex
  *
  */
+@SuppressWarnings("unchecked")
 public class DataController implements AbstractDataController {
+	
 	
 	public ArrayList<String> getAllUsernames(EntityManager em) {
 		Query query = em.createNamedQuery("getAllUsernames");

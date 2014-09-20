@@ -3,6 +3,7 @@
 	<persistence-unit name="ComS309Project" transaction-type="RESOURCE_LOCAL">
 		<class>com.entities.User</class>
 		<properties>
+			<property name="openjpa.RuntimeUnenhancedClasses" value="supported"/>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://mysql.cs.iastate.edu:3306/db309T11"/>
 			<property name="javax.persistence.jdbc.user" value="u309T11"/>
 			<property name="javax.persistence.jdbc.password" value="ZiASf-eya"/>
