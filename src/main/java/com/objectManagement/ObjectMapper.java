@@ -1,4 +1,4 @@
-package com.resource;
+package com.objectManagement;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.resource;
+package com.persistenceResource;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

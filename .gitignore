@@ -1,1 +1,10 @@
-/*.class
+*.class
+.classpath
+.project
+.settings/
+target/
+*.out
+*.swp
+*.DS_Store
+*.lock
+*~

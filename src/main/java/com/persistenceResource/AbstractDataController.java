@@ -1,4 +1,4 @@
-package com.resource;
+package com.persistenceResource;
 
 import java.util.ArrayList;
 import javax.persistence.EntityManager;

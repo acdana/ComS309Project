@@ -1,9 +1,11 @@
-package com.resource;
+package com.persistenceResource;
 
 import java.util.ArrayList;
 
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
+
+import com.objectManagement.ObjectMapper;
 
 /**
  * This class is the implementation of AbstractDataRetreival.
