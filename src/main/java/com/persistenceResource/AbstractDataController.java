@@ -11,4 +11,5 @@ import javax.persistence.EntityManager;
  */
 public interface AbstractDataController {
 	public ArrayList<String> getAllUsernames(EntityManager em);
+	public String deleteUser(EntityManager em, String usernameToDelete);
 }

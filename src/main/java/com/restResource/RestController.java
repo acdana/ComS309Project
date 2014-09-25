@@ -24,9 +24,9 @@ public class RestController {
       public String getAllUsernames() {
     	  
     	try {
-    	ArrayList<String> userNames = dataController.getAllUsernames(em);
-    	em.close();
-        return userNames.toString();
+    		ArrayList<String> userNames = dataController.getAllUsernames(em);
+    		em.close();
+    		return userNames.toString();
     	}
     	catch (Exception e) {
     		return "Error message of some kind";
@@ -40,18 +40,18 @@ public class RestController {
       public String createNewUser(@PathParam("username") String username, @PathParam("password") String password, @PathParam("email") String email) {
     	 
     	  try {
-    	  em.getTransaction().begin();
-    	  User user = new User();
-    	  user.setUsername(username);
-    	  user.setPassword(password);
-    	  user.setEmail(email);
-    	  user.setAccountStatus("Clear");
-    	  user.setUserType("Basic");
-    	  user.setPenalties(0);
-    	  em.persist(user);
-    	  em.getTransaction().commit();
-    	  em.close();
-    	  return "Success";
+    		  em.getTransaction().begin();
+    		  User user = new User();
+    		  user.setUsername(username);
+    		  user.setPassword(password);
+    		  user.setEmail(email);
+    		  user.setAccountStatus("Clear");
+    		  user.setUserType("Basic");
+    		  user.setPenalties(0);
+    		  em.persist(user);
+    		  em.getTransaction().commit();
+    		  em.close();
+    		  return "Success";
     	  }
     	  catch(Exception e) {
     		  return "Failure";
@@ -59,4 +59,19 @@ public class RestController {
       }
 
 
+      @GET
+      @Produces(MediaType.TEXT_PLAIN)
+      @Path("/deleteUser/{usernameToDelete}")
+      public String deleteUser(@PathParam("usernameToDelete") String usernameToDelete) {
+    	  
+    	try {
+    		String result = dataController.deleteUser(em, usernameToDelete);
+    		em.close();
+    		return result;
+    	}
+    	catch (Exception e) {
+    		return "Failure";
+    	}
+      }
+      
 }
