@@ -32,11 +32,12 @@ public class DataController implements AbstractDataController {
 	
 	public String deleteUser(EntityManager em, String usernameToDelete) {
 		try {
-			em.createNamedQuery("deleteUser").setParameter("usernameToDelete", usernameToDelete);
+			Query query = em.createNamedQuery("deleteUser").setParameter("usernameToDelete", usernameToDelete);
+			query.executeUpdate();
 			return "Success";
 		}
 		catch (Exception e) {
-			return "Failure";
+			return e.getMessage();
 		}
 		
 	}

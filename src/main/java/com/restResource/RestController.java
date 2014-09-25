@@ -65,12 +65,14 @@ public class RestController {
       public String deleteUser(@PathParam("usernameToDelete") String usernameToDelete) {
     	  
     	try {
+    		em.getTransaction().begin();
     		String result = dataController.deleteUser(em, usernameToDelete);
+    		em.getTransaction().commit();
     		em.close();
     		return result;
     	}
     	catch (Exception e) {
-    		return "Failure";
+    		return e.getMessage();
     	}
       }
       
