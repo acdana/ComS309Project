@@ -9,7 +9,11 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@NamedQuery(name="getAllUsernames", query="SELECT U.username FROM User U")
+@NamedQueries({
+    @NamedQuery(name="getAllUsernames", query="SELECT U.username FROM User U"),
+    @NamedQuery(name="deleteUser", query="DELETE FROM User WHERE username = :usernameToDelete"),
+})
+
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
