@@ -1,6 +1,7 @@
 package com.persistenceResource;
 
 import java.util.ArrayList;
+
 import javax.persistence.EntityManager;
 
 /**
@@ -10,6 +11,8 @@ import javax.persistence.EntityManager;
  *
  */
 public interface AbstractDataController {
-	public ArrayList<String> getAllUsernames(EntityManager em);
+	public ArrayList<String> getUsernames(EntityManager em, String namedQuery);
 	public String deleteUser(EntityManager em, String usernameToDelete);
+	public String penalizeUser(EntityManager em, String usernameToPenalize);
+	public String getPenaltyCount(EntityManager em, String usernameToCheck);
 }

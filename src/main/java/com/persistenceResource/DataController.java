@@ -17,24 +17,23 @@ import com.objectManagement.ObjectMapper;
 @SuppressWarnings("unchecked")
 public class DataController implements AbstractDataController {
 	
-	
-	public ArrayList<String> getAllUsernames(EntityManager em) {
+	public ArrayList<String> getUsernames(EntityManager em, String namedQuery) {
 		
-		Query query = em.createNamedQuery("getAllUsernames");
+		Query query = em.createNamedQuery(namedQuery);
 		if(query.getResultList().size() == 0) {
 			return null;
 		}
-		return ObjectMapper.mapAllUsernames(query.getResultList());
-		
+		return ObjectMapper.mapUsernames(query.getResultList());
 		
 	}
 	
-	
 	public String deleteUser(EntityManager em, String usernameToDelete) {
+		
 		try {
 			Query query = em.createNamedQuery("deleteUser").setParameter("usernameToDelete", usernameToDelete);
-			query.executeUpdate();
-			return "Success";
+			int deleted = query.executeUpdate();
+			if (deleted == 0) return "No entries deleted.";
+			else return "Success";
 		}
 		catch (Exception e) {
 			return e.getMessage();
@@ -42,5 +41,35 @@ public class DataController implements AbstractDataController {
 		
 	}
 	
+	public String penalizeUser(EntityManager em, String usernameToPenalize) {
+		
+		try {
+			
+			Query q = em.createNamedQuery("penalizeUser").setParameter("usernameToPenalize", usernameToPenalize);
+			int update = q.executeUpdate();
+			if (update == 0) return "Did not penalize user: " + usernameToPenalize;
+			else return "Success";
+			
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+		
+	}
+	
+	public String getPenaltyCount(EntityManager em, String usernameToCheck) {
+	
+		try {
+			
+			Query q = em.createNamedQuery("getPenaltyCount").setParameter("usernameToCheck", usernameToCheck);
+			if (q.getResultList().size() == 0) return "Could not find user.";
+			else {
+				return usernameToCheck + " has a penalty count of " + q.getResultList().get(0);
+			}
+			
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+		
+	}
 
 }

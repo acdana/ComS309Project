@@ -24,7 +24,7 @@ public class RestController {
       public String getAllUsernames() {
     	  
     	try {
-    		ArrayList<String> userNames = dataController.getAllUsernames(em);
+    		ArrayList<String> userNames = dataController.getUsernames(em, "getAllUsernames");
     		em.close();
     		return userNames.toString();
     	}
@@ -74,6 +74,60 @@ public class RestController {
     	catch (Exception e) {
     		return e.getMessage();
     	}
+      }
+      
+      @GET
+      @Produces(MediaType.TEXT_PLAIN)
+      @Path("/penalizeUser/{usernameToPenalize}")
+      public String penalizeUser(@PathParam("usernameToPenalize") String usernameToPenalize) {
+    	  
+    	  try {
+    		  
+    		  em.getTransaction().begin();
+    		  String result = dataController.penalizeUser(em, usernameToPenalize);
+    		  em.getTransaction().commit();
+    		  em.close();
+    		  return result;
+    		  
+    	  } catch (Exception e) {
+    		  return e.getMessage();
+    	  }
+    	  
+      }
+      
+      @GET
+      @Produces(MediaType.TEXT_PLAIN)
+      @Path("/getPenalizedUsers")
+      public String getPenalizedUsers() {
+    	  
+    	try {
+    		
+    		ArrayList<String> userNames = dataController.getUsernames(em, "getPenalizedUsers");
+    		em.close();
+    		if (userNames == null) return "No penalized users.";
+    		else return userNames.toString();
+    	
+    	} catch (Exception e) {
+    		return e.getMessage();
+    	}
+    	
+      }
+      
+      @GET
+      @Produces(MediaType.TEXT_PLAIN)
+      @Path("/getPenaltyCount/{usernameToCheck}")
+      public String getPenaltyCount(@PathParam("usernameToCheck") String usernameToCheck) {
+    	
+    	  try {
+    		  
+    		  String output = dataController.getPenaltyCount(em, usernameToCheck);
+    		  em.close();
+    		  return output;
+    		  
+    	  } catch (Exception e) {
+    		  return e.getMessage();
+    	  }
+    	  
       }
       
 }
