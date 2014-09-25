@@ -5,6 +5,10 @@
 		<class>com.entities.Message</class>
 		<class>com.entities.Profile</class>
 		<class>com.entities.Sale</class>
+<<<<<<< HEAD
+=======
+		<class>com.entities.User</class>
+>>>>>>> aff01a052df58bd3b8734b2dc78c865a5cce4754
 		<properties>
 			<property name="openjpa.RuntimeUnenhancedClasses" value="supported"/>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://mysql.cs.iastate.edu:3306/db309T11"/>
