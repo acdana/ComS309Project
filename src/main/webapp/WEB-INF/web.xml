@@ -15,7 +15,7 @@
 </servlet>
 <servlet-mapping>
 <servlet-name>Jersey REST Service</servlet-name>
-<url-pattern>/rest/*</url-pattern>
+<url-pattern>/309/*</url-pattern>
 </servlet-mapping>
 <resource-ref>
 	<description>ComS309 MySQL Server</description>
