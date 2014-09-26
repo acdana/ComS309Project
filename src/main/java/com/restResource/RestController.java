@@ -35,7 +35,7 @@ public class RestController {
      
       
       @GET
-      @Produces(MediaType.TEXT_PLAIN)
+      @Produces(MediaType.APPLICATION_JSON)
       @Path("/createNewUser/{username}/{password}/{email}")
       public String createNewUser(@PathParam("username") String username, @PathParam("password") String password, @PathParam("email") String email) {
     	 
