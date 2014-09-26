@@ -19,7 +19,7 @@ public class RestController {
 	DataController dataController = new DataController();
 	
       @GET
-      @Produces(MediaType.TEXT_PLAIN)
+      @Produces(MediaType.APPLICATION_JSON)
       @Path("/getAllUsernames")
       public String getAllUsernames() {
     	  
@@ -60,7 +60,7 @@ public class RestController {
 
 
       @GET
-      @Produces(MediaType.TEXT_PLAIN)
+      @Produces(MediaType.APPLICATION_JSON)
       @Path("/deleteUser/{usernameToDelete}")
       public String deleteUser(@PathParam("usernameToDelete") String usernameToDelete) {
     	  
@@ -77,7 +77,7 @@ public class RestController {
       }
       
       @GET
-      @Produces(MediaType.TEXT_PLAIN)
+      @Produces(MediaType.APPLICATION_JSON)
       @Path("/penalizeUser/{usernameToPenalize}")
       public String penalizeUser(@PathParam("usernameToPenalize") String usernameToPenalize) {
     	  
@@ -96,7 +96,7 @@ public class RestController {
       }
       
       @GET
-      @Produces(MediaType.TEXT_PLAIN)
+      @Produces(MediaType.APPLICATION_JSON)
       @Path("/getPenalizedUsers")
       public String getPenalizedUsers() {
     	  
@@ -114,7 +114,7 @@ public class RestController {
       }
       
       @GET
-      @Produces(MediaType.TEXT_PLAIN)
+      @Produces(MediaType.APPLICATION_JSON)
       @Path("/getPenaltyCount/{usernameToCheck}")
       public String getPenaltyCount(@PathParam("usernameToCheck") String usernameToCheck) {
     	
