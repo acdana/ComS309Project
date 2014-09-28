@@ -1,2 +1,15 @@
+<<<<<<< HEAD
 target/m2e-wtp/web-resources/META-INF/maven/com.cs309.team11/ComS309Project/pom.properties
 /target/
+=======
+*.class
+.classpath
+.project
+.settings/
+target/
+*.out
+*.swp
+*.DS_Store
+*.lock
+*~
+>>>>>>> 3729c5b07b6a0f043fa3ab1048c0e63e7572e833
