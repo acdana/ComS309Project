@@ -1,10 +1,12 @@
 package com.persistenceResource;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
 
+import com.objectManagement.MessageKeyMultiValue;
 import com.objectManagement.ObjectMapper;
 
 /**
@@ -70,6 +72,22 @@ public class DataController implements AbstractDataController {
 			return e.getMessage();
 		}
 		
+	}
+
+	public String getMessages(EntityManager em, String username) {
+		
+		try {
+			Query query = em.createNamedQuery("getMessages").setParameter("username", username);
+			List<Object[]> rawMessages = query.getResultList();
+			if(rawMessages.size() == 0) {
+				return "No messages";
+			}
+			else {
+				return ObjectMapper.mapMessages(rawMessages).toString();
+			}
+		} catch (Exception e) {
+			return "Failed to load messages";
+		}
 	}
 
 }

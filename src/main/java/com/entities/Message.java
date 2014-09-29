@@ -10,7 +10,9 @@ import java.util.Date;
  * 
  */
 @Entity
-@NamedQuery(name="Message.findAll", query="SELECT m FROM Message m")
+@NamedQueries ({
+	@NamedQuery(name="getMessages", query="SELECT M.sender, M.message, M.dateSent FROM Message M WHERE M.username = :username")
+})
 public class Message implements Serializable {
 	private static final long serialVersionUID = 1L;
 

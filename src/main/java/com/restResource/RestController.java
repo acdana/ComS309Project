@@ -130,4 +130,20 @@ public class RestController {
     	  
       }
       
+      @GET
+      @Produces(MediaType.APPLICATION_JSON)
+      @Path("/getMessages/{username}")
+      public String getMessages(@PathParam("username") String username) {
+    	  try {
+    		  
+    		  String messages = dataController.getMessages(em, username);
+    		  em.close();
+    		  return messages;
+    		  
+    	  } catch (Exception e) {
+    		  return e.getMessage();
+    	  }
+    	  
+      }
+      
 }
