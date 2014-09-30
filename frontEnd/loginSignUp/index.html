@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
-
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <!--HTML For Login/Sign Up page - Daniel Cain-->
     <script src="signUp.js"></script>
     <meta charset="utf-8" />
     <title>
@@ -9,7 +9,7 @@
     </title>
 </head>
 <body>
-    <form name="myForm" onsubmit="">
+    <form name="signUpForm" onsubmit="checkForm()">
         Name: <input type="text" name="name"><br>
         Gender: <select name="gender">
             <option value="male">Male</option>
@@ -18,7 +18,6 @@
         </select><br>
         Address: <input type="text" name="address"><br>
         Email: <input type="text" name="email"><br>
-        Phone: <input type="text" name="phone"><br>
         <button>Submit</button>
     <form>
 </body>
