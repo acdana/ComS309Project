@@ -3,6 +3,7 @@ package com.objectManagement;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ObjectMapper {
 	
 	public static ArrayList<String> mapUsernames(List<Object> rawUsernames) {
@@ -16,11 +17,14 @@ public class ObjectMapper {
 	}
 	
 	public static ArrayList<MessageKeyMultiValue> mapMessages(List<Object[]> rawMessages) {
+		
 		ArrayList<MessageKeyMultiValue> allMessages = new ArrayList<MessageKeyMultiValue>();
-		for(Object[] o : rawMessages) {
+		for(Object[] rawMessage : rawMessages) {	
+			
 			MessageKeyMultiValue message = new MessageKeyMultiValue();
-			message.setSender((String) o[0]); 
-			message.setMessage((String) o[1]);
+			message.setUsername("Test");
+			message.setMessage((String) rawMessage[0]);
+			message.setSender((String) rawMessage[1]); 
 			allMessages.add(message);
 		}
 		

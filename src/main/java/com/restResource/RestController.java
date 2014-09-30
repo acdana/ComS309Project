@@ -1,14 +1,13 @@
 package com.restResource;
 
 import java.util.ArrayList;
-
 import javax.persistence.EntityManager;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
+import com.entities.Message;
 import com.entities.User;
 import com.persistenceResource.DataController;
 import com.persistenceResource.FactoryStartup;
@@ -145,5 +144,31 @@ public class RestController {
     	  }
     	  
       }
+      
+      
+      @GET
+      @Produces(MediaType.APPLICATION_JSON)
+      @Path("/createNewMessage/{username}/{message}/{sender}")
+      public String createNewMessage(@PathParam("username") String username, @PathParam("message") String message, @PathParam("sender") String sender) {
+ 
+    	  try {
+    		  em.getTransaction().begin();
+    		  Message messageToSend = new Message();
+    		  messageToSend.setUsername(username);
+    		  messageToSend.setSender(sender);
+    		  messageToSend.setMessage(message);
+    		  messageToSend.setDateOpened(null);
+    		  messageToSend.setDateSent(null);
+    		  em.persist(messageToSend);
+    		  em.getTransaction().commit();
+    		  em.close();
+    		  return "Success";
+    	  }
+    	  catch(Exception e) {
+    		  System.out.println(e.getMessage());
+    		  return "Failure";
+    	  }
+      }
+      
       
 }

@@ -11,7 +11,7 @@ import java.util.Date;
  */
 @Entity
 @NamedQueries ({
-	@NamedQuery(name="getMessages", query="SELECT M.sender, M.message, M.dateSent FROM Message M WHERE M.username = :username")
+	@NamedQuery(name="getMessages", query="SELECT M.message, M.sender FROM Message M WHERE M.username = :username")
 })
 public class Message implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -21,7 +21,7 @@ public class Message implements Serializable {
 
 	@Temporal(TemporalType.DATE)
 	private Date dateOpened;
-
+	
 	@Temporal(TemporalType.DATE)
 	private Date dateSent;
 
@@ -52,8 +52,8 @@ public class Message implements Serializable {
 		return this.dateSent;
 	}
 
-	public void setDateSent(Date dateSent) {
-		this.dateSent = dateSent;
+	public void setDateSent(Date expression) {
+		this.dateSent = expression;
 	}
 
 	public String getMessage() {

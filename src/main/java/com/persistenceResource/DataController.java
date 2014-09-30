@@ -2,12 +2,10 @@ package com.persistenceResource;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
-
-import com.objectManagement.MessageKeyMultiValue;
 import com.objectManagement.ObjectMapper;
+
 
 /**
  * This class is the implementation of AbstractDataRetreival.
@@ -29,6 +27,7 @@ public class DataController implements AbstractDataController {
 		
 	}
 	
+	
 	public String deleteUser(EntityManager em, String usernameToDelete) {
 		
 		try {
@@ -42,6 +41,7 @@ public class DataController implements AbstractDataController {
 		}
 		
 	}
+	
 	
 	public String penalizeUser(EntityManager em, String usernameToPenalize) {
 		
@@ -57,6 +57,7 @@ public class DataController implements AbstractDataController {
 		}
 		
 	}
+	
 	
 	public String getPenaltyCount(EntityManager em, String usernameToCheck) {
 	
@@ -74,6 +75,7 @@ public class DataController implements AbstractDataController {
 		
 	}
 
+	
 	public String getMessages(EntityManager em, String username) {
 		
 		try {
@@ -86,6 +88,7 @@ public class DataController implements AbstractDataController {
 				return ObjectMapper.mapMessages(rawMessages).toString();
 			}
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			return "Failed to load messages";
 		}
 	}
