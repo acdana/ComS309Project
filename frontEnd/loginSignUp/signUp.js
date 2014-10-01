@@ -27,4 +27,13 @@ function checkForm() {
         alert("Not a valid e-mail address");
         return false;
     }
+
+}
+
+// Check for corrct username/password matchup
+function checkLogin() {
+    // Initialize variables for the forms from the login section
+    var un = document.forms["loginForm"]["logUsername"].value;
+    var passw = document.forms["loginForm"]["logPassword"].value;
+
 }
