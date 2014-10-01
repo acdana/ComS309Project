@@ -1,1 +1,10 @@
-target/m2e-wtp/web-resources/META-INF/maven/com.cs309.team11/ComS309Project/pom.properties
+*.class
+.classpath
+.project
+.settings/
+target/
+*.out
+*.swp
+*.DS_Store
+*.lock
+*~

@@ -9,13 +9,13 @@
 <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
 <init-param>
 <param-name>com.sun.jersey.config.property.packages</param-name>
-<param-value>com.resource</param-value>
+<param-value>com.restResource</param-value>
 </init-param>
 <load-on-startup>1</load-on-startup>
 </servlet>
 <servlet-mapping>
 <servlet-name>Jersey REST Service</servlet-name>
-<url-pattern>/rest/*</url-pattern>
+<url-pattern>/309/*</url-pattern>
 </servlet-mapping>
 <resource-ref>
 	<description>ComS309 MySQL Server</description>
