@@ -4,8 +4,11 @@ import java.sql.Date;
 
 /**
  * This class is used to store our database data before it is sent to the UI.
- * It contains elements for all necassary attributes in our database.
+ * It can contains elements for all necassary attributes in our database.
  * Add more elements as needed.
+ * 
+ *TODO: Branch out into different key value classes for different tables
+ * @deprecated
  * @author Alex
  *
  */

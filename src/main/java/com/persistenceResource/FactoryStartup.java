@@ -13,17 +13,29 @@ import javax.persistence.Persistence;
 
 public class FactoryStartup {
 
-	
+	/**
+	 * This is our EntityManagerFactory that handles the creation of EntityManagers.
+	 */
 	static EntityManagerFactory emf = Persistence.createEntityManagerFactory("ComS309Project");
 	
+	/**
+	 * This method is used to get an EntityManager.
+	 * 
+	 * @return An instance of an EntityManager generated with our EntityManagerFactory.
+	 */
 	public static EntityManager getAnEntityManager() {
 		return emf.createEntityManager();
 	}
 	
+	/**
+	 * This method closes our EntityManagerFactory.
+	 * This method should not be called as EntityManagerFactory
+	 * is (typically) automatically dealt with.
+	 * 
+	 * @param emf	Our EntityManagerFactory to close
+	 */
 	public void closeEntityManagerFactory(EntityManagerFactory emf) {
 		emf.close();
 	}
-	
-	
-   
+	 
 }
