@@ -1,29 +1,57 @@
 ﻿<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <link href="css/style.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
     <link href="bootstrap/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
 
     <!--HTML For Login/Sign Up page - Daniel Cain-->
-    <script src="signUp.js"></script>
     <meta charset="utf-8" />
     <title>
         Thriftr: Sign Up!
     </title>
 </head>
 <body>
-    <img src="../assets/png/thriftrTitle.png" width="600px"/>
-    <form name="signUpForm" onsubmit="checkForm()">
-        Name: <input type="text" name="name"><br>
-        Gender: <select name="gender">
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-        </select><br>
-        Address: <input type="text" name="address"><br>
-        Email: <input type="text" name="email"><br>
-        <button>Submit</button>
-    <form>
+    <div class="container">
+        <div class="row">
+            <div class="span12" id="titleCard">
+                <img src="../assets/png/thriftrTitle.png" width="600px" />
+            </div>
+        </div>
+        <div class="row">
+            <h1 style="font-family: 'Lato', sans-serif;">
+                Sign Up
+            </h1>
+        </div>
+        <!--Sign-Up Form-->
+        <div class="row">
+            <div class="span12">
+                <form name="signUpForm" onsubmit="checkForm()" style="font-family: 'trebuchet ms', sans-serif;">
+                    Username: <input type="text" name="username" /><br />
+                    Name: <input type="text" name="name"><br>
+                    Email (@iastate.edu only): <input type="text" name="email"><br>
+                    <button>Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <h1 style="font-family: 'Lato', sans-serif;">
+                Log In
+            </h1>
+        </div>
+        <!--Log In Form-->
+        <div class="row">
+            <div class="span12">
+                <form name="loginForm" onsubmit="checkLogin()" style="font-family: 'trebuchet ms', sans-serif;">
+                    Username: <input type="text" name="logUsername" /><br />
+                    Password: <input type="text" name="logPassword" /><br />
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--JavaScript Links-->
+    <script src="signUp.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
 </body>
 </html>
