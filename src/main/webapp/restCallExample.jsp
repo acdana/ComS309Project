@@ -1,7 +1,7 @@
 <html ng-app>
 <head>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
-<script type="text/javascript" src="createUser.js"></script>
+<script type="text/javascript" src="createUserExample.js"></script>
 </head>
 
 
