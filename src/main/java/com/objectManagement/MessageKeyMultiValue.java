@@ -75,7 +75,8 @@ public class MessageKeyMultiValue {
 	
 	@Override
 	public String toString() {
-		return "Username: " + username + "     Sender: " + sender + "     Message: " + message + "     Date Sent: " + dateSent.toString() + "     Date Opened: " + dateOpened.toString();
+		return "Sender: " + sender + "     Message: " + message;
 	}
+
 	
 }

@@ -17,7 +17,7 @@ public class Message implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private String username;
+	private String messageID;
 
 	@Temporal(TemporalType.DATE)
 	private Date dateOpened;
@@ -25,6 +25,8 @@ public class Message implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dateSent;
 
+	private String username;
+	
 	private String message;
 
 	private String sender;
@@ -32,6 +34,14 @@ public class Message implements Serializable {
 	public Message() {
 	}
 
+	public String getMessageID() {
+		return this.messageID;
+	}
+	
+	public void setMessageID(String messageID) {
+		this.messageID = messageID;
+	}
+	
 	public String getUsername() {
 		return this.username;
 	}

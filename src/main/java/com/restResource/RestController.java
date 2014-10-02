@@ -28,6 +28,7 @@ public class RestController {
     		return userNames.toString();
     	}
     	catch (Exception e) {
+    		em.close();
     		return "Error message of some kind";
     	}
       }
@@ -39,20 +40,11 @@ public class RestController {
       public String createNewUser(@PathParam("username") String username, @PathParam("password") String password, @PathParam("email") String email) {
     	 
     	  try {
-    		  em.getTransaction().begin();
-    		  User user = new User();
-    		  user.setUsername(username);
-    		  user.setPassword(password);
-    		  user.setEmail(email);
-    		  user.setAccountStatus("Clear");
-    		  user.setUserType("Basic");
-    		  user.setPenalties(0);
-    		  em.persist(user);
-    		  em.getTransaction().commit();
-    		  em.close();
+    		  dataController.createNewUser(em, username, password, email);
     		  return "Success";
     	  }
     	  catch(Exception e) {
+    		  em.close();
     		  return "Failure";
     	  }
       }
@@ -71,6 +63,7 @@ public class RestController {
     		return result;
     	}
     	catch (Exception e) {
+    		em.close();
     		return e.getMessage();
     	}
       }
@@ -89,6 +82,7 @@ public class RestController {
     		  return result;
     		  
     	  } catch (Exception e) {
+    		  em.close();
     		  return e.getMessage();
     	  }
     	  
@@ -107,6 +101,7 @@ public class RestController {
     		else return userNames.toString();
     	
     	} catch (Exception e) {
+    		em.close();
     		return e.getMessage();
     	}
     	
@@ -124,6 +119,7 @@ public class RestController {
     		  return output;
     		  
     	  } catch (Exception e) {
+    		  em.close();
     		  return e.getMessage();
     	  }
     	  
@@ -140,6 +136,8 @@ public class RestController {
     		  return messages;
     		  
     	  } catch (Exception e) {
+    		  em.close();
+    		  System.out.println(e.getMessage());
     		  return e.getMessage();
     	  }
     	  
@@ -152,20 +150,12 @@ public class RestController {
       public String createNewMessage(@PathParam("username") String username, @PathParam("message") String message, @PathParam("sender") String sender) {
  
     	  try {
-    		  em.getTransaction().begin();
-    		  Message messageToSend = new Message();
-    		  messageToSend.setUsername(username);
-    		  messageToSend.setSender(sender);
-    		  messageToSend.setMessage(message);
-    		  messageToSend.setDateOpened(null);
-    		  messageToSend.setDateSent(null);
-    		  em.persist(messageToSend);
-    		  em.getTransaction().commit();
-    		  em.close();
+    		  dataController.createNewMessage(em, username, message, sender);
     		  return "Success";
     	  }
     	  catch(Exception e) {
     		  System.out.println(e.getMessage());
+    		  em.close();
     		  return "Failure";
     	  }
       }
