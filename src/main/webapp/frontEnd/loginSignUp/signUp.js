@@ -39,11 +39,10 @@ function checkForm() {
     })
 }
 
-console.log("hello2");
 
+// Submit GET request, creates new user
+// Runs when the submit button (for Sign Up) is clicked
 $("#submitButton").click(function () {
-    console.log("attempting to submit");
-    console.log("/createNewUser/" + $("#name").val() + "/" + $("#pass").val() + "/" + $("#email").val());
     $.ajax({
         url: "309/T11/createNewUser/" + $("#name").val() + "/" + $("#pass").val() + "/" + $("#email").val(),
         type: "GET",
