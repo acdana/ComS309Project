@@ -1,7 +1,11 @@
 package com.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+import javax.persistence.criteria.Expression;
+
+import java.sql.Timestamp;
 import java.util.Date;
 
 
@@ -19,11 +23,11 @@ public class Message implements Serializable {
 	@Id
 	private String messageID;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateOpened;
 	
-	@Temporal(TemporalType.DATE)
-	private Date dateSent;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Expression<Timestamp> dateSent;
 
 	private String username;
 	
@@ -58,11 +62,11 @@ public class Message implements Serializable {
 		this.dateOpened = dateOpened;
 	}
 
-	public Date getDateSent() {
+	public Expression<Timestamp> getDateSent() {
 		return this.dateSent;
 	}
 
-	public void setDateSent(Date expression) {
+	public void setDateSent(Expression<Timestamp> expression) {
 		this.dateSent = expression;
 	}
 

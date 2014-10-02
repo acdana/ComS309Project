@@ -75,8 +75,7 @@ public class MessageKeyMultiValue {
 	
 	@Override
 	public String toString() {
-		return "Sender: " + sender + "     Message: " + message;
+		return "Sender: " + sender + "     Message: " + message + "\n";
 	}
-
 	
 }

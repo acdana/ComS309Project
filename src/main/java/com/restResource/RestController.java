@@ -7,8 +7,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import com.entities.Message;
-import com.entities.User;
 import com.persistenceResource.DataController;
 import com.persistenceResource.FactoryStartup;
 
@@ -137,7 +135,6 @@ public class RestController {
     		  
     	  } catch (Exception e) {
     		  em.close();
-    		  System.out.println(e.getMessage());
     		  return e.getMessage();
     	  }
     	  
@@ -154,7 +151,6 @@ public class RestController {
     		  return "Success";
     	  }
     	  catch(Exception e) {
-    		  System.out.println(e.getMessage());
     		  em.close();
     		  return "Failure";
     	  }

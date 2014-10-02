@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
 
 import com.entities.Message;
 import com.entities.User;
@@ -143,7 +144,6 @@ public class DataController implements AbstractDataController {
 		try {
 			Query query = em.createNamedQuery("getMessages").setParameter("username", username);
 			List<Object[]> rawMessages = query.getResultList();
-			  System.out.println(SecureIDGenerator.nextSecureId());
 			if(rawMessages.size() == 0) {
 				return "No messages";
 			}
@@ -172,17 +172,18 @@ public class DataController implements AbstractDataController {
 	}
 	
 	public void createNewMessage(EntityManager em, String username, String message, String sender) throws Exception {
-		  em.getTransaction().begin();
-		  Message messageToSend = new Message();
-		  messageToSend.setMessageID(SecureIDGenerator.nextSecureId());
-		  messageToSend.setUsername(username);
-		  messageToSend.setSender(sender);
-		  messageToSend.setMessage(message);
-		  messageToSend.setDateOpened(null);
-		  messageToSend.setDateSent(null);
-		  em.persist(messageToSend);
-		  em.getTransaction().commit();
-		  em.close();
+			CriteriaBuilder cb = em.getCriteriaBuilder();
+			em.getTransaction().begin();
+			Message messageToSend = new Message();
+			messageToSend.setMessageID(SecureIDGenerator.nextSecureId());
+			messageToSend.setUsername(username);
+			messageToSend.setSender(sender);
+			messageToSend.setMessage(message);
+			messageToSend.setDateOpened(null);
+			messageToSend.setDateSent(cb.currentTimestamp());
+			em.persist(messageToSend);
+			em.getTransaction().commit();
+			em.close();
 	}
 
 }
