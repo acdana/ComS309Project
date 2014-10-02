@@ -4,20 +4,17 @@ function checkForm() {
     // initializing variables to values entered in the form
     var n = document.forms["signUpForm"]["name"].value;
     var email = document.forms["signUpForm"]["email"].value;
-    var address = document.forms["signUpForm"]["address"].value;
+    var pass1 = document.forms["signUpForm"]["password1"].value;
+    var pass2 = document.forms["signUpForm"]["password2"].value;
 
     var atpos = email.indexOf("@");
     var dotpos = email.lastIndexOf(".");
 
+
+
     // Checks if the name is made with alphanumeric chars and isn't empty
     if (n == null || n == "" || !n.match(/^[0-9a-z]+$/)) {
         alert("Name must be filled out with alphanumeric characters only");
-        return false;
-    }
-
-    // Checks if the address field is filled
-    if (address == null || address == "") {
-        alert("Address required");
         return false;
     }
 
@@ -28,7 +25,37 @@ function checkForm() {
         return false;
     }
 
+    // Check if Password and Confirm Password have the same value
+    if (pass1 != pass2) {
+        alert("Password and its confirmation aren't the same.");
+        return false;
+    }
+    $.ajax({
+        url: "../../createNewUser/" + n + "/" + pass1 + "/" + email,
+        type: "POST",
+        success: function (result) {
+            console.log(result);
+        }
+    })
 }
+
+console.log("hello2");
+
+$("#submitButton").click(function () {
+    console.log("attempting to submit");
+    console.log("/createNewUser/" + $("#name").val() + "/" + $("#pass").val() + "/" + $("#email").val());
+    $.ajax({
+        url: "309/T11/createNewUser/" + $("#name").val() + "/" + $("#pass").val() + "/" + $("#email").val(),
+        type: "GET",
+        success: function (result) {
+            console.log(result);
+        },
+        error: function (dc, status, err) {
+            console.log(err);
+            console.log(status);
+        }
+    });
+});
 
 // Check for corrct username/password matchup
 function checkLogin() {

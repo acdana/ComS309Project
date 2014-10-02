@@ -33,7 +33,7 @@ public class RestController {
      
       
       @GET
-      @Produces(MediaType.APPLICATION_JSON)
+      @Produces(MediaType.TEXT_PLAIN)
       @Path("/createNewUser/{username}/{password}/{email}")
       public String createNewUser(@PathParam("username") String username, @PathParam("password") String password, @PathParam("email") String email) {
     	 
@@ -43,7 +43,7 @@ public class RestController {
     	  }
     	  catch(Exception e) {
     		  em.close();
-    		  return "Failure";
+    		  return e.toString();
     	  }
       }
 
