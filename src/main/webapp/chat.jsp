@@ -1,5 +1,7 @@
+<!-- javascript for the instant chat -->
 <html>
 <head>
+<!-- simple temp css to make the chat more readable -->
 <style type="text/css">
 input#chat {
 	width: 410px
@@ -27,6 +29,7 @@ input#chat {
 
 	Chat.socket = null;
 
+//compatability type checks	
 	Chat.connect = (function(host) {
 		if ("WebSocket" in window) {
 			Chat.socket = new WebSocket(host);
@@ -37,8 +40,8 @@ input#chat {
 			return;
 		}
 
+		//when a connection is made
 		Chat.socket.onopen = function() {
-			Console.log("Connected");
 			document.getElementById("chat").onkeydown = function(event) {
 				if (event.keyCode == 13) {
 					Chat.sendMessage();
@@ -46,16 +49,19 @@ input#chat {
 			};
 		};
 
+		//when a connection closes
 		Chat.socket.onclose = function() {
 			document.getElementById("chat").onkeydown = null;
 			Console.log("Dissconnected");
 		};
 
+		//when a message is submitted
 		Chat.socket.onmessage = function(message) {
 			Console.log(message.data);
 		};
 	});
 
+	//endpoint initialization
 	Chat.initialize = function() {
 		//incase we have https
 		if (window.location.protocol == "http:") {
@@ -66,7 +72,8 @@ input#chat {
 					+ "/ComS309Project/chat");
 		}
 	};
-
+	//when a messege is sent
+	// checks for blank messeges
 	Chat.sendMessage = (function() {
 		var message = document.getElementById("chat").value;
 		if (message != '') {
@@ -77,15 +84,21 @@ input#chat {
 
 	var Console = {};
 
+	//puts words into the console and limits the logs
 	Console.log = (function(message) {
 		var console = document.getElementById("console");
+		
+		//adds new message to console with word wrap
 		var p = document.createElement('p');
 		p.style.wordWrap = "break-word";
 		p.innerHTML = message;
 		console.appendChild(p);
+		
+		//keeps chat log small
 		while (console.childNodes.length > 25) {
 			console.removeChild(console.firstChild);
 		}
+		//puts scroll bar at bottom with each message
 		console.scrollTop = console.scrollHeight;
 	});
 

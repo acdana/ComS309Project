@@ -1,3 +1,5 @@
+package com.chatRecource;
+
 import java.io.IOException;
 import java.util.Random;
 import java.util.Set;
@@ -8,54 +10,66 @@ import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
+//websocket sessions for instant chat -brittany fisher
 
+//creates a new endpoint for each new connection to the chat page
+//is to eventually be connected to specific users not just random numbers
 @ServerEndpoint(value = "/chat")
 public class ChatServerpoint {
-
+		
+	//list of unique sessions
 	private static final Set<ChatServerpoint> connect = new CopyOnWriteArraySet<ChatServerpoint>();
 
+	//holds the name of this connection
 	private final String name;
-	private Session session;
+	
+	//
+	private Session sess;
 
+	//temp anon naming schem
 	public ChatServerpoint() {
 		Random ran = new Random();
 		name = ((Integer) ran.nextInt(1000)).toString();
 	}
 
+	//adds new session to the connection and sends the new connection to all users
 	@OnOpen
 	public void start(Session session) {
-		this.session = session;
+		sess = session;
 		connect.add(this);
-		String message = name + " has joined.";
-		broadcast(message);
+		String msg = name + " has joined.";
+		transmit(msg);
 	}
-
+	
+	//removes the user from the connection and sends the disconnection to all users
 	@OnClose
 	public void end() {
 		connect.remove(this);
-		String message = name + " has disconnected.";
-		broadcast(message);
+		String msg = name + " has disconnected.";
+		transmit(msg);
 	}
 
+	//server gets a message and sends it to all connections
 	@OnMessage
-	public void incoming(String message) {
-		broadcast(name + ": " + message);
+	public void incoming(String msg) {
+		transmit(name + ": " + msg);
 	}
-
-	private static void broadcast(String msg) {
+	
+	//checks and sends message to each connection
+	private static void transmit(String msg) {
 		for (ChatServerpoint client : connect) {
 			try {
 				synchronized (client) {
-					client.session.getBasicRemote().sendText(msg);
+					client.sess.getBasicRemote().sendText(msg);
 				}
 			} catch (IOException e) {
 				connect.remove(client);
 				try {
-					client.session.close();
+					client.sess.close();
 				} catch (IOException e1) {
 				}
 				String message = client.name + " has been disconnected.";
-				broadcast(message);
+				transmit(message);
 			}
 		}
 	}
