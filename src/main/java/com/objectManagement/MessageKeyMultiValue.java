@@ -2,13 +2,36 @@ package com.objectManagement;
 
 import java.sql.Date;
 
+/**
+ * This is the key value class for the Message table.
+ * We use getters and setters for all variables within
+ * a Message.
+ * 
+ * @author Alex Dana
+ */
 public class MessageKeyMultiValue {
 	
+	/**The message contents
+	 **/
 	private String message;
+	
+	/**The sender of the message
+	 **/
 	private String sender;
+	
+	/**The user who the message is sent to
+	 **/
 	private String username;
+	
+	/**The date that the message was sent
+	 **/
 	private Date dateSent;
+	
+	/**The date that the message was opened
+	 **/
 	private Date dateOpened;
+	
+	
 	
 	public String getMessage() {
 		return message;
