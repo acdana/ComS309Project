@@ -156,5 +156,19 @@ public class RestController {
     	  }
       }
       
+      @GET
+      @Produces(MediaType.APPLICATION_JSON)
+      @Path("/userLogin/{username}/{password}")
+      public String userLogin(@PathParam("username") String username, @PathParam("password") String password) {
+ 
+    	  try {
+    		  String loginStatus = dataController.userLogin(em, username, password);
+    		  return loginStatus;
+    	  }
+    	  catch(Exception e) {
+    		  em.close();
+    		  return "Failure - Database Error";
+    	  }
+      }
       
 }

@@ -186,4 +186,14 @@ public class DataController implements AbstractDataController {
 			em.close();
 	}
 
+	public String userLogin(EntityManager em, String username, String password) throws Exception {
+		Query query = em.createNamedQuery("userLogin").setParameter("username", username).setParameter("password", password);
+		if(query.getResultList().size() == 0) {
+			return "Failed";
+		}
+		else {
+			return "Success";
+		}
+	}
+
 }

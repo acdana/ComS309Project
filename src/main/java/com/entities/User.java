@@ -14,7 +14,8 @@ import javax.persistence.*;
     @NamedQuery(name="deleteUser", query="DELETE FROM User U WHERE U.username = :usernameToDelete"),
     @NamedQuery(name="penalizeUser", query="UPDATE User U SET U.penalties = U.penalties + 1 WHERE U.username = :usernameToPenalize"),
     @NamedQuery(name="getPenalizedUsers", query="SELECT U.username FROM User U WHERE U.penalties >= 1"),
-    @NamedQuery(name="getPenaltyCount", query="SELECT U.penalties FROM User U where U.username = :usernameToCheck")
+    @NamedQuery(name="getPenaltyCount", query="SELECT U.penalties FROM User U where U.username = :usernameToCheck"),
+    @NamedQuery(name="userLogin", query="SELECT U.username FROM User U where U.username = :username AND U.password = :password")
 })
 
 public class User implements Serializable {

@@ -18,4 +18,5 @@ public interface AbstractDataController {
 	public String getPenaltyCount(EntityManager em, String usernameToCheck) throws Exception;
 	public String getMessages(EntityManager em, String username) throws Exception;
 	public void createNewMessage(EntityManager em, String username, String message, String sender) throws Exception;
+	public String userLogin(EntityManager em, String username, String password) throws Exception;
 }
