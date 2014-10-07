@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+ 
+  <Resource name="jdbc/db309T11" auth="Container" type="javax.sql.DataSource"
+               maxActive="50" maxIdle="30" maxWait="10000"
+               username="u309T11" password="ZiASf-eya" 
+               driverClassName="com.mysql.jdbc.Driver"
+               url="jdbc:mysql://mysql.cs.iastate.edu:3306/db309T11"/>
+ 
+</Context>

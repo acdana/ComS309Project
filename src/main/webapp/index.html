@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--HTML For Login/Sign Up page - Daniel Cain-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="frontEnd/loginSignUp/signUp.js"></script>
+    <link href="frontEnd/loginSignUp/styles.css" rel="stylesheet">
+    <link href="frontEnd/bootstrap/bootstrap.css" rel="stylesheet">
+    <link href="frontEnd/bootstrap/bootstrap-responsive.css" rel="stylesheet">
+    <meta charset="utf-8" />
+    <title>
+        Thriftr: Sign Up!
+    </title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="span12" id="titleCard">
+                <img src="./frontEnd/assets/png/thriftrTitle.png" width="600px" />
+            </div>
+        </div>
+        <div class="row">
+            <h1 style="font-family: 'Lato', sans-serif;">
+                Sign Up
+            </h1>
+        </div>
+        <!--Sign-Up Form-->
+        <div class="row">
+            <div class="span12">
+                <div id="submit" style="font-family: 'trebuchet ms', sans-serif;">
+                    Username: <input type="text" name="username" /><br />
+                    Name: <input type="text" name="name" id="name"><br>
+                    Email (@iastate.edu only): <input type="text" name="email" id="email"><br>
+                    Password: <input type="password" name="password1" id="pass"/><br />
+                    Confirm Password: <input type="password" name="password2" /><br />
+                    <button id ="submitButton">Register</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <h1 style="font-family: 'Lato', sans-serif;">
+                Log In
+            </h1>
+        </div>
+        <!--Log In Form-->
+        <div class="row">
+            <div class="span12">
+                <form name="loginForm" style="font-family: 'trebuchet ms', sans-serif;">
+                    Username: <input type="text" name="logUsername" /><br />
+                    Password: <input type="text" name="logPassword" /><br />
+                    <button onclick="checkLogin">Log In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--JavaScript Links-->
+    <script src="frontEnd/loginSignUp/signUp.js"></script>
+    <script type="text/javascript" src="frontEnd/bootstrap/bootstrap.js"></script>
+</body>
+</html>
