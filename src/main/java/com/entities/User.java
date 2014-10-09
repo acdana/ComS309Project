@@ -3,21 +3,26 @@ package com.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
 /**
  * The persistent class for the User database table.
  * 
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name="getAllUsernames", query="SELECT U.username FROM User U"),
-    @NamedQuery(name="deleteUser", query="DELETE FROM User U WHERE U.username = :usernameToDelete"),
-    @NamedQuery(name="penalizeUser", query="UPDATE User U SET U.penalties = U.penalties + 1 WHERE U.username = :usernameToPenalize"),
-    @NamedQuery(name="getPenalizedUsers", query="SELECT U.username FROM User U WHERE U.penalties >= 1"),
-    @NamedQuery(name="getPenaltyCount", query="SELECT U.penalties FROM User U where U.username = :usernameToCheck"),
-    @NamedQuery(name="userLogin", query="SELECT U.username FROM User U where U.username = :username AND U.password = :password")
+	@NamedQuery(name = "getAllUsernames", query = "SELECT U.username FROM User U"),
+	@NamedQuery(name = "deleteUser", query = "DELETE FROM User U WHERE U.username = :usernameToDelete"),
+	@NamedQuery(name = "penalizeUser", query = "UPDATE User U SET U.penalties = U.penalties + 1 WHERE U.username = :usernameToPenalize"),
+	@NamedQuery(name = "getPenalizedUsers", query = "SELECT U.username FROM User U WHERE U.penalties >= 1"),
+	@NamedQuery(name = "getPenaltyCount", query = "SELECT U.penalties FROM User U where U.username = :usernameToCheck"),
+	@NamedQuery(name = "userLogin", query = "SELECT U.username FROM User U where U.username = :username AND U.password = :password"),
+	@NamedQuery(name = "getUserType", query = "SELECT U.userType FROM User U where U.username = :username"),
+	@NamedQuery(name = "makeBasic", query = "UPDATE User U SET U.userType=\"Basic\" where U.username = :username"),
+	@NamedQuery(name = "makeModerator", query = "UPDATE User U SET U.userType=\"Moderator\" where U.username = :username"),
+	@NamedQuery(name = "makeAdmin", query = "UPDATE User U SET U.userType=\"Admin\" where U.username = :username"),
+	@NamedQuery(name = "getBasics", query = "SELECT U.username FROM User U where U.userType = \"Basic\""),
+	@NamedQuery(name = "getModerators", query = "SELECT U.username FROM User U where U.userType = \"Moderator\""),
+	@NamedQuery(name = "getAdmins", query = "SELECT U.username FROM User U where U.userType = \"Admin\"")
 })
-
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 

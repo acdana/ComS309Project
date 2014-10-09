@@ -19,4 +19,6 @@ public interface AbstractDataController {
 	public String getMessages(EntityManager em, String username) throws Exception;
 	public void createNewMessage(EntityManager em, String username, String message, String sender) throws Exception;
 	public String userLogin(EntityManager em, String username, String password) throws Exception;
+	public String getUserType(EntityManager em, String username) throws Exception;
+	public String changeUserType(EntityManager em, String username, String userType) throws Exception;
 }
