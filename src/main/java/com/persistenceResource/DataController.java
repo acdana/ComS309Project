@@ -66,7 +66,7 @@ public class DataController implements AbstractDataController {
 			Query query = em.createNamedQuery("deleteUser").setParameter("usernameToDelete", usernameToDelete);
 			int deleted = query.executeUpdate();
 			if (deleted == 0)
-				return "No entries deleted.";
+				return "Failure";
 			else
 				return "Success";
 		} catch (Exception e) {
@@ -96,7 +96,7 @@ public class DataController implements AbstractDataController {
 			int update = q.executeUpdate();
 
 			if (update == 0) {
-				return "Did not penalize user: " + usernameToPenalize;
+				return "Failure";
 			} else
 				return "Success";
 
@@ -128,7 +128,7 @@ public class DataController implements AbstractDataController {
 			if (q.getResultList().size() == 0) {
 				return "Could not find user.";
 			} else {
-				return usernameToCheck + " has a penalty count of " + q.getResultList().get(0);
+				return q.getResultList().get(0).toString();
 			}
 
 		} catch (Exception e) {

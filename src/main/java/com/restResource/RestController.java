@@ -34,7 +34,7 @@ public class RestController {
 			return userNames.toString();
 		} catch (Exception e) {
 			em.close();
-			return "Error message of some kind";
+			return "{\"Status\":\"Faiure\"}";
 		}
 	}
 
@@ -45,10 +45,10 @@ public class RestController {
 
 		try {
 			dataController.createNewUser(em, username, password, email);
-			return "Success";
+			return "{\"Status\":\"Success\"}";
 		} catch (Exception e) {
 			em.close();
-			return e.toString();
+			return "{\"Status\":\"Failure\"}";
 		}
 	}
 
@@ -59,10 +59,10 @@ public class RestController {
 
 		try {
 			em.getTransaction().begin();
-			String result = dataController.deleteUser(em, usernameToDelete);
+			String statusMessage = dataController.deleteUser(em, usernameToDelete);
 			em.getTransaction().commit();
 			em.close();
-			return result;
+			return "{\"Status\":\"" + statusMessage + "\"}";
 		} catch (Exception e) {
 			em.close();
 			return e.getMessage();
@@ -77,10 +77,10 @@ public class RestController {
 		try {
 
 			em.getTransaction().begin();
-			String result = dataController.penalizeUser(em, usernameToPenalize);
+			String statusMessage = dataController.penalizeUser(em, usernameToPenalize);
 			em.getTransaction().commit();
 			em.close();
-			return result;
+			return "{\"Status\":\"" + statusMessage + "\"}";
 
 		} catch (Exception e) {
 			em.close();
@@ -117,9 +117,9 @@ public class RestController {
 
 		try {
 
-			String output = dataController.getPenaltyCount(em, usernameToCheck);
+			String penaltyCount = dataController.getPenaltyCount(em, usernameToCheck);
 			em.close();
-			return output;
+			return "{\"PenaltyCount\":\"" + penaltyCount + "\"}";
 
 		} catch (Exception e) {
 			em.close();
@@ -152,10 +152,10 @@ public class RestController {
 
 		try {
 			dataController.createNewMessage(em, username, message, sender);
-			return "Success";
+			return "{\"Status\":\"Success\"}";
 		} catch (Exception e) {
 			em.close();
-			return "Failure";
+			return "{\"Status\":\"Failure\"}";
 		}
 	}
 
@@ -182,7 +182,7 @@ public class RestController {
 
 			String output = dataController.getUserType(em, username);
 			em.close();
-			return output;
+			return "{\"UserType\":\"" + output + "\"}";
 
 		} catch (Exception e) {
 
