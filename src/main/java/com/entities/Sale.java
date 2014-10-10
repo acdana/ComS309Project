@@ -10,7 +10,9 @@ import java.util.Date;
  * 
  */
 @Entity
-@NamedQuery(name="Sale.findAll", query="SELECT s FROM Sale s")
+@NamedQueries({
+	@NamedQuery(name = "getAllCoordinates", query = "SELECT S.longitude, S.latitude FROM Sale S")
+})
 public class Sale implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -18,6 +20,10 @@ public class Sale implements Serializable {
 	private int saleID;
 
 	private String chosenLocation;
+	
+	private double latitude;
+	
+	private double longitude;
 
 	@Temporal(TemporalType.DATE)
 	private Date dateCreated;
@@ -87,6 +93,22 @@ public class Sale implements Serializable {
 
 	public void setSecondarySellerLocation(String secondarySellerLocation) {
 		this.secondarySellerLocation = secondarySellerLocation;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
 
 }

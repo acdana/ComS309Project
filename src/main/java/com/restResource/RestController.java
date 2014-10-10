@@ -1,15 +1,23 @@
 package com.restResource;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
+
 import javax.persistence.EntityManager;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
 import com.persistenceResource.DataController;
 import com.persistenceResource.FactoryStartup;
 
+/**
+ * This is our RestController class that contains the necassary information to make REST calls.
+ * It can be seen that all of our calls start with the 'T11' base path. When a return is in order,
+ * the return is made as a JSON String.
+ */
 @Path("/T11")
 public class RestController {
 	EntityManager em = FactoryStartup.getAnEntityManager();
@@ -322,6 +330,25 @@ public class RestController {
 				return "No admins.";
 			else
 				return userNames.toString();
+
+		} catch (Exception e) {
+			em.close();
+			return e.getMessage();
+		}
+		
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getAverageSaleLocation")
+	public String getAverageLocation() {
+		
+		try {
+
+			Point2D.Double averageLocation = dataController.getAverageSaleLocation(em);
+			em.close();
+
+			return "{\"Location\":[{\"longitude\":\"" + averageLocation.getX() + "\", \"latitude\":\"" + averageLocation.getY() + "\"}]}";
 
 		} catch (Exception e) {
 			em.close();

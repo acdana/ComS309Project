@@ -1,5 +1,6 @@
 package com.objectManagement;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +51,26 @@ public class ObjectMapper {
 		
 		return allMessages;
 		
+	}
+	
+	/**
+	 * This method is used to translate raw sale location coordinates into
+	 * readable Point2D coordinates for us to analyze.
+	 * 
+	 * @param rawCoordinates
+	 * @return an ArrayList of Point2D.Double coordinates
+	 */
+	public static ArrayList<Point2D.Double> mapCoordinates(List<Object[]> rawCoordinates) {
+		
+		ArrayList<Point2D.Double> coordinateList = new ArrayList<Point2D.Double>();
+		
+		for(Object[] rawCoordinate : rawCoordinates) {
+			Point2D.Double coordinate = new Point2D.Double();
+			coordinate.setLocation((Double) rawCoordinate[0], (Double) rawCoordinate[1]);
+			coordinateList.add(coordinate);
+		
+		}
+		return coordinateList;
 	}
 	
 }
