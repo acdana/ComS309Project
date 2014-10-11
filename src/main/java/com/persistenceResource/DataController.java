@@ -246,7 +246,7 @@ public class DataController implements AbstractDataController {
 		Query q = em.createNamedQuery("getUserType").setParameter("username", username);
 		if (q.getResultList().size() == 0) {
 
-			return "Could not find user.";
+			return "None";
 
 		} else {
 
@@ -277,7 +277,7 @@ public class DataController implements AbstractDataController {
 
 			} else {
 
-				return "Failed to make " + username + " a " + userType + " user.";
+				return "Failure";
 
 			}
 
@@ -287,6 +287,30 @@ public class DataController implements AbstractDataController {
 
 		}
 
+	}
+	
+	public String getUsers(EntityManager em, String userType) throws Exception {
+		
+		try {
+			
+			Query q = em.createNamedQuery("getUsers").setParameter("userType", userType);
+			if (q.getResultList().size() == 0) {
+				
+				return "{\"Status\":\"Failure\"}";
+				
+			} else {
+				
+				return ObjectMapper.mapUsernames(q.getResultList()).toString();
+				
+			}
+			
+		} catch (Exception e) {
+			
+			em.close();
+			throw e;
+			
+		}
+		
 	}
 	
 	/**

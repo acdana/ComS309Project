@@ -21,4 +21,5 @@ public interface AbstractDataController {
 	public String userLogin(EntityManager em, String username, String password) throws Exception;
 	public String getUserType(EntityManager em, String username) throws Exception;
 	public String changeUserType(EntityManager em, String username, String userType) throws Exception;
+	public String getUsers(EntityManager em, String userType) throws Exception;
 }

@@ -19,9 +19,7 @@ import javax.persistence.*;
 	@NamedQuery(name = "makeBasic", query = "UPDATE User U SET U.userType='Basic' where U.username = :username"),
 	@NamedQuery(name = "makeModerator", query = "UPDATE User U SET U.userType='Moderator' where U.username = :username"),
 	@NamedQuery(name = "makeAdmin", query = "UPDATE User U SET U.userType='Admin' where U.username = :username"),
-	@NamedQuery(name = "getBasics", query = "SELECT U.username FROM User U where U.userType = 'Basic'"),
-	@NamedQuery(name = "getModerators", query = "SELECT U.username FROM User U where U.userType = 'Moderator'"),
-	@NamedQuery(name = "getAdmins", query = "SELECT U.username FROM User U where U.userType = 'Admin'")
+	@NamedQuery(name = "getUsers", query = "SELECT U.username FROM User U where U.userType = :userType")
 })
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -203,27 +203,19 @@ public class RestController {
 			em.getTransaction().begin();
 			String type = dataController.getUserType(em, username);
 			String result;
-			if (type.equalsIgnoreCase("Basic")) {
-
+			
+			if (type.equalsIgnoreCase("Basic"))
 				result = dataController.changeUserType(em, username, "Moderator");
-
-			} else if (type.equalsIgnoreCase("Moderator")) {
-
+			else if (type.equalsIgnoreCase("Moderator"))
 				result = dataController.changeUserType(em, username, "Admin");
-
-			} else if (type.equalsIgnoreCase("Admin")) {
-
-				result = "Cannot promote an admin.";
-
-			} else {
-
-				result = type;
-
-			}
+			else if (type.equalsIgnoreCase("Admin"))
+				result = "Failure";
+			else
+				result = "Failure";
 
 			em.getTransaction().commit();
 			em.close();
-			return result;
+			return "{\"Status\":\"" + result + "\"}";
 
 		} catch (Exception e) {
 
@@ -244,27 +236,19 @@ public class RestController {
 			em.getTransaction().begin();
 			String type = dataController.getUserType(em, username);
 			String result;
-			if (type.equalsIgnoreCase("Basic")) {
-
-				result = "Cannot demote a basic user.";
-
-			} else if (type.equalsIgnoreCase("Moderator")) {
-
+			
+			if (type.equalsIgnoreCase("Basic"))
+				result = "Failure";
+			else if (type.equalsIgnoreCase("Moderator"))
 				result = dataController.changeUserType(em, username, "Basic");
-
-			} else if (type.equalsIgnoreCase("Admin")) {
-
+			else if (type.equalsIgnoreCase("Admin"))
 				result = dataController.changeUserType(em, username, "Moderator");
-
-			} else {
-
-				result = type;
-
-			}
+			else
+				result = "Failure";
 
 			em.getTransaction().commit();
 			em.close();
-			return result;
+			return "{\"Status\":\"" + result + "\"}";
 
 		} catch (Exception e) {
 
@@ -277,63 +261,20 @@ public class RestController {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getBasics")
-	public String getBasics() {
-
-		try {
-
-			ArrayList<String> userNames = dataController.getUsernames(em, "getBasics");
-			em.close();
-			if (userNames == null)
-				return "No basic users.";
-			else
-				return userNames.toString();
-
-		} catch (Exception e) {
-			em.close();
-			return e.getMessage();
-		}
-
-	}
-
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getModerators")
-	public String getModerators() {
-
-		try {
-
-			ArrayList<String> userNames = dataController.getUsernames(em, "getModerators");
-			em.close();
-			if (userNames == null)
-				return "No moderators.";
-			else
-				return userNames.toString();
-
-		} catch (Exception e) {
-			em.close();
-			return e.getMessage();
-		}
-
-	}
-	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getAdmins")
-	public String getAdmins() {
+	@Path("/getUsers/{userType}")
+	public String getUsers(@PathParam("userType") String userType) {
 		
 		try {
-
-			ArrayList<String> userNames = dataController.getUsernames(em, "getAdmins");
+			
+			String userNames = dataController.getUsers(em, userType);
 			em.close();
-			if (userNames == null)
-				return "No admins.";
-			else
-				return userNames.toString();
-
+			return userNames;
+			
 		} catch (Exception e) {
+			
 			em.close();
-			return e.getMessage();
+			return "{\"Status\":\"Failure\"}";
+			
 		}
 		
 	}
