@@ -2,14 +2,12 @@ package com.restResource;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
-
 import javax.persistence.EntityManager;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
 import com.persistenceResource.DataController;
 import com.persistenceResource.FactoryStartup;
 
@@ -31,7 +29,16 @@ public class RestController {
 		try {
 			ArrayList<String> userNames = dataController.getUsernames(em, "getAllUsernames");
 			em.close();
-			return userNames.toString();
+			
+			String namesToReturn = "{\"Usernames\":[";
+			for(String name : userNames) {
+				String tempName = "{\"Username\":\"" + name + "\"},";
+				namesToReturn += tempName;
+			}
+			namesToReturn = namesToReturn.substring(0, namesToReturn.length()-1);
+			namesToReturn += "]}";
+			
+			return namesToReturn;
 		} catch (Exception e) {
 			em.close();
 			return "{\"Status\":\"Faiure\"}";
@@ -48,7 +55,7 @@ public class RestController {
 			return "{\"Status\":\"Success\"}";
 		} catch (Exception e) {
 			em.close();
-			return "{\"Status\":\"Failure\"}";
+			return "{\"Status\":\"Exception Failure\"}";
 		}
 	}
 
@@ -65,7 +72,7 @@ public class RestController {
 			return "{\"Status\":\"" + statusMessage + "\"}";
 		} catch (Exception e) {
 			em.close();
-			return e.getMessage();
+			return "{\"Status\":\"Exception Failure\"}";
 		}
 	}
 
@@ -84,7 +91,7 @@ public class RestController {
 
 		} catch (Exception e) {
 			em.close();
-			return e.getMessage();
+			return "{\"Status\":\"Exception Failure\"}";
 		}
 
 	}
@@ -105,7 +112,7 @@ public class RestController {
 
 		} catch (Exception e) {
 			em.close();
-			return e.getMessage();
+			return "{\"Status\":\"Exception Failure\"}";
 		}
 
 	}
@@ -123,7 +130,7 @@ public class RestController {
 
 		} catch (Exception e) {
 			em.close();
-			return e.getMessage();
+			return "{\"Status\":\"Exception Failure\"}";
 		}
 
 	}
@@ -140,7 +147,7 @@ public class RestController {
 
 		} catch (Exception e) {
 			em.close();
-			return e.getMessage();
+			return "{\"Status\":\"Exception Failure\"}";
 		}
 
 	}
@@ -155,7 +162,7 @@ public class RestController {
 			return "{\"Status\":\"Success\"}";
 		} catch (Exception e) {
 			em.close();
-			return "{\"Status\":\"Failure\"}";
+			return "{\"Status\":\"Exception Failure\"}";
 		}
 	}
 
@@ -169,7 +176,7 @@ public class RestController {
 			return loginStatus;
 		} catch (Exception e) {
 			em.close();
-			return "Failure - Database Error";
+			return "{\"Status\":\"Exception Failure\"}";
 		}
 	}
 
@@ -185,10 +192,8 @@ public class RestController {
 			return "{\"UserType\":\"" + output + "\"}";
 
 		} catch (Exception e) {
-
 			em.close();
-			return e.getMessage();
-
+			return "{\"Status\":\"Exception Failure\"}";
 		}
 
 	}
@@ -218,10 +223,8 @@ public class RestController {
 			return "{\"Status\":\"" + result + "\"}";
 
 		} catch (Exception e) {
-
 			em.close();
-			return e.getMessage();
-
+			return "{\"Status\":\"Exception Failure\"}";
 		}
 
 	}
@@ -251,10 +254,8 @@ public class RestController {
 			return "{\"Status\":\"" + result + "\"}";
 
 		} catch (Exception e) {
-
 			em.close();
-			return e.getMessage();
-
+			return "{\"Status\":\"Exception Failure\"}";
 		}
 
 	}
@@ -271,10 +272,8 @@ public class RestController {
 			return userNames;
 			
 		} catch (Exception e) {
-			
 			em.close();
-			return "{\"Status\":\"Failure\"}";
-			
+			return "{\"Status\":\"Exception Failure\"}";
 		}
 		
 	}
@@ -293,7 +292,7 @@ public class RestController {
 
 		} catch (Exception e) {
 			em.close();
-			return e.getMessage();
+			return "{\"Status\":\"Exception Failure\"}";
 		}
 		
 	}
