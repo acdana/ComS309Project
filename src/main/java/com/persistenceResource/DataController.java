@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.servlet.http.HttpServletRequest;
 
 import com.entities.Message;
 import com.entities.User;
@@ -345,6 +346,24 @@ public class DataController implements AbstractDataController {
 			throw e;
 		}
 	
+	}
+	
+	public boolean verifyCredentials(EntityManager em, HttpServletRequest req) {
+    	String[] credentials = req.getHeader("Authorization").split(":");
+    	String username = credentials[0];
+    	String password = credentials[1];
+    	
+    	try {
+    		if(this.userLogin(em, username, password).equals("Failed")) {
+    			em.close();
+    			return false;
+    		}
+    	} catch (Exception e) {
+    		em.close();
+    		return false;
+    	}
+    	
+    	return true;
 	}
 	
 

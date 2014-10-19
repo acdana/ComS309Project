@@ -63,3 +63,23 @@ function checkLogin() {
     var passw = document.forms["loginForm"]["logPassword"].value;
 
 }
+
+
+
+
+$("#testButton").click(function () {
+    $.ajax({
+        url: "309/T11/getAllUsernames",
+        type: "GET",
+        headers: {
+        	"Authorization" : "TestUser" + ":" + "myPassword", //TestUser and myPassword need to be stored during the jQuery session somehow.
+        },
+        success: function (result) {
+            console.log(result);
+        },
+        error: function (dc, status, err) {
+            console.log(err);
+            console.log(status);
+        }
+    });
+});
