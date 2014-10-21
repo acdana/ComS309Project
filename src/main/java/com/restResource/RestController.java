@@ -1,7 +1,6 @@
 package com.restResource;
 
 import java.awt.geom.Point2D;
-import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
@@ -33,17 +32,11 @@ public class RestController {
 		if(dataController.verifyCredentials(em, req) == true) {
 		
 			try {
-				ArrayList<String> userNames = dataController.getUsernames(em, "getAllUsernames");
+				String userNames = dataController.getUsernames(em, "getAllUsernames");
 				em.close();
 			
-				String namesToReturn = "{\"Usernames\":[";
-				for(String name : userNames) {
-					String tempName = "{\"Username\":\"" + name + "\"},";
-					namesToReturn += tempName;
-				}
-				namesToReturn = namesToReturn.substring(0, namesToReturn.length()-1);
-				namesToReturn += "]}";
-				return namesToReturn;
+				
+				return userNames;
 			} catch (Exception e) {
 				em.close();
 				return "{\"Status\":\"Exception Faiure\"}";
@@ -136,13 +129,13 @@ public class RestController {
 		if(dataController.verifyCredentials(em, req) == true) {	
 			
 			try {
-				ArrayList<String> userNames = dataController.getUsernames(em, "getPenalizedUsers");
+				String userNames = dataController.getUsernames(em, "getPenalizedUsers");
 				em.close();
 				if (userNames == null) {
 					return "No penalized users.";
 				}
 				else {
-					return userNames.toString();
+					return userNames;
 				}
 			} catch (Exception e) {
 				em.close();

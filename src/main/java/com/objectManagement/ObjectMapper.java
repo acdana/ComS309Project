@@ -19,13 +19,16 @@ public class ObjectMapper {
 	 * @param rawUsernames	The list of raw usernames that we wish to process.
 	 * @return An array list of strings representing the user names retrieved.
 	 */
-	public static ArrayList<String> mapUsernames(List<Object> rawUsernames) {
+	public static String mapUsernames(List<Object> rawUsernames) {
 		
-		ArrayList<String> usernames = new ArrayList<String>();
-		for(Object rawName : rawUsernames) {
-			usernames.add((String) rawName);
+		String namesToReturn = "{\"Usernames\":[";
+		for(Object name : rawUsernames) {
+			String tempName = "{\"Username\":\"" + (String) name + "\"},";
+			namesToReturn += tempName;
 		}
-		return usernames;
+		namesToReturn = namesToReturn.substring(0, namesToReturn.length()-1);
+		namesToReturn += "]}";
+		return namesToReturn;
 		
 	}
 	
@@ -37,20 +40,21 @@ public class ObjectMapper {
 	 * @param rawMessages The raw message objects to be translated.
 	 * @return An array list of MessageKeyMultiValue objects representing messages.
 	 */
-	public static ArrayList<MessageKeyMultiValue> mapMessages(List<Object[]> rawMessages) {
+	public static String mapMessages(List<Object[]> rawMessages) {
 		
-		ArrayList<MessageKeyMultiValue> allMessages = new ArrayList<MessageKeyMultiValue>();
+		String allMessages = "{\"Messages\":[";
 		for(Object[] rawMessage : rawMessages) {	
 			
-			MessageKeyMultiValue message = new MessageKeyMultiValue();
-			message.setUsername("Test");
-			message.setMessage((String) rawMessage[0]);
-			message.setSender((String) rawMessage[1]); 
-			allMessages.add(message);
+
+			String name = (String) rawMessage[1];
+			String content = (String) rawMessage[0]; 
+			String tempMessage = "{\"Sender\":\"" + name + "\", \"Message\": \"" + content + "\"},";
+			allMessages += tempMessage;
 		}
+		allMessages = allMessages.substring(0, allMessages.length()-1);
+		allMessages += "]}";
 		
 		return allMessages;
-		
 	}
 	
 	/**

@@ -37,7 +37,7 @@ public class DataController implements AbstractDataController {
 	 * @return An ArrayList of Strings representing every user that is retrieved
 	 *         using namedQuery.
 	 */
-	public ArrayList<String> getUsernames(EntityManager em, String namedQuery) throws Exception {
+	public String getUsernames(EntityManager em, String namedQuery) throws Exception {
 
 		Query query = em.createNamedQuery(namedQuery);
 		try {
@@ -157,13 +157,12 @@ public class DataController implements AbstractDataController {
 			Query query = em.createNamedQuery("getMessages").setParameter("username", username);
 			List<Object[]> rawMessages = query.getResultList();
 			if (rawMessages.size() == 0) {
-				return "No messages";
+				return "{\"Messages\":\"No messages\"}";
 			} else {
 				return ObjectMapper.mapMessages(rawMessages).toString();
 			}
 
 		} catch (Exception e) {
-			System.out.println("Here");
 			throw e;
 		}
 	}
@@ -227,9 +226,9 @@ public class DataController implements AbstractDataController {
 	public String userLogin(EntityManager em, String username, String password) throws Exception {
 		Query query = em.createNamedQuery("userLogin").setParameter("username", username).setParameter("password", password);
 		if (query.getResultList().size() == 0) {
-			return "Failed";
+			return "{\"Status\":\"Login Failure\"}";
 		} else {
-			return "Success";
+			return "{\"Status\":\"Login Success\"}";
 		}
 	}
 
@@ -296,13 +295,9 @@ public class DataController implements AbstractDataController {
 			
 			Query q = em.createNamedQuery("getUsers").setParameter("userType", userType);
 			if (q.getResultList().size() == 0) {
-				
 				return "{\"Status\":\"Failure\"}";
-				
 			} else {
-				
 				return ObjectMapper.mapUsernames(q.getResultList()).toString();
-				
 			}
 			
 		} catch (Exception e) {
