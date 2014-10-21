@@ -1,6 +1,43 @@
-﻿h1{
+﻿body{
+    margin-top:5%;
+    background-image:url(../assets/jpg/campanile.jpg);
+    background-repeat:no-repeat;
+}
+h1{
     font-size: 20px;
     margin: 5px;
     margin-top: 2px;
     margin-bottom: 2px;
+}
+
+#itembox{
+    border: solid;
+    border-width: 3px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 10px;
+    background-color:#fbfaf6;
+}
+
+#profBio{
+    border: solid;
+    border-width: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color:#fbfaf6;
+}
+
+#profInfo{
+    background-color:#fbfaf6;
+    border: solid;
+    border-width: 3px;
+}
+
+.container{
+    padding: 40px;
+    background-color:rgba(255, 255, 255, 0.45);
 }
