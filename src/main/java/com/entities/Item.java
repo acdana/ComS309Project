@@ -23,6 +23,10 @@ public class Item implements Serializable {
 	private String username;
 
 	public Item() {
+		itemID = -1;
+		itemName = "";
+		saleID = -1;
+		username = "";
 	}
 
 	public int getItemID() {

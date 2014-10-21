@@ -13,9 +13,11 @@ import com.persistenceResource.DataController;
 import com.persistenceResource.FactoryStartup;
 
 /**
- * This is our RestController class that contains the necassary information to make REST calls.
+ * This is our RestController class that contains the necessary information to make REST calls.
  * It can be seen that all of our calls start with the 'T11' base path. When a return is in order,
  * the return is made as a JSON String.
+ * 
+ * Username and password should be sent via jQuery header with the AJAX call so that the user identity may be verified.
  */
 @Path("/T11")
 public class RestController {

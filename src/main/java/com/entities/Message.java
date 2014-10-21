@@ -3,9 +3,6 @@ package com.entities;
 import java.io.Serializable;
 
 import javax.persistence.*;
-import javax.persistence.criteria.Expression;
-
-import java.sql.Timestamp;
 import java.util.Date;
 
 
@@ -27,7 +24,7 @@ public class Message implements Serializable {
 	private Date dateOpened;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	private Expression<Timestamp> dateSent;
+	private Date dateSent;
 
 	private String username;
 	
@@ -62,11 +59,11 @@ public class Message implements Serializable {
 		this.dateOpened = dateOpened;
 	}
 
-	public Expression<Timestamp> getDateSent() {
+	public Date getDateSent() {
 		return this.dateSent;
 	}
 
-	public void setDateSent(Expression<Timestamp> expression) {
+	public void setDateSent(Date expression) {
 		this.dateSent = expression;
 	}
 

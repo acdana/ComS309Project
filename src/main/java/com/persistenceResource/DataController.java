@@ -2,13 +2,11 @@ package com.persistenceResource;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
-
 import com.entities.Message;
 import com.entities.User;
 import com.objectManagement.ObjectMapper;
@@ -200,7 +198,6 @@ public class DataController implements AbstractDataController {
 	 * @throws Exception
 	 */
 	public void createNewMessage(EntityManager em, String username, String message, String sender) throws Exception {
-		CriteriaBuilder cb = em.getCriteriaBuilder();
 		em.getTransaction().begin();
 		Message messageToSend = new Message();
 		messageToSend.setMessageID(SecureIDGenerator.nextSecureId());
@@ -208,7 +205,7 @@ public class DataController implements AbstractDataController {
 		messageToSend.setSender(sender);
 		messageToSend.setMessage(message);
 		messageToSend.setDateOpened(null);
-		messageToSend.setDateSent(cb.currentTimestamp());
+		messageToSend.setDateSent(new Date());
 		em.persist(messageToSend);
 		em.getTransaction().commit();
 		em.close();
