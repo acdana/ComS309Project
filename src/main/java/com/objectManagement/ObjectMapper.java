@@ -26,7 +26,9 @@ public class ObjectMapper {
 			String tempName = "{\"Username\":\"" + (String) name + "\"},";
 			namesToReturn += tempName;
 		}
+		if(rawUsernames.size() > 0) {
 		namesToReturn = namesToReturn.substring(0, namesToReturn.length()-1);
+		}
 		namesToReturn += "]}";
 		return namesToReturn;
 		
