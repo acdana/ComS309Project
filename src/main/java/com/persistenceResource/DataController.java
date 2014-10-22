@@ -146,8 +146,7 @@ public class DataController implements AbstractDataController {
 	 *            
 	 * 
 	 * @throws Exception
-	 * @return A status message indicating whether or not the user's messages
-	 *         were retrieved successfully.
+	 * @return A JSON formatted string of the messages for the given user.
 	 */
 	public String getMessages(EntityManager em, String username) throws Exception {
 
@@ -218,7 +217,7 @@ public class DataController implements AbstractDataController {
 	 * @param username	The username of the user that is attempting to login
 	 * @param passowrd	The password used to attempt to login.
 	 * 
-	 * @return	A status message on whether or not the login credentials are correct.
+	 * @return	A JSON status message on whether or not the login credentials are correct.
 	 */
 	public String userLogin(EntityManager em, String username, String password) throws Exception {
 		Query query = em.createNamedQuery("userLogin").setParameter("username", username).setParameter("password", password);
@@ -286,6 +285,15 @@ public class DataController implements AbstractDataController {
 
 	}
 	
+	/**
+	 * This method is used to get users with a given type (Basic, Moderator, Admin).
+	 * 
+	 * @param em	Our instance of EntityManager used for persistence.
+	 * @param userType	The type of user to be searched for (Basic, Moderator, Admin)
+	 * 
+	 * @return A JSON string of all usernames with the given user type.
+	 * @throws Exception
+	 */
 	public String getUsers(EntityManager em, String userType) throws Exception {
 		
 		try {
@@ -340,6 +348,16 @@ public class DataController implements AbstractDataController {
 	
 	}
 	
+	/**
+	 * This method is used when an AJAX call is received to check if the logged in user
+	 * has the proper credentials. The HttpServletRequest is used to grab an authorization
+	 * header that is to contain the username and password of the logged in user.
+	 * 
+	 * @param em	Our instance of EntityManager used for persistence.
+	 * @param req	The HttpServletRequest containing the username and password in an authorization header.
+	 * 
+	 * @return	True of False based on whether or not the credentials provided were legitimate.
+	 */
 	public boolean verifyCredentials(EntityManager em, HttpServletRequest req) {
     	String[] credentials = req.getHeader("Authorization").split(":");
     	String username = credentials[0];

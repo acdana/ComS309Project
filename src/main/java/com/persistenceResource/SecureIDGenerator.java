@@ -12,6 +12,12 @@ import java.security.SecureRandom;
  */
 public final class SecureIDGenerator {
   
+	/**
+	 * This method is used to generate a random 26 digit string that is used
+	 * as an ID for some of our Entities.
+	 * 
+	 * @return	A random 26 digit string based on a SecureRandom and a BigInteger.
+	 */
   public static String nextSecureId() {  
 	SecureRandom random = new SecureRandom();
     return new BigInteger(130, random).toString(32);
