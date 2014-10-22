@@ -380,13 +380,13 @@ public class DataController implements AbstractDataController {
 	
 	/**
 	 * This method is used to get the profile picture location of the user.
+	 * 
 	 * @param em Our instance of EntityManager used for persistence.
 	 * @param username The username of the user we want to get the picture for.
 	 * @return A String that indicates the location of the profile picture.
 	 * @throws Exception
 	 */
 	public String getProfPic(EntityManager em, String username) throws Exception {
-		
 		
 		try {
 			
@@ -397,7 +397,7 @@ public class DataController implements AbstractDataController {
 				return "none";
 			
 			} else {
-			
+	
 				String out = (String) q.getResultList().get(0);
 				em.close();
 				return out;
@@ -405,14 +405,21 @@ public class DataController implements AbstractDataController {
 			}
 			
 		} catch (Exception e) {
-			
 			em.close();
-			throw e;
-			
+			throw e;	
 		}
 		
 	}
 	
+	/**
+	 * This method is used to get the bio of the given user.
+	 * 
+	 * @param em Our instance of EntityManager used for persistence.
+	 * @param username The username of the user we want to get the bio of.
+	 * 
+	 * @return A String containing the bio.
+	 * @throws Exception
+	 */
 	public String getBio(EntityManager em, String username) throws Exception {
 		
 		try {
@@ -440,6 +447,15 @@ public class DataController implements AbstractDataController {
 		
 	}
 	
+	/**
+	 * This method is used to get the current status of the given user.
+	 * 
+	 * @param em Our instance of EntityManager used for persistence.
+	 * @param username The username of the user we want to get the status of.
+	 * 
+	 * @return A String containing the status.
+	 * @throws Exception
+	 */
 	public String getStatus(EntityManager em, String username) throws Exception {
 		
 		try {
@@ -467,6 +483,16 @@ public class DataController implements AbstractDataController {
 		
 	}
 	
+	/**
+	 * This method is used to get the current number of trades the given user
+	 *  has participated in.
+	 * 
+	 * @param em Our instance of EntityManager used for persistence.
+	 * @param username The username of the user we want to get the trade count of.
+	 * 
+	 * @return A String containing the number of trades participated in by username.
+	 * @throws Exception
+	 */
 	public String getTotTrades(EntityManager em, String username) throws Exception {
 		
 		try {
@@ -491,7 +517,21 @@ public class DataController implements AbstractDataController {
 			throw e;
 			
 		}
+	}
+	
+	/**
+	 * This method is used to analyze different aspects of messages such
+	 * as average length and frequency sent.
+	 * 
+	 * @param	em Our instance of EntityManager used for persistence.
+	 * 
+	 * @return	A JSON string containing various pieces of information regarding messages
+	 * @throws Exception
+	 */
+	public String getMessageData(EntityManager em) throws Exception	{
 		
+		
+		return "";
 	}
 
 }

@@ -3,6 +3,7 @@ package com.persistenceResource;
 import java.awt.geom.Point2D;
 
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * This is the interface for all of the methods our REST calls will use. Anything we need to get from the database is done with
@@ -23,4 +24,10 @@ public interface AbstractDataController {
 	public String changeUserType(EntityManager em, String username, String userType) throws Exception;
 	public String getUsers(EntityManager em, String userType) throws Exception;
 	public Point2D.Double getAverageSaleLocation(EntityManager em) throws Exception;
+	public String getMessageData(EntityManager em) throws Exception;
+	public String getTotTrades(EntityManager em, String username) throws Exception;
+	public String getStatus(EntityManager em, String username) throws Exception;
+	public String getBio(EntityManager em, String username) throws Exception;
+	public String getProfPic(EntityManager em, String username) throws Exception;
+	public boolean verifyCredentials(EntityManager em, HttpServletRequest req);
 }

@@ -504,5 +504,26 @@ public class RestController {
 		}
 		
 	}
+	
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getMessageData")
+	public String getData() {
+		
+			try {
+				
+				String output = dataController.getMessageData(em);
+				em.close();
+				return output;
+				
+			} catch (Exception e) {
+				
+				em.close();
+				return "{\"Status\":\"Exception Failure\"}";
+				
+			}
+		
+	}
 
 }
