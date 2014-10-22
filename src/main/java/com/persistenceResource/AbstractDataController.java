@@ -1,5 +1,7 @@
 package com.persistenceResource;
 
+import java.awt.geom.Point2D;
+
 import javax.persistence.EntityManager;
 
 /**
@@ -20,4 +22,5 @@ public interface AbstractDataController {
 	public String getUserType(EntityManager em, String username) throws Exception;
 	public String changeUserType(EntityManager em, String username, String userType) throws Exception;
 	public String getUsers(EntityManager em, String userType) throws Exception;
+	public Point2D.Double getAverageSaleLocation(EntityManager em) throws Exception;
 }

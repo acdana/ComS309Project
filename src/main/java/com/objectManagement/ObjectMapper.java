@@ -13,8 +13,8 @@ import java.util.List;
 public class ObjectMapper {
 	
 	/**
-	 * This method is used to process a raw list of objects into a list of strings
-	 * representing user names.
+	 * This method is used to process a raw list of objects into a valid
+	 * JSON string for the frontend.
 	 * 
 	 * @param rawUsernames	The list of raw usernames that we wish to process.
 	 * @return An array list of strings representing the user names retrieved.
@@ -36,8 +36,8 @@ public class ObjectMapper {
 	
 	
 	/**
-	 * This method is used to translate raw message data into readable
-	 * MessageKeyMultiValue objects.
+	 * This method is used to translate raw message data into valid
+	 * JSON strings for the frontend.
 	 * 
 	 * @param rawMessages The raw message objects to be translated.
 	 * @return An array list of MessageKeyMultiValue objects representing messages.
@@ -45,15 +45,15 @@ public class ObjectMapper {
 	public static String mapMessages(List<Object[]> rawMessages) {
 		
 		String allMessages = "{\"Messages\":[";
-		for(Object[] rawMessage : rawMessages) {	
-			
-
-			String name = (String) rawMessage[1];
+		for(Object[] rawMessage : rawMessages) {
 			String content = (String) rawMessage[0]; 
-			String tempMessage = "{\"Sender\":\"" + name + "\", \"Message\": \"" + content + "\"},";
+			String name = (String) rawMessage[1];
+			String tempMessage = "{\"Sender\":\"" + name + "\",\"Message\":\"" + content + "\"},";
 			allMessages += tempMessage;
 		}
-		allMessages = allMessages.substring(0, allMessages.length()-1);
+		if(rawMessages.size() > 0) {
+			allMessages = allMessages.substring(0, allMessages.length()-1);
+		}
 		allMessages += "]}";
 		
 		return allMessages;
