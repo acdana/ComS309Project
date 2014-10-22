@@ -4,9 +4,11 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
+
 import com.entities.Message;
 import com.entities.User;
 import com.objectManagement.ObjectMapper;
@@ -376,5 +378,93 @@ public class DataController implements AbstractDataController {
     	return true;
 	}
 	
+	/**
+	 * This method is used to get the profile picture location of the user.
+	 * @param em Our instance of EntityManager used for persistence.
+	 * @param username The username of the user we want to get the picture for.
+	 * @return A String that indicates the location of the profile picture.
+	 * @throws Exception
+	 */
+	public String getProfPic(EntityManager em, String username) throws Exception {
+		
+		
+		try {
+			
+			Query q = em.createNamedQuery("getProfPic").setParameter("username", username);
+			if(q.getResultList().size() == 0) {
+			
+				em.close();
+				return "none";
+			
+			} else {
+			
+				String out = (String) q.getResultList().get(0);
+				em.close();
+				return out;
+			
+			}
+			
+		} catch (Exception e) {
+			
+			em.close();
+			throw e;
+			
+		}
+		
+	}
+	
+	public String getBio(EntityManager em, String username) throws Exception {
+		
+		try {
+			
+			Query q = em.createNamedQuery("getBio").setParameter("username", username);
+			if (q.getResultList().size() == 0) {
+				
+				em.close();
+				return "none";
+				
+			} else {
+				
+				String out = (String) q.getResultList().get(0);
+				em.close();
+				return out;
+				
+			}
+			
+		} catch (Exception e) {
+			
+			em.close();
+			throw e;
+			
+		}
+		
+	}
+	
+	public String getStatus(EntityManager em, String username) throws Exception {
+		
+		try {
+			
+			Query q = em.createNamedQuery("getStatus").setParameter("username", username);
+			if (q.getResultList().size() == 0) {
+				
+				em.close();
+				return "none";
+				
+			} else {
+				
+				String out = (String) q.getResultList().get(0);
+				em.close();
+				return out;
+				
+			}
+			
+		} catch (Exception e) {
+			
+			em.close();
+			throw e;
+			
+		}
+		
+	}
 
 }

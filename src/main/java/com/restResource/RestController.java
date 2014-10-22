@@ -372,5 +372,104 @@ public class RestController {
 			return "{\"Status\":\"Credential Failure\"}";
 		}
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getStatus/{username}")
+	public String getStatus(@Context HttpServletRequest req, @PathParam("username") String username) {
+		
+		if (dataController.verifyCredentials(em, req) == true) {
+			
+			try {
+				
+				String output = dataController.getStatus(em, username);
+				if (output.equalsIgnoreCase("none")) {
+					
+					return "{\"Status\":\"Missing Failure\"}";
+					
+				}
+				em.close();
+				return "{\"Bio\":\"" + output + "\"}";
+				
+			} catch (Exception e) {
+				
+				em.close();
+				return "{\"Status\":\"Exception Failure\"}";
+				
+			}
+			
+		} else {
+			
+			return "{\"Status\":\"Credential Failure\"}";
+		
+		}
+		
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getProfPic/{username}")
+	public String getProfPic(@Context HttpServletRequest req, @PathParam("username") String username) {
+		
+		if (dataController.verifyCredentials(em, req) == true) {
+			
+			try {
+				
+				String output = dataController.getProfPic(em, username);
+				if (output.equalsIgnoreCase("none")) {
+					
+					return "{\"Status\":\"Missing Failure\"}";
+					
+				}
+				em.close();
+				return "{\"ProfilePic\":\"" + output + "\"}";
+				
+			} catch (Exception e) {
+				
+				em.close();
+				return "{\"Status\":\"Exception Failure\"}";
+				
+			}
+			
+		} else {
+			
+			return "{\"Status\":\"Credential Failure\"}";
+		
+		}
+		
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getBio/{username}")
+	public String getBio(@Context HttpServletRequest req, @PathParam("username") String username) {
+		
+		if (dataController.verifyCredentials(em, req) == true) {
+			
+			try {
+				
+				String output = dataController.getProfPic(em, username);
+				if (output.equalsIgnoreCase("none")) {
+					
+					return "{\"Status\":\"Missing Failure\"}";
+					
+				}
+				em.close();
+				return "{\"Bio\":\"" + output + "\"}";
+				
+			} catch (Exception e) {
+				
+				em.close();
+				return "{\"Status\":\"Exception Failure\"}";
+				
+			}
+			
+		} else {
+			
+			return "{\"Status\":\"Credential Failure\"}";
+		
+		}
+		
+	}
 
 }
