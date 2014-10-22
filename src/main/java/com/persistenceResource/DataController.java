@@ -466,5 +466,32 @@ public class DataController implements AbstractDataController {
 		}
 		
 	}
+	
+	public String getTotTrades(EntityManager em, String username) throws Exception {
+		
+		try {
+			
+			Query q = em.createNamedQuery("getTotTrades").setParameter("username", username);
+			if (q.getResultList().size() == 0) {
+				
+				em.close();
+				return "none";
+				
+			} else {
+				
+				String out = (String) q.getResultList().get(0);
+				em.close();
+				return out;
+				
+			}
+			
+		} catch (Exception e) {
+			
+			em.close();
+			throw e;
+			
+		}
+		
+	}
 
 }

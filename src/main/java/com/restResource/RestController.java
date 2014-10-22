@@ -418,7 +418,7 @@ public class RestController {
 				String output = dataController.getProfPic(em, username);
 				if (output.equalsIgnoreCase("none")) {
 					
-					return "{\"Status\":\"Missing Failure\"}";
+					return "{\"Status\":\"Missing Username Failure\"}";
 					
 				}
 				em.close();
@@ -448,14 +448,47 @@ public class RestController {
 			
 			try {
 				
-				String output = dataController.getProfPic(em, username);
+				String output = dataController.getBio(em, username);
 				if (output.equalsIgnoreCase("none")) {
 					
-					return "{\"Status\":\"Missing Failure\"}";
+					return "{\"Status\":\"Missing Username Failure\"}";
 					
 				}
 				em.close();
 				return "{\"Bio\":\"" + output + "\"}";
+				
+			} catch (Exception e) {
+				
+				em.close();
+				return "{\"Status\":\"Exception Failure\"}";
+				
+			}
+			
+		} else {
+			
+			return "{\"Status\":\"Credential Failure\"}";
+		
+		}
+		
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getTotTrades/{username}")
+	public String getTotTrades(@Context HttpServletRequest req, @PathParam("username") String username) {
+		
+		if (dataController.verifyCredentials(em, req) == true) {
+			
+			try {
+				
+				String output = dataController.getTotTrades(em, username);
+				if (output.equalsIgnoreCase("none")) {
+					
+					return "{\"Status\":\"Missing Username Failure\"}";
+					
+				}
+				em.close();
+				return "{\"Trades\":\"" + output + "\"}";
 				
 			} catch (Exception e) {
 				
