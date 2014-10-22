@@ -12,7 +12,7 @@ import java.util.Date;
 @Entity
 @NamedQueries({
 	@NamedQuery(name = "getAllCoordinates", query = "SELECT S.longitude, S.latitude FROM Sale S"),
-	@NamedQuery(name = "getTotTrades", query = "SELECT count(s.primarySeller) from Sale s where s.primarySeller = :username")
+	@NamedQuery(name = "getTotTrades", query = "SELECT count(s.primarySeller) from Sale s where s.primarySeller = :username and not s.secondarySeller = \"\"")
 })
 public class Sale implements Serializable {
 	private static final long serialVersionUID = 1L;
