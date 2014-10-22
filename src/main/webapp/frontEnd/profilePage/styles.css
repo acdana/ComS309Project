@@ -1,4 +1,4 @@
-﻿body{
+body{
     margin-top:5%;
     background-image:url(../assets/jpg/campanile.jpg);
     background-repeat:no-repeat;
@@ -23,17 +23,8 @@ h1{
     border-radius: 2px 2px 2px 2px;
 }
 
-#profBio{
-    border: solid;
-    border-width: 5px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    background-color:#fbfaf6;
-}
-
 #profInfo{
+	font-family: 'trebuchet ms', sans-serif;
     background-color:#fbfaf6;
     border: solid;
     border-width: 3px;
