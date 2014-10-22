@@ -6,7 +6,7 @@
 </script>
 <script type="text/javascript">
 	//max zoom out level
-	
+
 	function init() {
 		var maxZoomOut = 14;
 		var map = new google.maps.Map(document.getElementById('map'), {
@@ -20,36 +20,15 @@
 				-93.629762));
 
 		//drag listener
-		google.maps.event
-				.addListener(
-						map,
-						'dragend',
-						function() {
-							//checks if cords are in bounds
-							if (boundry.contains(map.getCenter())) {
-								return;
-							}
+		google.maps.event.addListener(map, 'dragend', function() {
 
-							//force center of map within boundrys
-							var cent = map.getCenter(), x = cent.lng(), y = cent
-									.lat(), minX = boundry.getSouthWest().lng(), minY = boundry
-									.getSouthWest().lat(), maxX = boundry
-									.getNorthEast().lng(), maxY = boundry
-									.getNorthEast().lat();
+			//force center of map within boundrys
+			//fixed center
+			var cent = posFix(map.getCenter());
 
-							//correcting position
-							if (x < minX)
-								x = minX;
-							if (x > maxX)
-								x = maxX;
-							if (y < minY)
-								y = minY;
-							if (y > maxY)
-								y = maxY;
-
-							//setting center to corrected position
-							map.setCenter(new google.maps.LatLng(y, x));
-						});
+			//setting center to corrected position
+			map.setCenter(cent);
+		});
 
 		//zoom listener
 		google.maps.event.addListener(map, 'zoom_changed', function() {
@@ -58,6 +37,54 @@
 				map.setZoom(maxZoomOut);
 			}
 		});
+
+		//prevent dblclick zoom
+		map.setOptions({
+			disableDoubleClickZoom : true
+		});
+
+		//make dblclick new marker
+		var marker;
+		google.maps.event.addListener(map, 'dblclick', function(clickLatLng) {
+			var fixPos = posFix(clickLatLng.latLng);
+			if (marker) {
+				//force marker into boundrys
+				marker.setPosition(fixPos);
+			} else {
+				marker = new google.maps.Marker({
+					position : fixPos,
+					map : map
+				});
+			}
+		});
+
+		function posFix(pos) {
+			var x = pos.lng();
+			var y = pos.lat();
+
+			//the boundrys
+			var minX = boundry.getSouthWest().lng();
+			var minY = boundry.getSouthWest().lat();
+			var maxX = boundry.getNorthEast().lng();
+			var maxY = boundry.getNorthEast().lat();
+
+			//correcting position
+			if (x < minX) {
+				x = minX;
+			}
+			if (x > maxX) {
+				x = maxX;
+			}
+			if (y < minY) {
+				y = minY;
+			}
+			if (y > maxY) {
+				y = maxY;
+			}
+			var newPos = new google.maps.LatLng(y, x);
+			return newPos;
+		}
+
 	}
 
 	//in google tutoria. makes things work. figure out what this does
