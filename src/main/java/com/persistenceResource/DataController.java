@@ -517,6 +517,41 @@ public class DataController implements AbstractDataController {
 			throw e;
 			
 		}
+		
+	}
+	
+	/**
+	 * Gets the number of open sales that a user has.
+	 * @param em Instance of EntityManager used for persistence.
+	 * @param username The username that we want to get unfinished/open sales of. 
+	 * @return The number of open sales a user has.
+	 * @throws Exception
+	 */
+	public String getOpenSales(EntityManager em, String username) throws Exception {
+		
+		try {
+			
+			Query q = em.createNamedQuery("getOpenSales").setParameter("username", username);
+			if (q.getResultList().size() == 0) {
+				
+				em.close();
+				return "none";
+				
+			} else {
+				
+				String out = (String) q.getResultList().get(0);
+				em.close();
+				return out;
+				
+			}
+			
+		} catch (Exception e) {
+			
+			em.close();
+			throw e;
+			
+		}
+		
 	}
 	
 	/**
@@ -530,8 +565,24 @@ public class DataController implements AbstractDataController {
 	 */
 	public String getMessageData(EntityManager em) throws Exception	{
 		
+		double averageLength = 0.0;
+		try {
+			Query query = em.createNamedQuery("getAllMessages");
+			List<Object> rawMessages =  query.getResultList();
+			
+			for(Object message : rawMessages) {	
+				String tempMessageContents = (String) message;
+				averageLength += tempMessageContents.length();
+			}
+			
+			averageLength = averageLength/rawMessages.size();
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return "{\"Status\":\"Exception Failure\"}";
+		}
 		
-		return "";
+		return "{\"AverageLength\":\"" + Double.toString(averageLength) + "\"}";
 	}
 
 }
