@@ -12,6 +12,7 @@ function getProfPic(){
 	$.ajax({
 		url: "309/T11/getProfPic",
 		type: "GET",
+		datatype: 'json',
 		headers: {
 			"Authorization" : "TestUser" + ":" + "myPassword"
 		},
@@ -29,6 +30,7 @@ function getProfName(){
 	$.ajax({
 		url: "309/T11/getProfName",
 		type: "GET",
+		datatype: 'json',
 		headers: {
 			"Authorization" : "TestUser" + ":" + "myPassword"
 		},
@@ -47,6 +49,7 @@ function getSignDate(){
 	$.ajax({
 		url: "309/T11/getSignDate",
 		type: "GET",
+		datatype: 'json',
 		headers: {
 			"Authorization" : "TestUser" + ":" + "myPassword"
 		},
@@ -65,6 +68,7 @@ function getTotTrades(){
 	$.ajax({
 		url: "309/T11/getTotTrades",
 		type: "GET",
+		datatype: 'json',
 		headers: {
 			"Authorization" : "TestUser" + ":" + "myPassword"
 		},
@@ -83,6 +87,7 @@ function getSaleItems(){
 	$.ajax({
 		url: "309/T11/getSaleItems",
 		type: "GET",
+		datatype: 'json',
 		headers: {
 			"Authorization" : "TestUser" + ":" + "myPassword"
 		},
