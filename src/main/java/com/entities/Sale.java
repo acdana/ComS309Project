@@ -12,7 +12,8 @@ import java.util.Date;
 @Entity
 @NamedQueries({
 	@NamedQuery(name = "getAllCoordinates", query = "SELECT S.longitude, S.latitude FROM Sale S"),
-	@NamedQuery(name = "getTotTrades", query = "SELECT count(s.primarySeller) from Sale s where s.primarySeller = :username and not s.secondarySeller = \"\"")
+	@NamedQuery(name = "getTotTrades", query = "SELECT count(s.primarySeller) from Sale s where s.primarySeller = :username and not s.secondarySeller = \"\""),
+	@NamedQuery(name = "getOpenSales", query = "SELECT count(s.primarySeller) from Sale s where s.primarySeller = :username and s.secondarySeller = \"\"")
 })
 public class Sale implements Serializable {
 	private static final long serialVersionUID = 1L;

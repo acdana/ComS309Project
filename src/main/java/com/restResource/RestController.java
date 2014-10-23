@@ -505,6 +505,39 @@ public class RestController {
 		
 	}
 	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getOpenSales/{username}")
+	public String getOpenSales(@Context HttpServletRequest req, @PathParam("username") String username) {
+		
+		if (dataController.verifyCredentials(em, req) == true) {
+			
+			try {
+				
+				String output = dataController.getOpenSales(em, username);
+				if (output.equalsIgnoreCase("none")) {
+					
+					return "{\"Status\":\"Missing Username Failure\"}";
+					
+				}
+				em.close();
+				return "{\"Open Sales\":\"" + output + "\"}";
+				
+			} catch (Exception e) {
+				
+				em.close();
+				return "{\"Status\":\"Exception Failure\"}";
+				
+			}
+			
+		} else {
+			
+			return "{\"Status\":\"Credential Failure\"}";
+		
+		}
+		
+	}
+	
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
