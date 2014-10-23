@@ -29,7 +29,7 @@ input#chat {
 
 	Chat.socket = null;
 
-//compatability type checks	
+	//compatability type checks	
 	Chat.connect = (function(host) {
 		if ("WebSocket" in window) {
 			Chat.socket = new WebSocket(host);
@@ -74,26 +74,26 @@ input#chat {
 	};
 	//when a messege is sent
 	// checks for blank messeges
-	Chat.sendMessage = (function() {
+	Chat.sendMessage = function() {
 		var message = document.getElementById("chat").value;
 		if (message != '') {
 			Chat.socket.send(message);
 			document.getElementById("chat").value = '';
 		}
-	});
+	};
 
 	var Console = {};
 
 	//puts words into the console and limits the logs
 	Console.log = (function(message) {
 		var console = document.getElementById("console");
-		
+
 		//adds new message to console with word wrap
 		var p = document.createElement('p');
 		p.style.wordWrap = "break-word";
 		p.innerHTML = message;
 		console.appendChild(p);
-		
+
 		//keeps chat log small
 		while (console.childNodes.length > 25) {
 			console.removeChild(console.firstChild);
