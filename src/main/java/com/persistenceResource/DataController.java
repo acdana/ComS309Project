@@ -530,8 +530,24 @@ public class DataController implements AbstractDataController {
 	 */
 	public String getMessageData(EntityManager em) throws Exception	{
 		
+		double averageLength = 0.0;
+		try {
+			Query query = em.createNamedQuery("getAllMessages");
+			List<Object> rawMessages =  query.getResultList();
+			
+			for(Object message : rawMessages) {	
+				String tempMessageContents = (String) message;
+				averageLength += tempMessageContents.length();
+			}
+			
+			averageLength = averageLength/rawMessages.size();
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return "{\"Status\":\"Exception Failure\"}";
+		}
 		
-		return "";
+		return "{\"AverageLength\":\"" + Double.toString(averageLength) + "\"}";
 	}
 
 }
