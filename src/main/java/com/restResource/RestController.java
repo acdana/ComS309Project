@@ -388,12 +388,11 @@ public class RestController {
 					return "{\"Status\":\"Missing Failure\"}";
 					
 				}
-				em.close();
-				return "{\"Bio\":\"" + output + "\"}";
+				
+				return "{\"Account Status\":\"" + output + "\"}";
 				
 			} catch (Exception e) {
 				
-				em.close();
 				return "{\"Status\":\"Exception Failure\"}";
 				
 			}
@@ -421,12 +420,10 @@ public class RestController {
 					return "{\"Status\":\"Missing Username Failure\"}";
 					
 				}
-				em.close();
 				return "{\"ProfilePic\":\"" + output + "\"}";
 				
 			} catch (Exception e) {
 				
-				em.close();
 				return "{\"Status\":\"Exception Failure\"}";
 				
 			}
@@ -454,12 +451,11 @@ public class RestController {
 					return "{\"Status\":\"Missing Username Failure\"}";
 					
 				}
-				em.close();
+				
 				return "{\"Bio\":\"" + output + "\"}";
 				
 			} catch (Exception e) {
 				
-				em.close();
 				return "{\"Status\":\"Exception Failure\"}";
 				
 			}
@@ -487,12 +483,11 @@ public class RestController {
 					return "{\"Status\":\"Missing Username Failure\"}";
 					
 				}
-				em.close();
+				
 				return "{\"Trades\":\"" + output + "\"}";
 				
 			} catch (Exception e) {
 				
-				em.close();
 				return "{\"Status\":\"Exception Failure\"}";
 				
 			}
@@ -520,12 +515,11 @@ public class RestController {
 					return "{\"Status\":\"Missing Username Failure\"}";
 					
 				}
-				em.close();
+				
 				return "{\"Open Sales\":\"" + output + "\"}";
 				
 			} catch (Exception e) {
 				
-				em.close();
 				return "{\"Status\":\"Exception Failure\"}";
 				
 			}

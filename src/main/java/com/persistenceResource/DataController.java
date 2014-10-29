@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Query;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 
 import com.entities.Message;
+import com.entities.Profile;
 import com.entities.User;
 import com.objectManagement.ObjectMapper;
 
@@ -183,7 +184,16 @@ public class DataController implements AbstractDataController {
 		user.setAccountStatus("Clear");
 		user.setUserType("Basic");
 		user.setPenalties(0);
+		Profile prof = new Profile();
+		prof.setBio("");
+		
+		//TODO Set this empty string to default profile picture location
+		prof.setProfilePicture("");
+		
+		prof.setReputation(0);
+		prof.setUsername(username);
 		em.persist(user);
+		em.persist(prof);
 		em.getTransaction().commit();
 		em.close();
 	}
@@ -361,6 +371,7 @@ public class DataController implements AbstractDataController {
 	 * @return	True of False based on whether or not the credentials provided were legitimate.
 	 */
 	public boolean verifyCredentials(EntityManager em, HttpServletRequest req) {
+	
     	String[] credentials = req.getHeader("Authorization").split(":");
     	String username = credentials[0];
     	String password = credentials[1];
@@ -376,6 +387,7 @@ public class DataController implements AbstractDataController {
     	}
     	
     	return true;
+    	
 	}
 	
 	/**
