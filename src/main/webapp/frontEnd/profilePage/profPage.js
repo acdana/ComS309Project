@@ -14,7 +14,7 @@ function getProfPic(){
 		type: "GET",
 		datatype: 'json',
 		headers: {
-			"Authorization" : "TestUser" + ":" + "myPassword"
+			"Authorization" : getCredentials(),
 		},
 		success: function(result){
 			console.log(result);
@@ -32,7 +32,7 @@ function getProfName(){
 		type: "GET",
 		datatype: 'json',
 		headers: {
-			"Authorization" : "TestUser" + ":" + "myPassword"
+			"Authorization" : getCredentials(),
 		},
 		success: function(result){
 			console.log(result);
@@ -51,7 +51,7 @@ function getSignDate(){
 		type: "GET",
 		datatype: 'json',
 		headers: {
-			"Authorization" : "TestUser" + ":" + "myPassword"
+			"Authorization" : getCredentials(),
 		},
 		success: function(result){
 			console.log(result);
@@ -70,7 +70,7 @@ function getTotTrades(){
 		type: "GET",
 		datatype: 'json',
 		headers: {
-			"Authorization" : "TestUser" + ":" + "myPassword"
+			"Authorization" : getCredentials(),
 		},
 		success: function(result){
 			console.log(result);
@@ -89,7 +89,7 @@ function getSaleItems(){
 		type: "GET",
 		datatype: 'json',
 		headers: {
-			"Authorization" : "TestUser" + ":" + "myPassword"
+			"Authorization" : getCredentials(),
 		},
 		success: function(result){
 			console.log(result);
@@ -100,3 +100,18 @@ function getSaleItems(){
 		}
 	});
 };
+
+
+
+function getCredentials() {
+	   var authorization = "Authorization=";
+	   var idx = document.cookie.indexOf(authorization)
+
+	   if (idx != -1) {
+	       var end = document.cookie.indexOf(";", idx + 1);
+	       if (end == -1) end = document.cookie.length;
+	       return unescape(document.cookie.substring(idx + authorization.length, end));
+	   } else {
+	       return "";
+	  }
+}
