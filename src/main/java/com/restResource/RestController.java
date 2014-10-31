@@ -1,6 +1,7 @@
 package com.restResource;
 
 import java.awt.geom.Point2D;
+
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
@@ -9,6 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+
 import com.persistenceResource.DataController;
 import com.persistenceResource.FactoryStartup;
 
@@ -30,7 +32,7 @@ public class RestController {
 	@Path("/getAllUsernames")
 	public String getAllUsernames(@Context HttpServletRequest req) {
 
-    	
+
 		if(dataController.verifyCredentials(em, req) == true) {
 		
 			try {
@@ -55,9 +57,7 @@ public class RestController {
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	@Path("/createNewUser/{username}/{password}/{email}")
-	public String createNewUser(@Context HttpServletRequest req, @PathParam("username") String username, @PathParam("password") String password, @PathParam("email") String email) {
-
-		if(dataController.verifyCredentials(em, req) == true) {
+	public String createNewUser(@PathParam("username") String username, @PathParam("password") String password, @PathParam("email") String email) {
 			
 			try {
 				dataController.createNewUser(em, username, password, email);
@@ -67,10 +67,8 @@ public class RestController {
 				return "{\"Status\":\"Exception Failure\"}";
 			}
 			
-		}	
-		else {
-			return "{\"Status\":\"Credential Failure\"}";
-		}
+		
+	
 	}
 
 	@GET
@@ -499,7 +497,7 @@ public class RestController {
 		}
 		
 	}
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getOpenSales/{username}")

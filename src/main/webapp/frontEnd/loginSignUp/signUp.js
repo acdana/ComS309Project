@@ -61,8 +61,32 @@ function checkLogin() {
     // Initialize variables for the forms from the login section
     var un = document.forms["loginForm"]["logUsername"].value;
     var passw = document.forms["loginForm"]["logPassword"].value;
+    
+    var header = "Basic " + un + ":" + passw;
+    document.cookie = "expires=Thu, 01-Jan-1970 00:00:01 GMT";
+    document.cookie = "Authorization=" + header + "; path=/";
 
 }
+
+
+
+
+function getCredentials() {
+	   var authorization = "Authorization=";
+	   var idx = document.cookie.indexOf(authorization)
+
+	   if (idx != -1) {
+	       var end = document.cookie.indexOf(";", idx + 1);
+	       if (end == -1) end = document.cookie.length;
+	       return unescape(document.cookie.substring(idx + authorization.length, end));
+	   } else {
+	       return "";
+	  }
+}
+
+
+
+
 
 
 
@@ -72,7 +96,7 @@ $("#testButton").click(function () {
         url: "309/T11/getAllUsernames",
         type: "GET",
         headers: {
-        	"Authorization" : "TestUser" + ":" + "myPassword", //TestUser and myPassword need to be stored during the jQuery session somehow.
+        	"Authorization" : getCredentials(), //TestUser and myPassword need to be stored during the jQuery session somehow.
         },
         success: function (result) {
             console.log(result);
