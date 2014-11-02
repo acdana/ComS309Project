@@ -86,7 +86,35 @@ function getCredentials() {
 
 
 
+$('#loginButton').click(function() {
+    var username = document.forms["loginForm"]["logUsername"].value;
+    var password = document.forms["loginForm"]["logPassword"].value;
+    var response = "";
+    var login = $.ajax({
+        url: "309/T11/userLogin/" + username + "/" + password,
+        type: "GET",
+        headers: {
+        	"Authorization" : getCredentials(),
+        },
+        success: function (result) {
+        	if(result.Status == "Login Success") {
+        		checkLogin();
+        	    window.location.href = 'frontEnd/profilePage/index.html';
+        	}
+        	else {
+        		alert("Incorrect Username/Password")
+        	}
+            console.log(result);
 
+        },
+        error: function (dc, status, err) {
+            console.log(err);
+            console.log(status);
+        }
+    });
+	
+    return false;
+});
 
 
 
@@ -96,7 +124,7 @@ $("#testButton").click(function () {
         url: "309/T11/getAllUsernames",
         type: "GET",
         headers: {
-        	"Authorization" : getCredentials(), //TestUser and myPassword need to be stored during the jQuery session somehow.
+        	"Authorization" : getCredentials(),
         },
         success: function (result) {
             console.log(result);

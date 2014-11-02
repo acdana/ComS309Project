@@ -517,14 +517,14 @@ public class DataController implements AbstractDataController {
 				
 			} else {
 				
-				String out = (String) q.getResultList().get(0);
+				Long outNumber = (Long) q.getResultList().get(0);
 				em.close();
+				String out = outNumber.toString();
 				return out;
 				
 			}
 			
 		} catch (Exception e) {
-			
 			em.close();
 			throw e;
 			
