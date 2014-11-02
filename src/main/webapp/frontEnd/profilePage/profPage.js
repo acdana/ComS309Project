@@ -1,7 +1,6 @@
 // Run calls on page load
 window.onload = function(){
 	getProfPic();
-	getProfName();
 	getSignDate();
 	getTotTrades();
 	getSaleItems();
@@ -16,7 +15,7 @@ function getUsername() {
 // Find user's profile picture
 function getProfPic(){
 	getUsername();
-	$.ajax({
+	var path = $.ajax({
 		url: "../../309/T11/getProfPic/" + getUsername(),
 		type: "GET",
 		datatype: 'json',
@@ -24,6 +23,7 @@ function getProfPic(){
 			"Authorization" : getCredentials(),
 		},
 		success: function(result){
+			displayProfilePic(result.ProfilePic, 100, 100);
 			console.log(result);
 		},
 		error: function(dc, status, err){
@@ -31,34 +31,26 @@ function getProfPic(){
 			console.log(status);
 		}
 	});
+	
+	
 };
 
 
-// Find user's name
-//TODO This is not a REST URL at the moment
-function getProfName(){
-	$.ajax({
-		url: "../../309/T11/getProfName",
-		type: "GET",
-		datatype: 'json',
-		headers: {
-			"Authorization" : getCredentials(),
-		},
-		success: function(result){
-			console.log(result);
-		},
-		error: function(dc, status, err){
-			console.log(err);
-			console.log(status);
-		}
-	});
-};
+function displayProfilePic(path, width, height) {
+    var pic = document.getElementById("profPic");
+    pic.src = path;
+    pic.width = width;
+    pic.height = height;
+
+}
+
+
 
 // Find user's sign-up date
 //TODO This is not a REST URL at the moment
 function getSignDate(){
 	$.ajax({
-		url: "../../309/T11/getSignDate",
+		url: "../../309/T11/getSignUpDate",
 		type: "GET",
 		datatype: 'json',
 		headers: {
@@ -84,6 +76,7 @@ function getTotTrades(){
 			"Authorization" : getCredentials(),
 		},
 		success: function(result){
+			displayTotalTrades(result.Trades);
 			console.log(result);
 		},
 		error: function(dc, status, err){
@@ -92,6 +85,12 @@ function getTotTrades(){
 		}
 	});
 };
+
+
+function displayTotalTrades(trades) {
+    document.getElementById("totalTradesMade").innerHTML = "Total Trades: " + trades;
+
+}
 
 // Find number of items currently for sale
 //TODO This is not a REST URL at the moment
