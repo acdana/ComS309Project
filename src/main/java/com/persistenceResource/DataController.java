@@ -186,9 +186,7 @@ public class DataController implements AbstractDataController {
 		user.setPenalties(0);
 		Profile prof = new Profile();
 		prof.setBio("");
-		
-		//TODO Set this empty string to default profile picture location
-		prof.setProfilePicture("");
+		prof.setProfilePicture("profilePics/defaultPhoto.jpg");
 		
 		prof.setReputation(0);
 		prof.setUsername(username);
