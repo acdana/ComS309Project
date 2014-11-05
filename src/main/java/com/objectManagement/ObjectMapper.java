@@ -1,7 +1,9 @@
 package com.objectManagement;
 
 import java.awt.geom.Point2D;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -77,6 +79,25 @@ public class ObjectMapper {
 		
 		}
 		return coordinateList;
+	}
+	
+	public static String mapCurrentSales(List<Object[]> rawSales) {
+		String currentSales = "{\"Result\":[";
+		
+		for(Object[] rawSale : rawSales) {
+			String seller = (String) rawSale[0]; 
+			Date dateCreated = (Date) rawSale[1];
+			String dateString = new SimpleDateFormat("dd/MM/yyyy").format(dateCreated);
+			String tempSale = "{\"Seller\":\"" + seller + "\",\"dateCreated\":\"" + dateString + "\"},";
+			currentSales += tempSale;
+		}
+		if(rawSales.size() > 0) {
+			currentSales = currentSales.substring(0, currentSales.length()-1);
+		}
+		currentSales += "]}";
+		
+		return currentSales;
+		
 	}
 	
 }
