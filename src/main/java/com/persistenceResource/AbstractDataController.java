@@ -30,4 +30,5 @@ public interface AbstractDataController {
 	public String getBio(EntityManager em, String username) throws Exception;
 	public String getProfPic(EntityManager em, String username) throws Exception;
 	public boolean verifyCredentials(EntityManager em, HttpServletRequest req);
+	public String getCurrentSales(EntityManager em) throws Exception;
 }

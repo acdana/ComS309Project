@@ -594,5 +594,15 @@ public class DataController implements AbstractDataController {
 		
 		return "{\"AverageLength\":\"" + Double.toString(averageLength) + "\"}";
 	}
+	
+	
+	
+	public String getCurrentSales(EntityManager em) {
+		
+		Query query = em.createNamedQuery("getCurrentSales");
+		List<Object[]> rawSales = query.getResultList();
+		
+		return ObjectMapper.mapCurrentSales(rawSales);
+	}
 
 }

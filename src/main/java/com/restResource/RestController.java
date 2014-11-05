@@ -550,5 +550,31 @@ public class RestController {
 			}
 		
 	}
+	
+	
+	
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getCurrentSales")
+	public String getCurrentSales() {
+		
+			try {
+				
+				String output = dataController.getCurrentSales(em);
+				if (output.equalsIgnoreCase("none")) {
+					
+					return "{\"Result\":\"Missing Username Failure\"}";
+					
+				}
+				return output;
+				
+			} catch (Exception e) {
+				return "{\"Result\":\"Exception Failure\"}";
+				
+			}
+
+		
+	}
 
 }
