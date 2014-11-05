@@ -4,6 +4,7 @@ window.onload = function(){
 	getSignDate();
 	getTotTrades();
 	getSaleItems();
+	getBio();
 }
 
 
@@ -44,7 +45,32 @@ function displayProfilePic(path, width, height) {
 
 }
 
+// Find user's bio
+function getBio(){
+	getUsername();
+	var path = $.ajax({
+		url: "../../309/T11/getBio/" + getUsername(),
+		type: "GET",
+		datatype: 'json',
+		headers: {
+			"Authorization" : getCredentials(),
+		},
+		success: function(result){
+			displayBio(result.userBio);
+			console.log(result);
+		},
+		error: function(dc, status, err){
+			console.log(err);
+			console.log(status);
+		}
+	});
+}
 
+// userBio helper function
+function displayBio(path){
+	var bio = document.getElementById("userBio");
+	bio.src = path;
+}
 
 // Find user's sign-up date
 //TODO This is not a REST URL at the moment
