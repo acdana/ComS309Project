@@ -63,8 +63,10 @@ function checkLogin() {
     var passw = document.forms["loginForm"]["logPassword"].value;
     
     var header = "Basic " + un + ":" + passw;
-    document.cookie = "expires=Thu, 01-Jan-1970 00:00:01 GMT";
-    document.cookie = "Authorization=" + header + "; path=/";
+
+    document.cookie = "ourCookie=expires=Authorization=; path=/";
+    
+    document.cookie = "ourCookie=Authorization=" + header + "; path=/";
 
 }
 

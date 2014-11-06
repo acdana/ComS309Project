@@ -14,13 +14,15 @@ import java.util.Date;
 	@NamedQuery(name = "getAllCoordinates", query = "SELECT S.longitude, S.latitude FROM Sale S"),
 	@NamedQuery(name = "getTotTrades", query = "SELECT count(s.primarySeller) from Sale s where s.primarySeller = :username and not s.secondarySeller = \"\""),
 	@NamedQuery(name = "getOpenSales", query = "SELECT count(s.primarySeller) from Sale s where s.primarySeller = :username and s.secondarySeller = \"\""),
-	@NamedQuery(name = "getCurrentSales", query = "SELECT S.primarySeller, S.dateCreated FROM Sale S WHERE S.secondarySeller = ''")
+	@NamedQuery(name = "getCurrentSales", query = "SELECT S.saleDescription, S.primarySeller, S.dateCreated FROM Sale S WHERE S.secondarySeller = ''")
 })
 public class Sale implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	private int saleID;
+	
+	private String saleDescription;
 
 	private String chosenLocation;
 	
@@ -112,6 +114,14 @@ public class Sale implements Serializable {
 
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
+	}
+
+	public String getSaleDescription() {
+		return saleDescription;
+	}
+
+	public void setSaleDescription(String saleDescription) {
+		this.saleDescription = saleDescription;
 	}
 
 }

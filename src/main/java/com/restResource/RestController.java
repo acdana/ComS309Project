@@ -567,6 +567,7 @@ public class RestController {
 					return "{\"Result\":\"Missing Username Failure\"}";
 					
 				}
+				System.out.println(output);
 				return output;
 				
 			} catch (Exception e) {

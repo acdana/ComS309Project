@@ -85,10 +85,11 @@ public class ObjectMapper {
 		String currentSales = "{\"Result\":[";
 		
 		for(Object[] rawSale : rawSales) {
-			String seller = (String) rawSale[0]; 
-			Date dateCreated = (Date) rawSale[1];
+			String saleDescription = (String) rawSale[0];
+			String seller = (String) rawSale[1]; 
+			Date dateCreated = (Date) rawSale[2];
 			String dateString = new SimpleDateFormat("dd/MM/yyyy").format(dateCreated);
-			String tempSale = "{\"Seller\":\"" + seller + "\",\"dateCreated\":\"" + dateString + "\"},";
+			String tempSale = "{\"saleDescription\":\"" + saleDescription + "\",\"Seller\":\"" + seller + "\",\"dateCreated\":\"" + dateString + "\"},";
 			currentSales += tempSale;
 		}
 		if(rawSales.size() > 0) {

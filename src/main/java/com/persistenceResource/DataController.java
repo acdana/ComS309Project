@@ -371,6 +371,9 @@ public class DataController implements AbstractDataController {
 	public boolean verifyCredentials(EntityManager em, HttpServletRequest req) {
 	
     	String[] credentials = req.getHeader("Authorization").split(":");
+    	if(credentials.length == 1) {
+    		return false;
+    	}
     	String username = credentials[0];
     	String password = credentials[1];
     	
