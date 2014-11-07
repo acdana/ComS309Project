@@ -1,7 +1,7 @@
 <!-- javascript for the instant chat -->
 <html>
 <head>
-<!-- simple temp css to make the chat more readable -->
+<!-- simple temp css to make the chat readable -->
 <style type="text/css">
 input#chat {
     width: 400px
