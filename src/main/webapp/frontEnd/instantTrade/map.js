@@ -11,7 +11,7 @@ function init() {
 	// other persons marker
 	var mark;
 
-	//for displaying location of both markers
+	// for displaying location of both markers
 	var yoursPos = document.getElementById("yoursPos");
 	var otherPos = document.getElementById("otherPos");
 
@@ -90,18 +90,18 @@ function init() {
 						var msg = marker.getPosition().lat() + ","
 								+ marker.getPosition().lng();
 
-						//taks msg and maeks into html displayable
+						// taks msg and maeks into html displayable
 						var p = document.createElement('p');
 						p.style.wordWrap = "break-word";
 						p.innerHTML = msg;
 
-						//removes old location information
+						// removes old location information
 						if (yoursPos.childNodes.length > 0) {
 							yoursPos.removeChild(yoursPos.firstChild);
 						}
-						//adds new locations data
+						// adds new locations data
 						yoursPos.appendChild(p);
-
+						msg = "m," + msg;
 						othMark.socket.send(msg);
 					});
 		};
@@ -109,27 +109,28 @@ function init() {
 		// when a message is submitted
 		othMark.socket.onmessage = function(message) {
 			var arrStr = message.data.split(",");
-			var y = parseFloat(arrStr[0]);
-			var x = parseFloat(arrStr[1]);
+			if (arrStr[0] == "m") {
+				var y = parseFloat(arrStr[1]);
+				var x = parseFloat(arrStr[2]);
 
-			//makes a string out of location info
-			msg = arrStr[0] + "," + arrStr[1];
-			//make msg html displayable
-			var p = document.createElement('p');
-			p.style.wordWrap = "break-word";
-			p.innerHTML = msg;
+				// makes a string out of location info
+				msg = arrStr[1] + "," + arrStr[2];
+				// make msg html displayable
+				var p = document.createElement('p');
+				p.style.wordWrap = "break-word";
+				p.innerHTML = msg;
 
-			//removes old location data
-			if (otherPos.childNodes.length > 0) {
-				otherPos.removeChild(otherPos.firstChild);
+				// removes old location data
+				if (otherPos.childNodes.length > 0) {
+					otherPos.removeChild(otherPos.firstChild);
+				}
+				// adds new location data
+				otherPos.appendChild(p);
+
+				var newPos = new google.maps.LatLng(y, x);
+				mark = setMarker(mark, newPos);
+				mark.setOpacity(.5);
 			}
-			//adds new location data
-			otherPos.appendChild(p);
-
-			var newPos = new google.maps.LatLng(y, x);
-			mark = setMarker(mark, newPos);
-			mark.setOpacity(.5);
-
 		};
 	};
 

@@ -47,12 +47,20 @@ input#items {
 	width: 392px;
 }
 
-#console {
+#otherTradeBox {
 	border: 1px solid #000000;
 	height: 170px;
 	overflow-y: scroll;
 	padding: 5px;
-	width: 100%;
+	width: 400px;
+}
+
+#tradeBox {
+	border: 1px solid #000000;
+	height: 170px;
+	overflow-y: scroll;
+	padding: 5px;
+	width: 400px;
 }
 
 #console p {
@@ -77,9 +85,6 @@ input#items {
 	</div>
 
 
-	<%--idk what this does yet.
-<script src="trade.js"></script>
---%>
 
 	<%--
 things needed
@@ -98,50 +103,49 @@ things needed
  --%>
 	<div id="right">
 		<div id="yours">
-			<button type="button">Your location</button>
+			<button id="yoursBut">Your location</button>
 		</div>
+		<p id="yourStar">--</p>
 		<div id="yoursPos"></div>
 		<div id="other">
-			<button type="button">Other location</button>
+			<button id="otherBut">Other location</button>
 		</div>
+		<p id="otherStar">--</p>
 		<div id="otherPos"></div>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<button type="button">Agree to trade</button>
-		<br>
-		<br> <br>
-		<br>
-		<button type="button">Final Agree</button>
-		<br>
-		<br>
+		<br> <br> <br> <br> <br>
 
-		<button type="button">Cancel trade</button>
+		<button id="fAgree">Final Agree</button>
+		<br> <br>
+
+		<button id="cancel">Cancel trade</button>
 
 	</div>
 
-	<%--basicly make them chats but able to remove items --%>
+	<%--chats but able to remove items --%>
 	<div id="rightright">
 		<div>
 			<p>
 				<input type="text" placeholder="type and press enter to add an item"
 					id="items" />
 			</p>
-			<div id="console-container">
-				<div id="console"></div>
-			</div>
+			<select id="tradeBox" size="2">
+			</select>
 		</div>
 		<br>
+		<button id="remove">Remove Trade</button>
+		<br> <br>
 		<div>
-			Trading for:<br>
+			Trading for: <br> <select id="otherTradeBox" size="2">
+			</select> <br>
+			<br>
+			<button id="agree">Agree to trade</button>
 
-			<div id="console-container">
-				<div id="console"></div>
-			</div>
 		</div>
 	</div>
+	<%--idk what this does yet.
+--%>
+	<script src="locationButtons.js"></script>
+	<script src="trade.js"></script>
 
 </body>
 </html>
