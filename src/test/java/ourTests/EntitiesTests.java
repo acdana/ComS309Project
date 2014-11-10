@@ -57,12 +57,12 @@ public class EntitiesTests extends TestCase {
 		sale.setLatitude(55.01);
 		sale.setLongitude(43.22);
 		sale.setPrimarySeller("PrimarySeller");
-		sale.setSaleID(65);
+		sale.setSaleID("65");
 		sale.setSecondarySeller("SecondarySeller");
 		sale.setSecondarySellerLocation("OtherPlace");
 		
 		assertEquals("Pearson Hall2014-12-0355.0143.22PrimarySeller65SecondarySellerOtherPlace", sale.getChosenLocation() + sale.getDateCreated().toString() + 
-				Double.toString(sale.getLatitude()) + Double.toString(sale.getLongitude()) + sale.getPrimarySeller() + Integer.toString(sale.getSaleID()) + 
+				Double.toString(sale.getLatitude()) + Double.toString(sale.getLongitude()) + sale.getPrimarySeller() + sale.getSaleID() + 
 				sale.getSecondarySeller() + sale.getSecondarySellerLocation());
 	}
 	

@@ -46,7 +46,6 @@ function displayCurrentSales(description, seller, date) {
 function logout() {
 	
 	deleteCookie("ourCookie");
-	alert(document.cookie);
     window.location.href = '../../index.html';
     
 }
@@ -54,3 +53,21 @@ function logout() {
 function deleteCookie() {
 	  document.cookie = "ourCookie=Authorization=; path=/";
 	}
+
+
+function createSale()	 {
+	window.location.href = '../createSale/index.html';
+}
+
+function getCredentials() {
+	   var authorization = "Authorization=Basic ";
+	   var idx = document.cookie.indexOf(authorization)
+
+	   if (idx != -1) {
+	       var end = document.cookie.indexOf(";", idx + 1);
+	       if (end == -1) end = document.cookie.length;
+	       return unescape(document.cookie.substring(idx + authorization.length, end));
+	   } else {
+	       return "";
+	  }
+}

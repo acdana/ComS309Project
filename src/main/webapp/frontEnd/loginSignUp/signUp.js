@@ -44,7 +44,7 @@ function checkForm() {
 // Runs when the submit button (for Sign Up) is clicked
 $("#submitButton").click(function () {
     $.ajax({
-        url: "309/T11/createNewUser/" + $("#name").val() + "/" + $("#pass").val() + "/" + $("#email").val(),
+        url: "309/T11/createNewUser/" + $("#username").val() + "/" + $("#pass").val() + "/" + $("#email").val(),
         type: "GET",
         success: function (result) {
             console.log(result);
@@ -64,7 +64,7 @@ function checkLogin() {
     
     var header = "Basic " + un + ":" + passw;
 
-    document.cookie = "ourCookie=expires=Authorization=; path=/";
+    document.cookie = "ourCookie=expires=;Authorization=; path=/";
     
     document.cookie = "ourCookie=Authorization=" + header + "; path=/";
 
@@ -74,7 +74,7 @@ function checkLogin() {
 
 
 function getCredentials() {
-	   var authorization = "Authorization=";
+	   var authorization = "Authorization=Basic ";
 	   var idx = document.cookie.indexOf(authorization)
 
 	   if (idx != -1) {
@@ -100,7 +100,9 @@ $('#loginButton').click(function() {
         },
         success: function (result) {
         	if(result.Status == "Login Success") {
+        		alert(document.cookie);
         		checkLogin();
+        		alert(document.cookie);
         	    window.location.href = 'frontEnd/profilePage/index.html';
         	}
         	else {

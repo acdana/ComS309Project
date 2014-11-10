@@ -9,7 +9,7 @@ window.onload = function(){
 
 
 function getUsername() {
-	var username = getCredentials().substr(0, getCredentials().indexOf(':'))
+	var username = getCredentials().substr(0, getCredentials().indexOf(':'));
 	return username.substr(username.indexOf(' ')+1);
 }
 
@@ -141,7 +141,7 @@ function getSaleItems(){
 
 
 function getCredentials() {
-	   var authorization = "Authorization=";
+	   var authorization = "Authorization=Basic ";
 	   var idx = document.cookie.indexOf(authorization)
 
 	   if (idx != -1) {
@@ -152,3 +152,15 @@ function getCredentials() {
 	       return "";
 	  }
 }
+
+
+function logout() {
+	
+	deleteCookie("ourCookie");
+    window.location.href = '../../index.html';
+    
+}
+
+function deleteCookie() {
+	  document.cookie = "ourCookie=Authorization=; path=/";
+	}

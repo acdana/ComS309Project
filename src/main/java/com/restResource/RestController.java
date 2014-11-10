@@ -11,6 +11,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.openjpa.persistence.RollbackException;
+
 import com.persistenceResource.DataController;
 import com.persistenceResource.FactoryStartup;
 
@@ -567,7 +569,6 @@ public class RestController {
 					return "{\"Result\":\"Missing Username Failure\"}";
 					
 				}
-				System.out.println(output);
 				return output;
 				
 			} catch (Exception e) {
@@ -575,6 +576,35 @@ public class RestController {
 				
 			}
 
+		
+	}
+	
+	
+	
+	
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/createSale/{description}")
+	public String createSale(@Context HttpServletRequest req, @PathParam("description") String description) {
+		
+		if (dataController.verifyCredentials(em, req) == true) {
+		
+			try {
+				
+				String output = dataController.createSale(em, req, description);
+				return output;
+				
+			} catch (Exception e) {
+				
+				return "{\"Result\":\"Exception Failure\"}";
+				
+			}
+		} else {
+			
+			return "{\"Result\":\"Credential Failure\"}";
+		
+		}
 		
 	}
 

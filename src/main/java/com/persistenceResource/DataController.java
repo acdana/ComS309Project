@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.entities.Message;
 import com.entities.Profile;
+import com.entities.Sale;
 import com.entities.User;
 import com.objectManagement.ObjectMapper;
 
@@ -369,7 +370,6 @@ public class DataController implements AbstractDataController {
 	 * @return	True of False based on whether or not the credentials provided were legitimate.
 	 */
 	public boolean verifyCredentials(EntityManager em, HttpServletRequest req) {
-	
     	String[] credentials = req.getHeader("Authorization").split(":");
     	if(credentials.length == 1) {
     		return false;
@@ -378,7 +378,7 @@ public class DataController implements AbstractDataController {
     	String password = credentials[1];
     	
     	try {
-    		if(this.userLogin(em, username, password).equals("Failed")) {
+    		if(this.userLogin(em, username, password).equals("{\"Status\":\"Login Failure\"}")) {
     			em.close();
     			return false;
     		}
@@ -591,7 +591,7 @@ public class DataController implements AbstractDataController {
 			averageLength = averageLength/rawMessages.size();
 			
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+
 			return "{\"Status\":\"Exception Failure\"}";
 		}
 		
@@ -608,4 +608,28 @@ public class DataController implements AbstractDataController {
 		return ObjectMapper.mapCurrentSales(rawSales);
 	}
 
+	
+	
+	public String createSale(EntityManager em, HttpServletRequest req, String description) throws Exception {
+    	
+		String[] credentials = req.getHeader("Authorization").split(":");
+    	if(credentials.length == 1) {
+    		return "{\"Result\":\"Exception Failure\"}";
+    	}
+    	String primarySeller = credentials[0];
+		
+		em.getTransaction().begin();
+		Sale saleToCreate = new Sale();
+		saleToCreate.setSaleID(SecureIDGenerator.nextSecureId());
+		saleToCreate.setPrimarySeller(primarySeller);
+		saleToCreate.setSaleDescription(description);
+		java.util.Date utilDate = new java.util.Date();
+		java.sql.Date currentDate = new java.sql.Date(utilDate.getTime());
+		saleToCreate.setDateCreated(currentDate);
+		em.persist(saleToCreate);
+		em.getTransaction().commit();
+		em.close();
+		return "{\"Result\":\"Success\"}";
+
+	}
 }
