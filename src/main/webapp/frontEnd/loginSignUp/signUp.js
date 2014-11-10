@@ -100,9 +100,7 @@ $('#loginButton').click(function() {
         },
         success: function (result) {
         	if(result.Status == "Login Success") {
-        		alert(document.cookie);
         		checkLogin();
-        		alert(document.cookie);
         	    window.location.href = 'frontEnd/profilePage/index.html';
         	}
         	else {

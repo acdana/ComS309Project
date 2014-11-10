@@ -52,7 +52,6 @@ public class EntitiesTests extends TestCase {
 	
 	@SuppressWarnings("deprecation")
 	@Test public void testSale() {
-		sale.setChosenLocation("Pearson Hall");
 		sale.setDateCreated(new Date(114, 11, 3));
 		sale.setLatitude(55.01);
 		sale.setLongitude(43.22);
@@ -61,7 +60,7 @@ public class EntitiesTests extends TestCase {
 		sale.setSecondarySeller("SecondarySeller");
 		sale.setSecondarySellerLocation("OtherPlace");
 		
-		assertEquals("Pearson Hall2014-12-0355.0143.22PrimarySeller65SecondarySellerOtherPlace", sale.getChosenLocation() + sale.getDateCreated().toString() + 
+		assertEquals("Pearson Hall2014-12-0355.0143.22PrimarySeller65SecondarySellerOtherPlace", sale.getDateCreated().toString() + 
 				Double.toString(sale.getLatitude()) + Double.toString(sale.getLongitude()) + sale.getPrimarySeller() + sale.getSaleID() + 
 				sale.getSecondarySeller() + sale.getSecondarySellerLocation());
 	}
