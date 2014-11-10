@@ -1,15 +1,18 @@
 //javascript for map
 
+//initialization for use outside this file
+var marker = null;
+var mark = null;
+var map = null;
+
 function init() {
 	// marks between users
 	var othMark = {};
 	othMark.socket = null;
 
 	// this marker
-	var marker;
 
 	// other persons marker
-	var mark;
 
 	// for displaying location of both markers
 	var yoursPos = document.getElementById("yoursPos");
@@ -17,7 +20,7 @@ function init() {
 
 	var maxZoomOut = 14;
 
-	var map = new google.maps.Map(document.getElementById('map'), {
+	map = new google.maps.Map(document.getElementById('map'), {
 		zoom : maxZoomOut,
 		center : new google.maps.LatLng(42.026652, -93.646420),
 		mapTypeId : google.maps.MapTypeId.ROADMAP

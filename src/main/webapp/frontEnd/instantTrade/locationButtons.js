@@ -37,7 +37,7 @@ var yStr = "--", oStr = "--";
 
 // function that takes the strings yStr and oStr and makes them viewable on the
 // html page
-var htmlChange = function(yStr, oStr) {
+var htmlChangeYO = function(yStr, oStr) {
 	var yp = document.createElement('p');
 	var op = document.createElement('p');
 	yp.innerHTML = yStr;
@@ -62,43 +62,50 @@ locationBut.connect = function(host) {
 		// becomes a star.
 
 		// left dash becomes a star for your button
+		// will only work if this user has put down a marker
 		Yours.addEventListener("click", function() {
-			// selects this button
-			if (yStr == "--") {
-				yStr = "*-";
+			if (marker != null) {
+				// selects this button
+				if (yStr == "--") {
+					yStr = "*-";
 
-			} else if (yStr == "-*") {
-				yStr = "**";
-			}
-			// un-selects this button
-			if (oStr == "*-") {
-				oStr = "--";
-			} else if (oStr == "**") {
-				oStr = "-*";
-			}
+				} else if (yStr == "-*") {
+					yStr = "**";
+				}
+				// un-selects this button
+				if (oStr == "*-") {
+					oStr = "--";
+				} else if (oStr == "**") {
+					oStr = "-*";
+				}
 
-			// sending message and updating the html page
-			locationBut.socket.send("l,o");
-			htmlChange(yStr, oStr);
+				// sending message and updating the html page
+				locationBut.socket.send("l,o");
+				htmlChangeYO(yStr, oStr);
+			}
 		});
 		// left dash becomes a star for other button
+		// will only work if the other user has put down a marker
 		Other.addEventListener("click", function() {
-			// selects this buttons
-			if (oStr == "--") {
-				oStr = "*-";
-			} else if (oStr == "-*") {
-				oStr = "**";
-			}
-			// un-selects other button
-			if (yStr == "*-") {
-				yStr = "--";
-			} else if (yStr == "**") {
-				yStr = "-*";
-			}
+			if (mark != null) {
 
-			// sending message and updating html page
-			locationBut.socket.send("l,y");
-			htmlChange(yStr, oStr);
+				// selects this buttons
+				if (oStr == "--") {
+					oStr = "*-";
+				} else if (oStr == "-*") {
+					oStr = "**";
+				}
+				// un-selects other button
+				if (yStr == "*-") {
+					yStr = "--";
+				} else if (yStr == "**") {
+					yStr = "-*";
+				}
+
+				// sending message and updating html page
+				locationBut.socket.send("l,y");
+				htmlChangeYO(yStr, oStr);
+			}
 		});
 
 	};
@@ -144,7 +151,7 @@ locationBut.connect = function(host) {
 					yStr = "*-";
 				}
 			}
-			htmlChange(yStr, oStr);
+			htmlChangeYO(yStr, oStr);
 		}
 
 	};

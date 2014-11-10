@@ -11,7 +11,7 @@
 
 #right {
 	float: left;
-	width: 200px;
+	width: 150px;
 }
 
 #rightright {
@@ -108,14 +108,16 @@ things needed
 		<p id="yourStar">--</p>
 		<div id="yoursPos"></div>
 		<div id="other">
+			<br>
 			<button id="otherBut">Other location</button>
 		</div>
 		<p id="otherStar">--</p>
 		<div id="otherPos"></div>
-		<br> <br> <br> <br> <br>
+		<br> <br> <br> <br> <br> <br> <br>
 
 		<button id="fAgree">Final Agree</button>
-		<br> <br>
+		<p id="fStar">--</p>
+		<br>
 
 		<button id="cancel">Cancel trade</button>
 
@@ -136,9 +138,9 @@ things needed
 		<br> <br>
 		<div>
 			Trading for: <br> <select id="otherTradeBox" size="2">
-			</select> <br>
-			<br>
+			</select> <br> <br>
 			<button id="agree">Agree to trade</button>
+			<p id="aStar">--</p>
 
 		</div>
 	</div>
@@ -146,6 +148,7 @@ things needed
 --%>
 	<script src="locationButtons.js"></script>
 	<script src="trade.js"></script>
+	<script src="agreeButtons.js"></script>
 
 </body>
 </html>
