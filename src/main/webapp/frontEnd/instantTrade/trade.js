@@ -29,6 +29,13 @@ Trade.connect = (function(host) {
 				// check for blanks
 				if (message != '') {
 
+					// removes agreement if an item is added
+					aStr = "--";
+					htmlChange(aStr, aStar);
+					// resets final agree
+					fStr = "--";
+					htmlChange(fStr, fStar);
+
 					// makes a new option from the string and adds it to the
 					// selection box
 					var opt = document.createElement('option');
@@ -48,15 +55,24 @@ Trade.connect = (function(host) {
 
 		// when the remove button is clicked
 		remove.addEventListener("click", function() {
-			// adds tags t for trade and r for remove and the index of the
-			// removed item
-			var rmv = "t,r," + tradeBox.selectedIndex;
+			if (tradeBox.selectedIndex >= 0) {
+				// adds tags t for trade and r for remove and the index of the
+				// removed item
+				var rmv = "t,r," + tradeBox.selectedIndex;
 
-			// sends the message
-			Trade.socket.send(rmv);
+				// sends the message
+				Trade.socket.send(rmv);
 
-			// removes this item from the select box
-			tradeBox.remove(tradeBox.selectedIndex);
+				// removes agreement if an item is removed
+				aStr = "--";
+				htmlChange(aStr, aStar);
+				// resets final agree
+				fStr = "--";
+				htmlChange(fStr, fStar);
+
+				// removes this item from the select box
+				tradeBox.remove(tradeBox.selectedIndex);
+			}
 
 		});
 
@@ -70,10 +86,17 @@ Trade.connect = (function(host) {
 		// checks this message is for here (should be a t if it is)
 		if (msgArr[0] == "t") {
 
+			// removes agreement if other person changes his trade
+			aStr = "--";
+			htmlChange(aStr, aStar);
+			// resets final agree
+			fStr = "--";
+			htmlChange(fStr, fStar);
+
 			// checks if this is for adding an option or removing an option
 			if (msgArr[1] == "a") {
 
-				// adds ooption to the other selection box
+				// adds option to the other selection box
 				var opt = document.createElement('option');
 				opt.text = msgArr[2];
 				otherTradeBox.appendChild(opt);

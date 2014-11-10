@@ -90,6 +90,16 @@ function init() {
 						// change marker pos or make new marker
 						marker = setMarker(marker, fixPos);
 
+						// resets final agree if this location was selected
+						if (yStr == "**") {
+							fStr = "--";
+							htmlChange(fStr, fStar);
+						}
+						// resets the selection under your button if change
+						// happens
+						yStr = "--";
+						htmlChange(yStr, YourStar);
+
 						var msg = marker.getPosition().lat() + ","
 								+ marker.getPosition().lng();
 
@@ -127,9 +137,19 @@ function init() {
 				if (otherPos.childNodes.length > 0) {
 					otherPos.removeChild(otherPos.firstChild);
 				}
+
+				if (oStr == "**") {
+					fStr = "--";
+					htmlChange(fStr, fStar);
+				}
+				// resets the selection under other button if change
+				// happens
+				oStr = "--";
+				htmlChange(oStr, OtherStar);
+				// resets final agree if this was selected
+
 				// adds new location data
 				otherPos.appendChild(p);
-
 				var newPos = new google.maps.LatLng(y, x);
 				mark = setMarker(mark, newPos);
 				mark.setOpacity(.5);

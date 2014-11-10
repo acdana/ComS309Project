@@ -72,8 +72,6 @@ input#items {
 </head>
 <body>
 
-
-
 	<div id="left">
 		<%--brings in the map
 --%>
@@ -83,6 +81,7 @@ input#items {
 --%>
 		<jsp:include page="chat.jsp" />
 	</div>
+
 
 
 
@@ -113,7 +112,7 @@ things needed
 		</div>
 		<p id="otherStar">--</p>
 		<div id="otherPos"></div>
-		<br> <br> <br> <br> <br> <br> <br>
+		<br> <br>
 
 		<button id="fAgree">Final Agree</button>
 		<p id="fStar">--</p>
@@ -149,6 +148,7 @@ things needed
 	<script src="locationButtons.js"></script>
 	<script src="trade.js"></script>
 	<script src="agreeButtons.js"></script>
+
 
 </body>
 </html>

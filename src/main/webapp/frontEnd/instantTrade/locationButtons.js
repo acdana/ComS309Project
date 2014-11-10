@@ -43,11 +43,11 @@ var htmlChangeYO = function(yStr, oStr) {
 	yp.innerHTML = yStr;
 	op.innerHTML = oStr;
 
-	yourStar.removeChild(yourStar.firstChild);
-	otherStar.removeChild(otherStar.firstChild);
+	YourStar.removeChild(YourStar.firstChild);
+	OtherStar.removeChild(OtherStar.firstChild);
 
-	yourStar.appendChild(yp);
-	otherStar.appendChild(op);
+	YourStar.appendChild(yp);
+	OtherStar.appendChild(op);
 
 }
 
