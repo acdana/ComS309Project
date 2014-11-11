@@ -1,4 +1,4 @@
-﻿body{
+body{
     margin-top:5%;
     background-image:url(../assets/jpg/campanile.jpg);
     background-repeat:no-repeat;
@@ -12,7 +12,7 @@ h1{
 
 .container{
     padding: 40px;
-    background-color:rgba(255, 255, 255, 0.45);
+    background-color:rgba(255, 255, 255, 0.7);
     -webkit-box-shadow: 2px 3px 3px 0 #1C1A19;
     box-shadow: 2px 3px 3px 0 #1C1A19;
     -webkit-border-radius: 5px 5px 5px 5px;
