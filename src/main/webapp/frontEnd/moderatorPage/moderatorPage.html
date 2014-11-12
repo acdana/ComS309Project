@@ -3,8 +3,14 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Moderator Page</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="moderatorPage.js"></script>
 </head>
 <body>
+<div id="logout">
+	<script>setUsername()</script>
+	<button id ="logout" onClick="logout()" style="float: right;">Logout</button>
+</div>
 	<div id="submit" style="font-family: 'trebuchet ms', sans-serif;">
 		Penalize User: <input type="text" id="userPenalize" />
 		<button id="penalizeButton">Confirm Penalize</button><br/>

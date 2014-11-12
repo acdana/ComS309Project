@@ -64,3 +64,15 @@ function logout() {
 function deleteCookie() {
 	  document.cookie = "ourCookie=Authorization=; path=/";
 	}
+
+
+function getUsername() {
+	var username = getCredentials().substr(0, getCredentials().indexOf(':'));
+	return username.substr(username.indexOf(' ')+1);
+}
+
+function setUsername() {
+	var userText = document.getElementById("logout")
+	userText.innerText = getUsername();
+	userText.style.textAlign="right";
+}

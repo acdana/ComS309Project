@@ -164,3 +164,12 @@ function logout() {
 function deleteCookie() {
 	  document.cookie = "ourCookie=Authorization=; path=/";
 	}
+
+
+
+
+function setUsername() {
+	var userText = document.getElementById("logout")
+	userText.innerText = getUsername();
+	userText.style.textAlign="right";
+}
