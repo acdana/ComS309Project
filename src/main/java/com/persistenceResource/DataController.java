@@ -370,7 +370,11 @@ public class DataController implements AbstractDataController {
 	 * @return	True of False based on whether or not the credentials provided were legitimate.
 	 */
 	public boolean verifyCredentials(EntityManager em, HttpServletRequest req) {
-    	String[] credentials = req.getHeader("Authorization").split(":");
+		String rawCredentials = req.getHeader("Authorization");
+		if(rawCredentials == null) {
+			return false;
+		}
+    	String[] credentials = rawCredentials.split(":");
     	if(credentials.length == 1) {
     		return false;
     	}
@@ -631,5 +635,28 @@ public class DataController implements AbstractDataController {
 		em.close();
 		return "{\"Result\":\"Success\"}";
 
+	}
+	
+	public String getUserType(EntityManager em, HttpServletRequest req) {
+    	String[] credentials = req.getHeader("Authorization").split(":");
+    	if(credentials.length == 1) {
+    		return "{\"Result\":\"Verification Failure\"}";
+    	}
+    	String username = credentials[0];
+    	
+    	try {
+    		Query query = em.createNamedQuery("getUserType").setParameter("username", username);
+    		List<String> rawType = query.getResultList();
+    		if(rawType.size() == 0) {
+    			return "{\"Result\":\"Verification Failure\"}";
+    		}
+    		else {
+    			return "{\"Result\":\"" + rawType.get(0) + "\"}";
+    		}
+    	}
+    	catch (Exception e) {
+    		System.out.println(e.getMessage());
+    		return "{\"Result\":\"Exception Failure\"}";
+    	}
 	}
 }

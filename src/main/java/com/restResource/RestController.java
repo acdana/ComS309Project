@@ -76,10 +76,9 @@ public class RestController {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/deleteUser/{usernameToDelete}")
-	public String deleteUser(@Context HttpServletRequest req, @PathParam("usernameToDelete") String usernameToDelete) {
-
-		if(dataController.verifyCredentials(em, req) == true) {	
-			
+	public String deleteUser(@Context HttpServletRequest req, @PathParam("usernameToDelete") String usernameToDelete) {		
+		
+		if(dataController.verifyCredentials(em, req) == true && dataController.getUserType(em, req).equals("{\"Result\":\"Admin\"}")) {	
 			try {
 				em.getTransaction().begin();
 				String statusMessage = dataController.deleteUser(em, usernameToDelete);
@@ -102,7 +101,7 @@ public class RestController {
 	@Path("/penalizeUser/{usernameToPenalize}")
 	public String penalizeUser(@Context HttpServletRequest req, @PathParam("usernameToPenalize") String usernameToPenalize) {
 
-		if(dataController.verifyCredentials(em, req) == true) {	
+		if(dataController.verifyCredentials(em, req) == true && (dataController.getUserType(em, req).equals("{\"Result\":\"Admin\"}") || dataController.getUserType(em, req).equals("{\"Result\":\"Moderator\"}"))) {	
 		
 			try {
 				em.getTransaction().begin();

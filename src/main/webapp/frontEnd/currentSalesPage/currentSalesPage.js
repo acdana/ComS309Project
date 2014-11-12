@@ -56,7 +56,7 @@ function deleteCookie() {
 
 
 function createSale()	 {
-	window.location.href = '../createSale/index.html';
+	window.location.href = '../createSale/createSale.html';
 }
 
 function getCredentials() {
