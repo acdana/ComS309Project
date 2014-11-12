@@ -40,17 +40,15 @@ public class RestController {
 			try {
 				String userNames = dataController.getUsernames(em, "getAllUsernames");
 				em.close();
-			
-				
 				return userNames;
 			} catch (Exception e) {
 				em.close();
-				return "{\"Status\":\"Exception Faiure\"}";
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 			}
 			
 		}
 		else {
-			return "{\"Status\":\"Credential Faiure\"}";
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
 		}
 	
 	}
@@ -63,10 +61,10 @@ public class RestController {
 			
 			try {
 				dataController.createNewUser(em, username, password, email);
-				return "{\"Status\":\"Success\"}";
+				return "{\"Result\":[{\"Status\":\"Success\"}]}";
 			} catch (Exception e) {
 				em.close();
-				return "{\"Status\":\"Exception Failure\"}";
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 			}
 			
 		
@@ -84,15 +82,15 @@ public class RestController {
 				String statusMessage = dataController.deleteUser(em, usernameToDelete);
 				em.getTransaction().commit();
 				em.close();
-				return "{\"Status\":\"" + statusMessage + "\"}";
+				return "{\"Result\":[{\"Status\":\"" + statusMessage + "\"}]}";
 			} catch (Exception e) {
 				em.close();
-				return "{\"Status\":\"Exception Failure\"}";
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 			}
 			
 		}	
 		else {
-			return "{\"Status\":\"Credential Failure\"}";			
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";			
 		}
 	}
 
@@ -108,16 +106,16 @@ public class RestController {
 				String statusMessage = dataController.penalizeUser(em, usernameToPenalize);
 				em.getTransaction().commit();
 				em.close();
-				return "{\"Status\":\"" + statusMessage + "\"}";
+				return "{\"Result\":[{\"Status\":\"" + statusMessage + "\"}]}";
 
 			} catch (Exception e) {
 				em.close();
-				return "{\"Status\":\"Exception Failure\"}";
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 			}
 		
 		}
 		else {
-			return "{\"Status\":\"Credential Failure\"}";
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
 		}
 
 	}
@@ -132,20 +130,15 @@ public class RestController {
 			try {
 				String userNames = dataController.getUsernames(em, "getPenalizedUsers");
 				em.close();
-				if (userNames == null) {
-					return "No penalized users.";
-				}
-				else {
-					return userNames;
-				}
+				return userNames;
 			} catch (Exception e) {
 				em.close();
-				return "{\"Status\":\"Exception Failure\"}";
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 			}
 			
 		}
 		else {
-			return "{\"Status\":\"Credential Failure\"}";
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
 		}
 		
 	}
@@ -160,15 +153,15 @@ public class RestController {
 			try {
 				String penaltyCount = dataController.getPenaltyCount(em, usernameToCheck);
 				em.close();
-				return "{\"PenaltyCount\":\"" + penaltyCount + "\"}";
+				return "{\"Result\":[{\"Status\":\"Success\"}, {\"PenaltyCount\":\"" + penaltyCount + "\"}]}";
 			} catch (Exception e) {
 				em.close();
-				return "{\"Status\":\"Exception Failure\"}";
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 			}
 		
 		}
 		else {
-			return "{\"Status\":\"Credential Failure\"}";
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
 		}
 	}
 
@@ -185,12 +178,12 @@ public class RestController {
 				return messages;
 			} catch (Exception e) {
 				em.close();
-				return "{\"Status\":\"Exception Failure\"}";
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 			}
 		
 		}
 		else {
-			return "{\"Status\":\"Credential Failure\"}";
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
 		}
 
 	}
@@ -204,15 +197,15 @@ public class RestController {
 		
 			try {
 				dataController.createNewMessage(em, username, message, sender);
-				return "{\"Status\":\"Success\"}";
+				return "{\"Result\":[{\"Status\":\"Success\"}]}";
 			} catch (Exception e) {
 				em.close();
-				return "{\"Status\":\"Exception Failure\"}";
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 			}
 		
 		}
 		else {
-			return "{\"Status\":\"Credential Failure\"}";
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
 		}
 	}
 
@@ -226,7 +219,7 @@ public class RestController {
 			return loginStatus;
 		} catch (Exception e) {
 			em.close();
-			return "{\"Status\":\"Exception Failure\"}";
+			return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 		}
 	}
 
@@ -241,15 +234,15 @@ public class RestController {
 			try {
 				String output = dataController.getUserType(em, username);
 				em.close();
-				return "{\"UserType\":\"" + output + "\"}";
+				return "{\"Result\":[{\"Status\":\"Success\"}, {\"UserType\":\"" + output + "\"}]}";
 			} catch (Exception e) {
 				em.close();
-				return "{\"Status\":\"Exception Failure\"}";
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 			}
 
 		}
 		else {
-			return "{\"Status\":\"Credential Failure\"}";
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
 		}
 	}
 
@@ -276,16 +269,16 @@ public class RestController {
 
 				em.getTransaction().commit();
 				em.close();
-				return "{\"Status\":\"" + result + "\"}";
+				return "{\"Result\":[{\"Status\":\"" + result + "\"}]}";
 
 			} catch (Exception e) {
 				em.close();
-				return "{\"Status\":\"Exception Failure\"}";
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 			}
 			
 		}
 		else {
-			return "{\"Status\":\"Credential Failure\"}";
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
 		}
 
 	}
@@ -313,16 +306,16 @@ public class RestController {
 
 				em.getTransaction().commit();
 				em.close();
-				return "{\"Status\":\"" + result + "\"}";
+				return "{\"Result\":[{\"Status\":\"" + result + "\"}]}";
 
 			} catch (Exception e) {
 				em.close();
-				return "{\"Status\":\"Exception Failure\"}";
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 			}
 			
 		}
 		else {
-			return "{\"Status\":\"Credential Failure\"}";
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
 		}
 	}
 	
@@ -340,12 +333,12 @@ public class RestController {
 			
 			} catch (Exception e) {
 				em.close();
-				return "{\"Status\":\"Exception Failure\"}";
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 			}
 		
 		}
 		else {
-			return "{\"Status\":\"Credential Failure\"}";
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
 		}
 	}
 	
@@ -359,16 +352,16 @@ public class RestController {
 			try {
 				Point2D.Double averageLocation = dataController.getAverageSaleLocation(em);
 				em.close();
-				return "{\"Location\":[{\"longitude\":\"" + averageLocation.getX() + "\", \"latitude\":\"" + averageLocation.getY() + "\"}]}";
+				return "{\"Result\":[{\"Status\":\"Success\"}, {\"Location\":[{\"longitude\":\"" + averageLocation.getX() + "\", \"latitude\":\"" + averageLocation.getY() + "\"}]}]}";
 
 			} catch (Exception e) {
 				em.close();
-				return "{\"Status\":\"Exception Failure\"}";
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 			}
 		
 		}
 		else {
-			return "{\"Status\":\"Credential Failure\"}";
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
 		}
 	}
 	
@@ -384,21 +377,21 @@ public class RestController {
 				String output = dataController.getStatus(em, username);
 				if (output.equalsIgnoreCase("none")) {
 					
-					return "{\"Status\":\"Missing Failure\"}";
+					return "{\"Result\":[{\"Status\":\"Failure\"}]}";
 					
 				}
 				
-				return "{\"Account Status\":\"" + output + "\"}";
+				return "{\"Result\":[{\"Status\":\"Success\"}, {\"Account Status\":\"" + output + "\"}]}";
 				
 			} catch (Exception e) {
 				
-				return "{\"Status\":\"Exception Failure\"}";
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 				
 			}
 			
 		} else {
 			
-			return "{\"Status\":\"Credential Failure\"}";
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
 		
 		}
 		
@@ -416,20 +409,20 @@ public class RestController {
 				String output = dataController.getProfPic(em, username);
 				if (output.equalsIgnoreCase("none")) {
 					
-					return "{\"Status\":\"Missing Username Failure\"}";
+					return "{\"Result\":[{\"Status\":\"Failure\"}]}";
 					
 				}
-				return "{\"ProfilePic\":\"" + output + "\"}";
+				return "{\"Result\":[{\"Status\":\"Success\"}, {\"ProfilePic\":\"" + output + "\"}]}";
 				
 			} catch (Exception e) {
 				
-				return "{\"Status\":\"Exception Failure\"}";
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 				
 			}
 			
 		} else {
 			
-			return "{\"Status\":\"Credential Failure\"}";
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
 		
 		}
 		
@@ -447,21 +440,21 @@ public class RestController {
 				String output = dataController.getBio(em, username);
 				if (output.equalsIgnoreCase("none")) {
 					
-					return "{\"Status\":\"Missing Username Failure\"}";
+					return "{\"Result\":[{\"Status\":\"Failure\"}]}";
 					
 				}
 				
-				return "{\"Bio\":\"" + output + "\"}";
+				return "{\"Result\":[{\"Status\":\"Success\"}, {\"Bio\":\"" + output + "\"}]}";
 				
 			} catch (Exception e) {
 				
-				return "{\"Status\":\"Exception Failure\"}";
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 				
 			}
 			
 		} else {
 			
-			return "{\"Status\":\"Credential Failure\"}";
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
 		
 		}
 		
@@ -479,21 +472,21 @@ public class RestController {
 				String output = dataController.getTotTrades(em, username);
 				if (output.equalsIgnoreCase("none")) {
 					
-					return "{\"Status\":\"Missing Username Failure\"}";
+					return "{\"Result\":[{\"Status\":\"Failure\"}]}";
 					
 				}
 				
-				return "{\"Trades\":\"" + output + "\"}";
+				return "{\"Result\":[{\"Status\":\"Success\"}, {\"Trades\":\"" + output + "\"}]}";
 				
 			} catch (Exception e) {
 				
-				return "{\"Status\":\"Exception Failure\"}";
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 				
 			}
 			
 		} else {
 			
-			return "{\"Status\":\"Credential Failure\"}";
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
 		
 		}
 		
@@ -511,21 +504,21 @@ public class RestController {
 				String output = dataController.getOpenSales(em, username);
 				if (output.equalsIgnoreCase("none")) {
 					
-					return "{\"Status\":\"Missing Username Failure\"}";
+					return "{\"Result\":[{\"Status\":\"Failure\"}]}";
 					
 				}
 				
-				return "{\"Open Sales\":\"" + output + "\"}";
+				return "{\"Result\":[{\"Status\":\"Success\"}, {\"Open Sales\":\"" + output + "\"}]}";
 				
 			} catch (Exception e) {
 				
-				return "{\"Status\":\"Exception Failure\"}";
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 				
 			}
 			
 		} else {
 			
-			return "{\"Status\":\"Credential Failure\"}";
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
 		
 		}
 		
@@ -539,14 +532,14 @@ public class RestController {
 		
 			try {
 				
-				String output = dataController.getMessageData(em);
+				double length = dataController.getMessageData(em);
 				em.close();
-				return output;
+				return "{\"Result\":[{\"Status\":\"Success\"}, {\"AverageLength\":\"" + length + "\"}]}";
 				
 			} catch (Exception e) {
 				
 				em.close();
-				return "{\"Status\":\"Exception Failure\"}";
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 				
 			}
 		
@@ -563,15 +556,10 @@ public class RestController {
 			try {
 				
 				String output = dataController.getCurrentSales(em);
-				if (output.equalsIgnoreCase("none")) {
-					
-					return "{\"Result\":\"Missing Username Failure\"}";
-					
-				}
 				return output;
 				
 			} catch (Exception e) {
-				return "{\"Result\":\"Exception Failure\"}";
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 				
 			}
 
@@ -592,16 +580,16 @@ public class RestController {
 			try {
 				
 				String output = dataController.createSale(em, req, description);
-				return output;
+				return "{\"Result\":[{\"Status\":\"" + output + "\"}]}";
 				
 			} catch (Exception e) {
 				
-				return "{\"Result\":\"Exception Failure\"}";
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 				
 			}
 		} else {
 			
-			return "{\"Result\":\"Credential Failure\"}";
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
 		
 		}
 		

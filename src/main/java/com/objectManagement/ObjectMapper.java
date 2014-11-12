@@ -23,7 +23,7 @@ public class ObjectMapper {
 	 */
 	public static String mapUsernames(List<Object> rawUsernames) {
 		
-		String namesToReturn = "{\"Usernames\":[";
+		String namesToReturn = "{\"Result\":[{\"Status\": \"Success\"}, {\"Usernames\":[";
 		for(Object name : rawUsernames) {
 			String tempName = "{\"Username\":\"" + (String) name + "\"},";
 			namesToReturn += tempName;
@@ -31,7 +31,7 @@ public class ObjectMapper {
 		if(rawUsernames.size() > 0) {
 		namesToReturn = namesToReturn.substring(0, namesToReturn.length()-1);
 		}
-		namesToReturn += "]}";
+		namesToReturn += "]}]}";
 		return namesToReturn;
 		
 	}
@@ -46,7 +46,7 @@ public class ObjectMapper {
 	 */
 	public static String mapMessages(List<Object[]> rawMessages) {
 		
-		String allMessages = "{\"Messages\":[";
+		String allMessages = "{\"Result\":[{\"Status\":\"Success\"}, {\"Messages\":[";
 		for(Object[] rawMessage : rawMessages) {
 			String content = (String) rawMessage[0]; 
 			String name = (String) rawMessage[1];
@@ -56,7 +56,7 @@ public class ObjectMapper {
 		if(rawMessages.size() > 0) {
 			allMessages = allMessages.substring(0, allMessages.length()-1);
 		}
-		allMessages += "]}";
+		allMessages += "]}]}";
 		
 		return allMessages;
 	}
@@ -82,7 +82,7 @@ public class ObjectMapper {
 	}
 	
 	public static String mapCurrentSales(List<Object[]> rawSales) {
-		String currentSales = "{\"Result\":[";
+		String currentSales = "{\"Result\":[{\"Status\":\"Success\"}, {\"Sales\":[";
 		
 		for(Object[] rawSale : rawSales) {
 			String saleDescription = (String) rawSale[0];
@@ -95,7 +95,7 @@ public class ObjectMapper {
 		if(rawSales.size() > 0) {
 			currentSales = currentSales.substring(0, currentSales.length()-1);
 		}
-		currentSales += "]}";
+		currentSales += "]}]}";
 		
 		return currentSales;
 		

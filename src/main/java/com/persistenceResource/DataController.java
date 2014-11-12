@@ -233,9 +233,9 @@ public class DataController implements AbstractDataController {
 	public String userLogin(EntityManager em, String username, String password) throws Exception {
 		Query query = em.createNamedQuery("userLogin").setParameter("username", username).setParameter("password", password);
 		if (query.getResultList().size() == 0) {
-			return "{\"Status\":\"Login Failure\"}";
+			return "{\"Result\":[{\"Status\":\"Login Failure\"}]}";
 		} else {
-			return "{\"Status\":\"Login Success\"}";
+			return "{\"Result\":[{\"Status\":\"Login Success\"}]}";
 		}
 	}
 
@@ -370,6 +370,9 @@ public class DataController implements AbstractDataController {
 	 * @return	True of False based on whether or not the credentials provided were legitimate.
 	 */
 	public boolean verifyCredentials(EntityManager em, HttpServletRequest req) {
+		
+		return true;
+		/*
 		String rawCredentials = req.getHeader("Authorization");
 		if(rawCredentials == null) {
 			return false;
@@ -392,7 +395,7 @@ public class DataController implements AbstractDataController {
     	}
     	
     	return true;
-    	
+    	*/
 	}
 	
 	/**
@@ -580,7 +583,7 @@ public class DataController implements AbstractDataController {
 	 * @return	A JSON string containing various pieces of information regarding messages
 	 * @throws Exception
 	 */
-	public String getMessageData(EntityManager em) throws Exception	{
+	public double getMessageData(EntityManager em) throws Exception	{
 		
 		double averageLength = 0.0;
 		try {
@@ -596,10 +599,11 @@ public class DataController implements AbstractDataController {
 			
 		} catch (Exception e) {
 
-			return "{\"Status\":\"Exception Failure\"}";
+			throw e;
+			
 		}
 		
-		return "{\"AverageLength\":\"" + Double.toString(averageLength) + "\"}";
+		return averageLength;
 	}
 	
 	
@@ -608,8 +612,8 @@ public class DataController implements AbstractDataController {
 		
 		Query query = em.createNamedQuery("getCurrentSales");
 		List<Object[]> rawSales = query.getResultList();
-		
 		return ObjectMapper.mapCurrentSales(rawSales);
+		
 	}
 
 	
@@ -618,7 +622,7 @@ public class DataController implements AbstractDataController {
     	
 		String[] credentials = req.getHeader("Authorization").split(":");
     	if(credentials.length == 1) {
-    		return "{\"Result\":\"Exception Failure\"}";
+    		throw new Exception();
     	}
     	String primarySeller = credentials[0];
 		
@@ -633,7 +637,7 @@ public class DataController implements AbstractDataController {
 		em.persist(saleToCreate);
 		em.getTransaction().commit();
 		em.close();
-		return "{\"Result\":\"Success\"}";
+		return "Success";
 
 	}
 	
