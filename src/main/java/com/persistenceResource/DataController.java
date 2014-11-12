@@ -371,8 +371,6 @@ public class DataController implements AbstractDataController {
 	 */
 	public boolean verifyCredentials(EntityManager em, HttpServletRequest req) {
 		
-		return true;
-		/*
 		String rawCredentials = req.getHeader("Authorization");
 		if(rawCredentials == null) {
 			return false;
@@ -395,7 +393,7 @@ public class DataController implements AbstractDataController {
     	}
     	
     	return true;
-    	*/
+    	
 	}
 	
 	/**
@@ -663,4 +661,24 @@ public class DataController implements AbstractDataController {
     		return "{\"Result\":\"Exception Failure\"}";
     	}
 	}
+	
+	public boolean updateProfile(EntityManager em, String username, String bio, String profPic) throws Exception {
+		
+		try {
+			
+			Profile p = em.find(Profile.class, username);
+			em.getTransaction().begin();
+			p.setBio(bio);
+			p.setProfilePicture(profPic);
+			em.getTransaction().commit();
+			return true;
+			
+		} catch (Exception e) {
+			
+			throw e;
+			
+		}
+		
+	}
+	
 }

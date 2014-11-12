@@ -33,8 +33,7 @@ public class RestController {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getAllUsernames")
 	public String getAllUsernames(@Context HttpServletRequest req) {
-
-
+		
 		if(dataController.verifyCredentials(em, req) == true) {
 		
 			try {
@@ -591,6 +590,41 @@ public class RestController {
 			
 			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
 		
+		}
+		
+	}
+	
+	@GET
+	@Path("/updateProfile/{username}/{bio}/{profilePicture}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String updateProfile(@Context HttpServletRequest req, @PathParam("username") String username, @PathParam("bio") String bio, @PathParam("profilePicture") String profPic) {
+		
+		if (dataController.verifyCredentials(em, req) == true) {
+			
+			try {
+				
+				System.out.println("Got here.");
+				boolean success = dataController.updateProfile(em, username, bio, profPic);
+				if (success) {
+					
+					return "{\"Result\":[{\"Status\":\"Success\"}]}";
+					
+				} else {
+					
+					return "{\"Result\":[{\"Status\":\"Failure\"}]}";
+					
+				}
+				
+			} catch (Exception e) {
+				
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
+				
+			}
+			
+		} else {
+			
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
+			
 		}
 		
 	}
