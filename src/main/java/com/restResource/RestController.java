@@ -603,7 +603,6 @@ public class RestController {
 			
 			try {
 				
-				System.out.println("Got here.");
 				boolean success = dataController.updateProfile(em, username, bio, profPic);
 				if (success) {
 					
@@ -614,6 +613,32 @@ public class RestController {
 					return "{\"Result\":[{\"Status\":\"Failure\"}]}";
 					
 				}
+				
+			} catch (Exception e) {
+				
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
+				
+			}
+			
+		} else {
+			
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
+			
+		}
+		
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/createItem/{itemName}")
+	public String createItem(@Context HttpServletRequest req, @PathParam("itemName") String itemName) {
+		
+		if (dataController.verifyCredentials(em, req) == true) {
+			
+			try {
+				
+				String output = dataController.createItem(em, req, itemName);
+				return "{\"Result\":[{\"Status\":\"" + output + "\"}]}";
 				
 			} catch (Exception e) {
 				

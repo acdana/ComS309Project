@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 
+import com.entities.Item;
 import com.entities.Message;
 import com.entities.Profile;
 import com.entities.Sale;
@@ -253,7 +254,7 @@ public class DataController implements AbstractDataController {
 		Query q = em.createNamedQuery("getUserType").setParameter("username", username);
 		if (q.getResultList().size() == 0) {
 
-			return "None";
+			throw new Exception();
 
 		} else {
 
@@ -671,6 +672,7 @@ public class DataController implements AbstractDataController {
 			p.setBio(bio);
 			p.setProfilePicture(profPic);
 			em.getTransaction().commit();
+			em.close();
 			return true;
 			
 		} catch (Exception e) {
@@ -678,6 +680,28 @@ public class DataController implements AbstractDataController {
 			throw e;
 			
 		}
+		
+	}
+	
+	public String createItem(EntityManager em, HttpServletRequest req, String itemName) throws Exception {
+		
+		String[] credentials = req.getHeader("Authorization").split(":");
+    	if(credentials.length == 1) {
+    		
+    		throw new Exception();
+    		
+    	}
+    	
+    	em.getTransaction().begin();
+    	Item i = new Item();
+    	i.setItemID(SecureIDGenerator.nextSecureId());
+    	i.setUsername(credentials[0]);
+    	i.setItemName(itemName);
+    	i.setSaleID("");
+    	em.persist(i);
+    	em.getTransaction().commit();
+    	em.close();
+    	return "Success";
 		
 	}
 	

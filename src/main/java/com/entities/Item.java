@@ -1,6 +1,7 @@
 package com.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -14,23 +15,23 @@ public class Item implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private int itemID;
+	private String itemID;
 
 	private String itemName;
 
-	private int saleID;
+	private String saleID;
 
 	private String username;
 
 	public Item() {
 	}
 
-	public int getItemID() {
+	public String getItemID() {
 		return this.itemID;
 	}
 
-	public void setItemID(int itemID) {
-		this.itemID = itemID;
+	public void setItemID(String string) {
+		this.itemID = string;
 	}
 
 	public String getItemName() {
@@ -41,11 +42,11 @@ public class Item implements Serializable {
 		this.itemName = itemName;
 	}
 
-	public int getSaleID() {
+	public String getSaleID() {
 		return this.saleID;
 	}
 
-	public void setSaleID(int saleID) {
+	public void setSaleID(String saleID) {
 		this.saleID = saleID;
 	}
 
