@@ -10,28 +10,31 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@NamedQuery(name="Item.findAll", query="SELECT i FROM Item i")
+@NamedQueries({
+	@NamedQuery(name="Item.findAll", query="SELECT i FROM Item i"),
+	@NamedQuery(name="getUsersItems", query="SELECT i FROM Item i WHERE i.username = :username"),
+})
 public class Item implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private String itemID;
+	private int itemID;
 
 	private String itemName;
 
-	private String saleID;
+	private int saleID;
 
 	private String username;
 
 	public Item() {
 	}
 
-	public String getItemID() {
+	public int getItemID() {
 		return this.itemID;
 	}
 
-	public void setItemID(String string) {
-		this.itemID = string;
+	public void setItemID(int ID) {
+		this.itemID = ID;
 	}
 
 	public String getItemName() {
@@ -42,12 +45,12 @@ public class Item implements Serializable {
 		this.itemName = itemName;
 	}
 
-	public String getSaleID() {
+	public int getSaleID() {
 		return this.saleID;
 	}
 
-	public void setSaleID(String saleID) {
-		this.saleID = saleID;
+	public void setSaleID(int ID) {
+		this.saleID = ID;
 	}
 
 	public String getUsername() {
@@ -56,6 +59,13 @@ public class Item implements Serializable {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	@Override
+	public String toString() {
+		
+		return "{\"Item\":[\"itemID\":\"" + itemID + "\", \"SaleID\":\"" + saleID + "\", \"itemName\":\"" + itemName + "\", \"username\":\"" + username + "\"]}";
+		
 	}
 
 }

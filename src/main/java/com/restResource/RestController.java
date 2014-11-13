@@ -637,8 +637,35 @@ public class RestController {
 			
 			try {
 				
-				String output = dataController.createItem(em, req, itemName);
+				String output = dataController.createItem(em, req.getHeader("Autorization").split(":")[0], itemName);
 				return "{\"Result\":[{\"Status\":\"" + output + "\"}]}";
+				
+			} catch (Exception e) {
+				
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
+				
+			}
+			
+		} else {
+			
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
+			
+		}
+		
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getUsersItems/{username}")
+	public String getUsersItems(@Context HttpServletRequest req, @PathParam("username") String username) {
+		
+		if (dataController.verifyCredentials(em, req) == true) {
+			
+			try {
+				
+				String result = dataController.getUsersItems(em, username);
+				String output = "{\"Result\":[{\"Status\":\"Success\"}, " + result + "]}";
+				return output;
 				
 			} catch (Exception e) {
 				

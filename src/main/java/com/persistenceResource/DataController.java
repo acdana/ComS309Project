@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 
@@ -384,7 +385,7 @@ public class DataController implements AbstractDataController {
     	String password = credentials[1];
     	
     	try {
-    		if(this.userLogin(em, username, password).equals("{\"Status\":\"Login Failure\"}")) {
+    		if(this.userLogin(em, username, password).equals("{\"Result\":[{\"Status\":\"Login Failure\"}]}")) {
     			em.close();
     			return false;
     		}
@@ -658,7 +659,6 @@ public class DataController implements AbstractDataController {
     		}
     	}
     	catch (Exception e) {
-    		System.out.println(e.getMessage());
     		return "{\"Result\":\"Exception Failure\"}";
     	}
 	}
@@ -683,25 +683,34 @@ public class DataController implements AbstractDataController {
 		
 	}
 	
-	public String createItem(EntityManager em, HttpServletRequest req, String itemName) throws Exception {
-		
-		String[] credentials = req.getHeader("Authorization").split(":");
-    	if(credentials.length == 1) {
-    		
-    		throw new Exception();
-    		
-    	}
+	public String createItem(EntityManager em, String username, String itemName) throws Exception {
     	
-    	em.getTransaction().begin();
+    	EntityTransaction et = em.getTransaction();
+    	et.begin();
     	Item i = new Item();
-    	i.setItemID(SecureIDGenerator.nextSecureId());
-    	i.setUsername(credentials[0]);
+    	i.setItemID(0);
+    	i.setUsername(username);
     	i.setItemName(itemName);
-    	i.setSaleID("");
+    	i.setSaleID(0);
     	em.persist(i);
-    	em.getTransaction().commit();
+    	et.commit();
     	em.close();
     	return "Success";
+		
+	}
+	
+	public String getUsersItems(EntityManager em, String username) throws Exception {
+		
+		try {
+			
+			Query q = em.createNamedQuery("getUsersItems").setParameter("username", username);
+			return ObjectMapper.mapUsersItems(q.getResultList());
+			
+		} catch (Exception e) {
+			
+			throw e;
+			
+		}
 		
 	}
 	

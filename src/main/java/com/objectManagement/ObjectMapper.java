@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.entities.Item;
+
 /**
  * This is the object mapping class for raw data retrieved from the database.
  * We process the raw data into meaningful types here.
@@ -98,6 +100,28 @@ public class ObjectMapper {
 		currentSales += "]}]}";
 		
 		return currentSales;
+		
+	}
+	
+	public static String mapUsersItems(List<Object> rawItems) {
+		
+		String out = "{\"Items\":[";
+		for (Object o : rawItems) {
+			
+			Item i = (Item) o;
+			out += i.toString() + ", ";
+			
+		}
+		
+		if (rawItems.size() != 0) {
+			
+			out = out.substring(0, out.length() - 2);
+			
+		}
+		
+		out += "]}";
+		
+		return out;
 		
 	}
 	
