@@ -1,11 +1,3 @@
-/**
- * 
- */
-
-
-
-
-
 function logout() {
 	
 	deleteCookie("ourCookie");
@@ -16,3 +8,8 @@ function logout() {
 function deleteCookie() {
 	  document.cookie = "ourCookie=Authorization=; path=/";
 	}
+
+// Submit Bio Function
+$('#subBio').click(function(){
+	
+});
