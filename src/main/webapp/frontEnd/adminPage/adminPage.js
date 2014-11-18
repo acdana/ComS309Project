@@ -10,7 +10,7 @@ $("#deleteButton").click(function () {
         	"Authorization" : getCredentials(),
         },
         success: function (result) {
-        	alert(result.Status)
+        	alert(result.Result[0].Status)
             console.log(result);
         },
         error: function (dc, status, err) {
@@ -29,7 +29,7 @@ $("#penalizeButton").click(function () {
         	"Authorization" : getCredentials(),
         },
         success: function (result) {
-        	alert(result.Status)
+        	alert(result.Result[0].Status)
             console.log(result);
         },
         error: function (dc, status, err) {
