@@ -31,7 +31,7 @@ function checkForm() {
         return false;
     }
     $.ajax({
-        url: "../../createNewUser/" + n + "/" + pass1 + "/" + email,
+        url: "../../309/T11/createNewUser/" + n + "/" + pass1 + "/" + email,
         type: "POST",
         success: function (result) {
             console.log(result);
@@ -44,7 +44,7 @@ function checkForm() {
 // Runs when the submit button (for Sign Up) is clicked
 $("#submitButton").click(function () {
     $.ajax({
-        url: "../309/T11/createNewUser/" + $("#username").val() + "/" + $("#pass").val() + "/" + $("#email").val(),
+        url: "../../309/T11/createNewUser/" + $("#username").val() + "/" + $("#pass").val() + "/" + $("#email").val(),
         type: "GET",
         success: function (result) {
             console.log(result);
@@ -93,15 +93,15 @@ $('#loginButton').click(function() {
     var password = document.forms["loginForm"]["logPassword"].value;
     var response = "";
     var login = $.ajax({
-        url: "../309/T11/userLogin/" + username + "/" + password,
+        url: "../../309/T11/userLogin/" + username + "/" + password,
         type: "GET",
         headers: {
         	"Authorization" : getCredentials(),
         },
         success: function (result) {
-        	if(result.Status == "Login Success") {
+        	if(result.Result[0].Status == "Login Success") {
         		checkLogin();
-        	    window.location.href = 'frontEnd/profilePage/index.html';
+        	    window.location.href = '../../frontEnd/profilePage/index.html';
         	}
         	else {
         		alert("Incorrect Username/Password")

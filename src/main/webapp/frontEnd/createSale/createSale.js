@@ -1,7 +1,6 @@
 
 
 $("#submitButton").click(function () {
-	alert(document.cookie);
     $.ajax({
         url: "../../309/T11/createSale/" + $("#description").val(),
         type: "GET",

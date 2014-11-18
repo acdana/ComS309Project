@@ -15,8 +15,8 @@ function getCurrentSales(){
 		success: function(result){
 			
 			var i = 0;
-			while(result.Result[i] != null) {
-			displayCurrentSales(result.Result[i].saleDescription, result.Result[i].Seller, result.Result[i].dateCreated);
+			while(result.Result[1].Sales[i] != null) {
+			displayCurrentSales(result.Result[1].Sales[i].saleDescription, result.Result[1].Sales[i].Seller, result.Result[1].Sales[i].dateCreated);
 			i++;
 			}
 			console.log(result);

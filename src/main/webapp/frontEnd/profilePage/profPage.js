@@ -24,7 +24,7 @@ function getProfPic(){
 			"Authorization" : getCredentials(),
 		},
 		success: function(result){
-			displayProfilePic(result.ProfilePic, 100, 100);
+			displayProfilePic(result.Result[1].ProfilePic, 100, 100);
 			console.log(result);
 		},
 		error: function(dc, status, err){
@@ -56,7 +56,7 @@ function getBio(){
 			"Authorization" : getCredentials(),
 		},
 		success: function(result){
-			displayBio(result.userBio);
+			displayBio(result.Result[1].Bio);
 			console.log(result);
 		},
 		error: function(dc, status, err){
@@ -102,7 +102,7 @@ function getTotTrades(){
 			"Authorization" : getCredentials(),
 		},
 		success: function(result){
-			displayTotalTrades(result.Trades);
+			displayTotalTrades(result.Result[1].Trades);
 			console.log(result);
 		},
 		error: function(dc, status, err){
