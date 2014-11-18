@@ -44,7 +44,7 @@ function checkForm() {
 // Runs when the submit button (for Sign Up) is clicked
 $("#submitButton").click(function () {
     $.ajax({
-        url: "309/T11/createNewUser/" + $("#username").val() + "/" + $("#pass").val() + "/" + $("#email").val(),
+        url: "../309/T11/createNewUser/" + $("#username").val() + "/" + $("#pass").val() + "/" + $("#email").val(),
         type: "GET",
         success: function (result) {
             console.log(result);
