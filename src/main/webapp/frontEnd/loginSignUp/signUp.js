@@ -93,7 +93,7 @@ $('#loginButton').click(function() {
     var password = document.forms["loginForm"]["logPassword"].value;
     var response = "";
     var login = $.ajax({
-        url: "309/T11/userLogin/" + username + "/" + password,
+        url: "../309/T11/userLogin/" + username + "/" + password,
         type: "GET",
         headers: {
         	"Authorization" : getCredentials(),
