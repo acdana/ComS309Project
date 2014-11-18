@@ -594,6 +594,41 @@ public class RestController {
 		
 	}
 	
+	
+	@GET
+	@Path("/updateProfile/{username}/{bio}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String updateProfile(@Context HttpServletRequest req, @PathParam("username") String username, @PathParam("bio") String bio) {
+		
+		if (dataController.verifyCredentials(em, req) == true) {
+			
+			try {
+				
+				boolean success = dataController.updateProfile(em, username, bio);
+				if (success) {
+					
+					return "{\"Result\":[{\"Status\":\"Success\"}]}";
+					
+				} else {
+					
+					return "{\"Result\":[{\"Status\":\"Failure\"}]}";
+					
+				}
+				
+			} catch (Exception e) {
+				
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
+				
+			}
+			
+		} else {
+			
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
+			
+		}
+		
+	}
+	
 	@GET
 	@Path("/updateProfile/{username}/{bio}/{profilePicture}")
 	@Produces(MediaType.APPLICATION_JSON)

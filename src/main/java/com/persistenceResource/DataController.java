@@ -683,6 +683,25 @@ public class DataController implements AbstractDataController {
 		
 	}
 	
+	public boolean updateProfile(EntityManager em, String username, String bio) throws Exception {
+		
+		try {
+			
+			Profile p = em.find(Profile.class, username);
+			em.getTransaction().begin();
+			p.setBio(bio);
+			em.getTransaction().commit();
+			em.close();
+			return true;
+			
+		} catch (Exception e) {
+			
+			throw e;
+			
+		}
+		
+	}
+	
 	public String createItem(EntityManager em, String username, String itemName) throws Exception {
     	
     	EntityTransaction et = em.getTransaction();
