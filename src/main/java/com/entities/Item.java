@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @NamedQueries({
 	@NamedQuery(name="Item.findAll", query="SELECT i FROM Item i"),
-	@NamedQuery(name="getUsersItems", query="SELECT i FROM Item i WHERE i.username = :username"),
+	@NamedQuery(name="getUsersItems", query="SELECT i FROM Item i WHERE i.username = :username")
 })
 public class Item implements Serializable {
 	private static final long serialVersionUID = 1L;

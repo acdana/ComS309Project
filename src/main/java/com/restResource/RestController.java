@@ -680,5 +680,31 @@ public class RestController {
 		}
 		
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/tradeItem/{itemID}/{saleID}")
+	public String tradeItem(@Context HttpServletRequest req, @PathParam("itemID") int itemID, @PathParam("saleID") int saleID) {
+		
+		if (dataController.verifyCredentials(em, req)) {
+			
+			try {
+				
+				String result = dataController.tradeItem(em, itemID, saleID);
+				return "{\"Result\":[{\"Status\":\"" + result + "\"}]}";
+
+			} catch (Exception e) {
+				
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
+				
+			}
+			
+		} else {
+
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
+			
+		}
+		
+	}
 
 }
