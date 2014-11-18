@@ -121,19 +121,19 @@ $('#loginButton').click(function() {
 
 
 
-$("#testButton").click(function () {
-    $.ajax({
-        url: "309/T11/getAllUsernames",
-        type: "GET",
-        headers: {
-        	"Authorization" : getCredentials(),
-        },
-        success: function (result) {
-            console.log(result);
-        },
-        error: function (dc, status, err) {
-            console.log(err);
-            console.log(status);
-        }
-    });
-});
+//$("#testButton").click(function () {
+  //  $.ajax({
+    //    url: "309/T11/getAllUsernames",
+      //  type: "GET",
+        //headers: {
+        	//"Authorization" : getCredentials(),
+//        },
+  //      success: function (result) {
+    //        console.log(result);
+      //  },
+        //error: function (dc, status, err) {
+//            console.log(err);
+  //          console.log(status);
+    //    }
+//    });
+//});
