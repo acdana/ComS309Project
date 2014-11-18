@@ -707,6 +707,7 @@ public class DataController implements AbstractDataController {
     	EntityTransaction et = em.getTransaction();
     	et.begin();
     	Item i = new Item();
+    	//TODO Change this so we generate unique item IDs
     	i.setItemID(0);
     	i.setUsername(username);
     	i.setItemName(itemName);
@@ -724,6 +725,25 @@ public class DataController implements AbstractDataController {
 			
 			Query q = em.createNamedQuery("getUsersItems").setParameter("username", username);
 			return ObjectMapper.mapUsersItems(q.getResultList());
+			
+		} catch (Exception e) {
+			
+			throw e;
+			
+		}
+		
+	}
+	
+	public String tradeItem(EntityManager em, int itemID, int saleID) throws Exception {
+		
+		try {
+
+			Item i = (Item) em.find(Item.class, itemID);
+			em.getTransaction().begin();
+			i.setSaleID(saleID);
+			em.getTransaction().commit();
+			em.close();
+			return "Success";
 			
 		} catch (Exception e) {
 			
