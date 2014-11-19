@@ -4,7 +4,9 @@ import java.awt.geom.Point2D;
 
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -53,8 +55,8 @@ public class RestController {
 	}
 
 	
-	@GET
-	@Produces(MediaType.TEXT_PLAIN)
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/createNewUser/{username}/{password}/{email}")
 	public String createNewUser(@PathParam("username") String username, @PathParam("password") String password, @PathParam("email") String email) {
 			
@@ -70,7 +72,7 @@ public class RestController {
 	
 	}
 
-	@GET
+	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/deleteUser/{usernameToDelete}")
 	public String deleteUser(@Context HttpServletRequest req, @PathParam("usernameToDelete") String usernameToDelete) {		
@@ -93,7 +95,7 @@ public class RestController {
 		}
 	}
 
-	@GET
+	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/penalizeUser/{usernameToPenalize}")
 	public String penalizeUser(@Context HttpServletRequest req, @PathParam("usernameToPenalize") String usernameToPenalize) {
@@ -187,7 +189,7 @@ public class RestController {
 
 	}
 
-	@GET
+	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/createNewMessage/{username}/{message}/{sender}")
 	public String createNewMessage(@Context HttpServletRequest req, @PathParam("username") String username, @PathParam("message") String message, @PathParam("sender") String sender) {
@@ -245,7 +247,7 @@ public class RestController {
 		}
 	}
 
-	@GET
+	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/promoteUser/{username}")
 	public String promoteUser(@Context HttpServletRequest req, @PathParam("username") String username) {
@@ -282,7 +284,7 @@ public class RestController {
 
 	}
 
-	@GET
+	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/demoteUser/{username}")
 	public String demoteUser(@Context HttpServletRequest req, @PathParam("username") String username) {
@@ -569,7 +571,7 @@ public class RestController {
 	
 	
 	
-	@GET
+	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/createSale/{description}")
 	public String createSale(@Context HttpServletRequest req, @PathParam("description") String description) {
@@ -595,7 +597,7 @@ public class RestController {
 	}
 	
 	
-	@GET
+	@POST
 	@Path("/updateProfile/{username}/{bio}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String updateProfile(@Context HttpServletRequest req, @PathParam("username") String username, @PathParam("bio") String bio) {
@@ -629,7 +631,7 @@ public class RestController {
 		
 	}
 	
-	@GET
+	@POST
 	@Path("/updateProfile/{username}/{bio}/{profilePicture}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String updateProfile(@Context HttpServletRequest req, @PathParam("username") String username, @PathParam("bio") String bio, @PathParam("profilePicture") String profPic) {
@@ -663,7 +665,7 @@ public class RestController {
 		
 	}
 	
-	@GET
+	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/createItem/{itemName}")
 	public String createItem(@Context HttpServletRequest req, @PathParam("itemName") String itemName) {
@@ -716,7 +718,7 @@ public class RestController {
 		
 	}
 	
-	@GET
+	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/tradeItem/{itemID}/{saleID}")
 	public String tradeItem(@Context HttpServletRequest req, @PathParam("itemID") int itemID, @PathParam("saleID") int saleID) {
