@@ -8,7 +8,7 @@
 $("#penalizeButton").click(function () {
     $.ajax({
         url: "../../309/T11/penalizeUser/" + $("#userPenalize").val(),
-        type: "GET",
+        type: "POST",
         headers: {
         	"Authorization" : getCredentials(),
         },

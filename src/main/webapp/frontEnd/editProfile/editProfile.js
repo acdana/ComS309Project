@@ -20,7 +20,7 @@ $('#subBio').click(function(){
 	var response = "";
 	var bioSub = $.ajax({
 		url: "../../309/T11/updateProfile/" + getUsername() + "/" + bio,
-		type: "GET",
+		type: "POST",
 		headers: {
 			"Authorization" : getCredentials(),
 		},

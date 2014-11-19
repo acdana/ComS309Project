@@ -120,6 +120,7 @@ function displayTotalTrades(trades) {
 
 // Find number of items currently for sale
 //TODO This is not a REST URL at the moment
+//TODO This should probably be changed to getSales so we see the sales the user has. Individual items aren't important
 function getSaleItems(){
 	$.ajax({
 		url: "../../309/T11/getSaleItems",

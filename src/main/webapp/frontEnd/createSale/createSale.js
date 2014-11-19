@@ -3,7 +3,7 @@
 $("#submitButton").click(function () {
     $.ajax({
         url: "../../309/T11/createSale/" + $("#description").val(),
-        type: "GET",
+        type: "POST",
         headers: {
         	"Authorization" : getCredentials(),
         },

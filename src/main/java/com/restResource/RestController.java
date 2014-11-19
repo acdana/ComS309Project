@@ -59,11 +59,12 @@ public class RestController {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/createNewUser/{username}/{password}/{email}")
 	public String createNewUser(@PathParam("username") String username, @PathParam("password") String password, @PathParam("email") String email) {
-			
+			System.out.println(username + " " + password + " " + email);
 			try {
 				dataController.createNewUser(em, username, password, email);
 				return "{\"Result\":[{\"Status\":\"Success\"}]}";
 			} catch (Exception e) {
+				System.out.println(e.getMessage());
 				em.close();
 				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 			}

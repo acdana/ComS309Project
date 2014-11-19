@@ -45,7 +45,7 @@ function checkForm() {
 $("#submitButton").click(function () {
     $.ajax({
         url: "../../309/T11/createNewUser/" + $("#username").val() + "/" + $("#pass").val() + "/" + $("#email").val(),
-        type: "GET",
+        type: "POST",
         success: function (result) {
             console.log(result);
         },

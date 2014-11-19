@@ -5,7 +5,7 @@
 $("#deleteButton").click(function () {
     $.ajax({
         url: "../../309/T11/deleteUser/" + $("#userDelete").val(),
-        type: "GET",
+        type: "DELETE",
         headers: {
         	"Authorization" : getCredentials(),
         },
@@ -24,7 +24,7 @@ $("#deleteButton").click(function () {
 $("#penalizeButton").click(function () {
     $.ajax({
         url: "../../309/T11/penalizeUser/" + $("#userPenalize").val(),
-        type: "GET",
+        type: "POST",
         headers: {
         	"Authorization" : getCredentials(),
         },
