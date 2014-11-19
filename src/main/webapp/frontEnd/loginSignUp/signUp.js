@@ -101,7 +101,7 @@ $('#loginButton').click(function() {
         success: function (result) {
         	if(result.Result[0].Status == "Login Success") {
         		checkLogin();
-        	    window.location.href = '../../frontEnd/profilePage/index.html';
+        	    window.location.href = '../../frontEnd/profilePage/index.html?username=' + getUsername();
         	}
         	else {
         		alert("Incorrect Username/Password")
@@ -119,7 +119,10 @@ $('#loginButton').click(function() {
 });
 
 
-
+function getUsername() {
+	var username = getCredentials().substr(0, getCredentials().indexOf(':'));
+	return username.substr(username.indexOf(' ')+1);
+}
 
 //$("#testButton").click(function () {
   //  $.ajax({

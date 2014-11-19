@@ -13,11 +13,27 @@ function getUsername() {
 	return username.substr(username.indexOf(' ')+1);
 }
 
+
+
+function getURLParameter(sParam) {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) 
+    {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam) 
+        {
+            return sParameterName[1];
+        }
+    }
+}
+
+
 // Find user's profile picture
 function getProfPic(){
 	getUsername();
 	var path = $.ajax({
-		url: "../../309/T11/getProfPic/" + getUsername(),
+		url: "../../309/T11/getProfPic/" + getURLParameter("username"),
 		type: "GET",
 		datatype: 'json',
 		headers: {
@@ -49,7 +65,7 @@ function displayProfilePic(path, width, height) {
 function getBio(){
 	getUsername();
 	var path = $.ajax({
-		url: "../../309/T11/getBio/" + getUsername(),
+		url: "../../309/T11/getBio/" + getURLParameter("username"),
 		type: "GET",
 		datatype: 'json',
 		headers: {
@@ -95,7 +111,7 @@ function getSignDate(){
 // Find number of trades the user has made
 function getTotTrades(){
 	$.ajax({
-		url: "../../309/T11/getTotTrades/" + getUsername(),
+		url: "../../309/T11/getTotTrades/" + getURLParameter("username"),
 		type: "GET",
 		datatype: 'json',
 		headers: {
