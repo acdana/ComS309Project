@@ -248,24 +248,15 @@ public class RestController {
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/promoteUser/{username}")
-	public String promoteUser(@Context HttpServletRequest req, @PathParam("username") String username) {
+	@Path("/changeUserType/{username}/{userType}")
+	public String promoteUser(@Context HttpServletRequest req, @PathParam("username") String username, @PathParam("userType") String userType) {
 
 		if(dataController.verifyCredentials(em, req) == true) {	
 			
 			try {
 				em.getTransaction().begin();
-				String type = dataController.getUserType(em, username);
-				String result;
-			
-				if (type.equalsIgnoreCase("Basic"))
-					result = dataController.changeUserType(em, username, "Moderator");
-				else if (type.equalsIgnoreCase("Moderator"))
-					result = dataController.changeUserType(em, username, "Admin");
-				else if (type.equalsIgnoreCase("Admin"))
-					result = "Failure";
-				else
-					result = "Failure";
+				
+				String result = dataController.changeUserType(em, username, userType);	
 
 				em.getTransaction().commit();
 				em.close();
@@ -281,42 +272,6 @@ public class RestController {
 			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
 		}
 
-	}
-
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/demoteUser/{username}")
-	public String demoteUser(@Context HttpServletRequest req, @PathParam("username") String username) {
-
-		if(dataController.verifyCredentials(em, req) == true) {
-		
-			try {
-				em.getTransaction().begin();
-				String type = dataController.getUserType(em, username);
-				String result;
-			
-				if (type.equalsIgnoreCase("Basic"))
-					result = "Failure";
-				else if (type.equalsIgnoreCase("Moderator"))
-					result = dataController.changeUserType(em, username, "Basic");
-				else if (type.equalsIgnoreCase("Admin"))
-					result = dataController.changeUserType(em, username, "Moderator");
-				else
-					result = "Failure";
-
-				em.getTransaction().commit();
-				em.close();
-				return "{\"Result\":[{\"Status\":\"" + result + "\"}]}";
-
-			} catch (Exception e) {
-				em.close();
-				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
-			}
-			
-		}
-		else {
-			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
-		}
 	}
 	
 	@GET

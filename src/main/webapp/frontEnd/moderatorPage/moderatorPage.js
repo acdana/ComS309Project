@@ -23,11 +23,42 @@ $("#penalizeButton").click(function () {
     });
 });
 
+$("#userPenaltyButton").click(function () {
+    $.ajax({
+        url: "../../309/T11/getPenaltyCount/" + $("#userPenaltyCount").val(),
+        type: "GET",
+        headers: {
+        	"Authorization" : getCredentials(),
+        },
+        success: function (result) {
+        	alert(result.Result[1].PenaltyCount)
+            console.log(result);
+        },
+        error: function (dc, status, err) {
+            console.log(err);
+            console.log(status);
+        }
+    });
+});
 
 
-
-
-
+$("#userTypeButton").click(function () {
+    $.ajax({
+        url: "../../309/T11/getUserType/" + $("#userType").val(),
+        type: "GET",
+        headers: {
+        	"Authorization" : getCredentials(),
+        },
+        success: function (result) {
+        	alert(result.Result[1].UserType)
+            console.log(result);
+        },
+        error: function (dc, status, err) {
+            console.log(err);
+            console.log(status);
+        }
+    });
+});
 
 
 function getCredentials() {
