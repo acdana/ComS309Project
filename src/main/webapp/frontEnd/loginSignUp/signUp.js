@@ -95,6 +95,7 @@ $('#loginButton').click(function() {
     var login = $.ajax({
         url: "../../309/T11/userLogin/" + username + "/" + password,
         type: "GET",
+        datatype: 'json',
         headers: {
         	"Authorization" : getCredentials(),
         },

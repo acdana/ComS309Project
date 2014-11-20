@@ -1,10 +1,8 @@
 package com.chatRecource;
 
 import java.io.IOException;
-import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
-
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
@@ -23,14 +21,11 @@ public class ChatServerpoint {
 
 	//holds the name of this connection
 	private String name;
-	
-	//
 	private Session sess;
 
 	//temp anon naming schem
 	public ChatServerpoint() {
-		Random ran = new Random();
-		name = ((Integer) ran.nextInt(1000)).toString();
+		name = null;
 	}
 
 	//adds new session to the connection and sends the new connection to all users
