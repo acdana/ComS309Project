@@ -55,8 +55,11 @@ agreeBut.connect = function(host) {
 			if (aStr == "**" && (yStr == "**" || oStr == "**")) {
 				if (fStr == "--") {
 					fStr = "*-";
+					
+					//redirect to another page
 				} else if (fStr == "-*") {
 					fStr = "**";
+					window.location.href = '../../frontEnd/profilePage/index.html?username='+ getUsername();
 				}
 				agreeBut.socket.send("a,f");
 				htmlChange(fStr, fStar);
@@ -88,8 +91,10 @@ agreeBut.connect = function(host) {
 			} else if (mess[1] == "f") {
 				if (fStr == "--") {
 					fStr = "-*";
+					//redirect
 				} else if (fStr == "*-") {
 					fStr = "**";
+					window.location.href = '../../frontEnd/profilePage/index.html?username='+ getUsername();
 				}
 				htmlChange(fStr, fStar);
 			}

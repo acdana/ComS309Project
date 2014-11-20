@@ -87,18 +87,9 @@ input#items {
 
 	<%--
 things needed
--indicator of how many people are in trade
--button to agree on this or other persons picked location
-	check for location changes on selected location
-	check that location actually has been selected
-		-hold onto selected location to give to database
--locations to add things that will be traded
--agree buttons
-	check for changes in trade items
--last agree button that both location and trades are good
-	check that location has been agreed to by both
-	check that trades have been agreed to by both
--cancel trade
+
+-final agree redirect
+-cancel trade redirect
  --%>
 	<div id="right">
 		<div id="yours">
@@ -148,7 +139,7 @@ things needed
 	<script src="locationButtons.js"></script>
 	<script src="trade.js"></script>
 	<script src="agreeButtons.js"></script>
-
+	<script src="cancelButton.js"></script>
 
 </body>
 </html>
