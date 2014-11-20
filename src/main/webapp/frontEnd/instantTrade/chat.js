@@ -1,5 +1,27 @@
 //javascript for chat abilities
 
+function getCredentials() {
+	   var authorization = "Authorization=Basic ";
+	   var idx = document.cookie.indexOf(authorization)
+
+	   if (idx != -1) {
+	       var end = document.cookie.indexOf(";", idx + 1);
+	       if (end == -1) end = document.cookie.length;
+	       return unescape(document.cookie.substring(idx + authorization.length, end));
+	   } else {
+	       return "";
+	  }
+}
+
+function getUsername() {
+	var username = getCredentials().substr(0, getCredentials().indexOf(':'));
+	return username.substr(username.indexOf(' ')+1);
+}
+
+
+
+
+
 var Chat = {};
 
 Chat.socket = null;
@@ -40,9 +62,9 @@ Chat.connect = (function(host) {
 Chat.initialize = function() {
 	// incase we have https
 	if (window.location.protocol == "http:") {
-		Chat.connect('ws://' + window.location.host + "/ComS309Project/chat");
+		Chat.connect('ws://' + window.location.host + "/ComS309Project/chat/" + getUsername());
 	} else {
-		Chat.connect('wss://' + window.location.host + "/ComS309Project/chat");
+		Chat.connect('wss://' + window.location.host + "/ComS309Project/chat/" + getUsername());
 	}
 };
 // when a messege is sent

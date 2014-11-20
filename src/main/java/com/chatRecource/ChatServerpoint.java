@@ -9,19 +9,20 @@ import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
+import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 //websocket sessions for instant chat -brittany fisher
 
 //creates a new endpoint for each new connection to the chat page
 //is to eventually be connected to specific users not just random numbers
-@ServerEndpoint(value = "/chat")
+@ServerEndpoint(value = "/chat/{username}")
 public class ChatServerpoint {
 		
 	//list of unique sessions
 	private static final Set<ChatServerpoint> connect = new CopyOnWriteArraySet<ChatServerpoint>();
 
 	//holds the name of this connection
-	private final String name;
+	private String name;
 	
 	//
 	private Session sess;
@@ -34,7 +35,8 @@ public class ChatServerpoint {
 
 	//adds new session to the connection and sends the new connection to all users
 	@OnOpen
-	public void start(Session session) {
+	public void start(Session session, @PathParam("username") String username) {
+		name = username;
 		sess = session;
 		connect.add(this);
 		String msg = name + " has joined.";
