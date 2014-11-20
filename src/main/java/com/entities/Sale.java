@@ -14,7 +14,7 @@ import java.util.Date;
 	@NamedQuery(name = "getAllCoordinates", query = "SELECT S.longitude, S.latitude FROM Sale S"),
 	@NamedQuery(name = "getTotTrades", query = "SELECT count(s.primarySeller) from Sale s where s.primarySeller = :username and not s.secondarySeller = \"\""),
 	@NamedQuery(name = "getOpenSales", query = "SELECT count(s.primarySeller) from Sale s where s.primarySeller = :username and s.secondarySeller = \"\""),
-	@NamedQuery(name = "getCurrentSales", query = "SELECT S.saleDescription, S.primarySeller, S.dateCreated FROM Sale S WHERE S.secondarySeller IS NULL")
+	@NamedQuery(name = "getCurrentSales", query = "SELECT S.saleDescription, S.primarySeller, S.dateCreated, S.saleID FROM Sale S WHERE S.secondarySeller IS NULL")
 })
 public class Sale implements Serializable {
 	private static final long serialVersionUID = 1L;

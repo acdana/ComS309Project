@@ -16,7 +16,7 @@ function getCurrentSales(){
 			
 			var i = 0;
 			while(result.Result[1].Sales[i] != null) {
-			displayCurrentSales(result.Result[1].Sales[i].saleDescription, result.Result[1].Sales[i].Seller, result.Result[1].Sales[i].dateCreated);
+			displayCurrentSales(result.Result[1].Sales[i].saleDescription, result.Result[1].Sales[i].Seller, result.Result[1].Sales[i].dateCreated, result.Result[1].Sales[i].saleID);
 			i++;
 			}
 			console.log(result);
@@ -30,7 +30,7 @@ function getCurrentSales(){
 };
 
 
-function displayCurrentSales(description, seller, date) {
+function displayCurrentSales(description, seller, date, saleID) {
     var sale = document.createElement("p");
     var table = document.getElementById("currentSalesTable");
     var row = table.insertRow(-1);
@@ -38,7 +38,13 @@ function displayCurrentSales(description, seller, date) {
     var userRow = row.insertCell(1);
     var dateRow = row.insertCell(2);
     descriptionRow.innerHTML = description;
+    descriptionRow.addEventListener('click', function(){
+        window.location.href = '../tradeDetails/index.html?saleID=' + saleID;
+    }); 
     userRow.innerHTML = seller;
+    userRow.addEventListener('click', function(){
+        window.location.href = '../profilePage/index.html?username=' + seller;
+    }); 
     dateRow.innerHTML = date;
 }
 
