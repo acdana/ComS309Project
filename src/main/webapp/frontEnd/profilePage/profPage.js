@@ -157,6 +157,28 @@ function getSaleItems(){
 
 
 
+
+
+$("#sendMessageButton").click(function () {
+    $.ajax({
+        url: "../../309/T11/createNewMessage/" + getURLParameter("username") + "/" + $("#message").val() + "/" + getUsername(),
+        type: "POST",
+        headers: {
+        	"Authorization" : getCredentials(),
+        },
+        success: function (result) {
+            console.log(result);
+            alert("Message has been sent...");
+        },
+        error: function (dc, status, err) {
+            console.log(err);
+            console.log(status);
+        }
+    });
+});
+
+
+
 function getCredentials() {
 	   var authorization = "Authorization=Basic ";
 	   var idx = document.cookie.indexOf(authorization)
