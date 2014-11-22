@@ -1,9 +1,8 @@
 // Run calls on page load
 window.onload = function(){
 	getProfPic();
-	getSignDate();
 	getTotTrades();
-	getSaleItems();
+	getOpenSales();
 	getBio();
 }
 
@@ -85,28 +84,9 @@ function getBio(){
 // userBio helper function
 function displayBio(path){
 	var bio = document.getElementById("userBio");
-	bio.src = path;
+	bio.innerHTML = path;
 }
 
-// Find user's sign-up date
-//TODO This is not a REST URL at the moment
-function getSignDate(){
-	$.ajax({
-		url: "../../309/T11/getSignUpDate",
-		type: "GET",
-		datatype: 'json',
-		headers: {
-			"Authorization" : getCredentials(),
-		},
-		success: function(result){
-			console.log(result);
-		},
-		error: function(dc, status, err){
-			console.log(err);
-			console.log(status);
-		}
-	});
-};
 
 // Find number of trades the user has made
 function getTotTrades(){
@@ -131,15 +111,12 @@ function getTotTrades(){
 
 function displayTotalTrades(trades) {
     document.getElementById("totalTradesMade").innerHTML = "Total Trades: " + trades;
-
 }
 
 // Find number of items currently for sale
-//TODO This is not a REST URL at the moment
-//TODO This should probably be changed to getSales so we see the sales the user has. Individual items aren't important
-function getSaleItems(){
+function getOpenSales(){
 	$.ajax({
-		url: "../../309/T11/getSaleItems",
+		url: "../../309/T11/getOpenSales/" + getURLParameter("username"),
 		type: "GET",
 		datatype: 'json',
 		headers: {
@@ -147,6 +124,7 @@ function getSaleItems(){
 		},
 		success: function(result){
 			console.log(result);
+			displaySales(result.Result[1].Sales);
 		},
 		error: function(dc, status, err){
 			console.log(err);
@@ -211,4 +189,8 @@ function setUsername() {
 	var userText = document.getElementById("logout")
 	userText.innerText = getUsername();
 	userText.style.textAlign="right";
+}
+
+function displaySales(sales) {
+	document.getElementById("currentUserSales").innerHTML = "Current User Sales: " + sales;
 }

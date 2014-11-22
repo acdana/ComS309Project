@@ -456,17 +456,11 @@ public class RestController {
 			
 			try {
 				
-				String output = dataController.getOpenSales(em, username);
-				if (output.equalsIgnoreCase("none")) {
-					
-					return "{\"Result\":[{\"Status\":\"Failure\"}]}";
-					
-				}
+				long output = dataController.getOpenSales(em, username);
 				
-				return "{\"Result\":[{\"Status\":\"Success\"}, {\"Open Sales\":\"" + output + "\"}]}";
+				return "{\"Result\":[{\"Status\":\"Success\"}, {\"Sales\":\"" + output + "\"}]}";
 				
 			} catch (Exception e) {
-				
 				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 				
 			}

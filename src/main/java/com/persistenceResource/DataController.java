@@ -547,24 +547,15 @@ public class DataController implements AbstractDataController {
 	 * @return The number of open sales a user has.
 	 * @throws Exception
 	 */
-	public String getOpenSales(EntityManager em, String username) throws Exception {
+	public long getOpenSales(EntityManager em, String username) throws Exception {
 		
 		try {
 			
 			Query q = em.createNamedQuery("getOpenSales").setParameter("username", username);
-			if (q.getResultList().size() == 0) {
-				
-				em.close();
-				return "none";
-				
-			} else {
-				
-				String out = (String) q.getResultList().get(0);
-				em.close();
-				return out;
-				
-			}
-			
+			long size = (Long) q.getResultList().get(0);
+			em.close();
+			return size;
+
 		} catch (Exception e) {
 			
 			em.close();
