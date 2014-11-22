@@ -82,11 +82,6 @@ public class ChatServerpoint {
 			System.out.println(e.getMessage());
 		}
 		
-		
-		
-		
-		
-		//transmit(name + ": " + msg);
 	}
 	
 	//checks and sends message to each connection

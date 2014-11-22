@@ -1,3 +1,17 @@
+function getURLParameter(sParam) {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) 
+    {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam) 
+        {
+            return sParameterName[1];
+        }
+    }
+}
+
+
 //common functions for this and other files
 //selection of either mozilla or normal websocket
 moziSock = function(sock, host) {
@@ -13,9 +27,9 @@ moziSock = function(sock, host) {
 // use either ws or wss connection
 var proto = function(sock) {
 	if (window.location.protocol == "http:") {
-		sock.connect('ws://' + window.location.host + "/ComS309Project/map");
+		sock.connect('ws://' + window.location.host + "/ComS309Project/map/" + getURLParameter("saleID"));
 	} else {
-		sock.connect('wss://' + window.location.host + "/ComS309Project/map");
+		sock.connect('wss://' + window.location.host + "/ComS309Project/map/" + getURLParameter("saleID"));
 	}
 };
 

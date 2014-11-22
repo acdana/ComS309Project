@@ -5,6 +5,22 @@ var marker = null;
 var mark = null;
 var map = null;
 
+
+function getURLParameter(sParam) {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) 
+    {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam) 
+        {
+            return sParameterName[1];
+        }
+    }
+}
+
+
+
 function init() {
 	// marks between users
 	var othMark = {};
@@ -160,11 +176,11 @@ function init() {
 	// endpoint initialization
 	// incase we have https
 	if (window.location.protocol == "http:") {
-		othMark.connect('ws://' + window.location.host + "/ComS309Project/map");
+		othMark.connect('ws://' + window.location.host + "/ComS309Project/map/" + getURLParameter("saleID"));
 	} else {
 		othMark
 				.connect('wss://' + window.location.host
-						+ "/ComS309Project/map");
+						+ "/ComS309Project/map/" + getURLParameter("saleID"));
 	}
 
 	// map boundrys
