@@ -4,9 +4,18 @@
 <meta charset="ISO-8859-1">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="currentSalesPage.js"></script>
+    <script src="../include/credentials.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> 
+    <script> 
+    $(function(){
+      $("#navbar").load("../include/navbar.html"); 
+    });
+	</script>
 <title>Current Sales</title>
 </head>
 <body>
+<div id="navbar"></div>
 <div id="logout">
 	<script>setUsername()</script>
 	<button id ="logout" onClick="logout()" style="float: right;">Logout</button>

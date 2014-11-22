@@ -1,18 +1,3 @@
-function logout() {
-	
-	deleteCookie("ourCookie");
-    window.location.href = '../../index.html';
-    
-}
-
-function getUsername() {
-	var username = getCredentials().substr(0, getCredentials().indexOf(':'));
-	return username.substr(username.indexOf(' ')+1);
-}
-
-function deleteCookie() {
-	  document.cookie = "ourCookie=Authorization=; path=/";
-	}
 
 // Submit Bio Function
 $('#subBio').click(function(){

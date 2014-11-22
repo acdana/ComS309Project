@@ -2,7 +2,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Instant Trade</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="../include/credentials.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> 
+    <script> 
+    $(function(){
+      $("#navbar").load("../include/navbar.html"); 
+    });
+	</script>
+	 <div id="navbar"></div>
 <style>
 #left {
 	float: left;
@@ -140,6 +150,7 @@ things needed
 	<script src="trade.js"></script>
 	<script src="agreeButtons.js"></script>
 	<script src="cancelButton.js"></script>
+    <script src="../include/credentials.js"></script>
 
 </body>
 </html>
