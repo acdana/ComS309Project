@@ -13,7 +13,8 @@ import javax.persistence.*;
 @NamedQueries({
 	@NamedQuery(name="Profile.findAll", query="SELECT p FROM Profile p"),
 	@NamedQuery(name="getProfPic", query="SELECT p.profilePicture FROM Profile p where p.username=:username"),
-	@NamedQuery(name="getBio", query="SELECT p.bio FROM Profile p where p.username=:username")
+	@NamedQuery(name="getBio", query="SELECT p.bio FROM Profile p where p.username=:username"),
+	@NamedQuery(name="getReputation", query="SELECT p.reputation FROM Profile p WHERE p.username = :username")
 })
 public class Profile implements Serializable {
 	private static final long serialVersionUID = 1L;

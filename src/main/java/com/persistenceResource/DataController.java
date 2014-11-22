@@ -753,4 +753,26 @@ public class DataController implements AbstractDataController {
 		
 	}
 	
+	
+	
+	
+	
+	public String getReputation(EntityManager em, String username) throws Exception {
+		
+		try {
+			
+			Query q = em.createNamedQuery("getReputation").setParameter("username", username);
+			System.out.println(username);
+			List rawRep = q.getResultList();
+			System.out.println((Integer) rawRep.get(0));
+			return Integer.toString((Integer) rawRep.get(0));
+			
+		} catch (Exception e) {
+			
+			throw e;
+			
+		}
+		
+	}
+	
 }

@@ -697,5 +697,32 @@ public class RestController {
 		}
 		
 	}
+	
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getReputation/{username}")
+	public String getReputation(@Context HttpServletRequest req, @PathParam("username") String username) {
+		
+		if (dataController.verifyCredentials(em, req)) {
+			
+			try {
+				
+				String result = dataController.getReputation(em, username);
+				return "{\"Result\":[{\"Status\":\"Success\"}, " + "{\"Reputation\":\"" + result + "\"}]}";
+
+			} catch (Exception e) {
+				
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
+				
+			}
+			
+		} else {
+
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
+			
+		}
+		
+	}
 
 }

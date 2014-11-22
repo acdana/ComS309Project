@@ -68,13 +68,16 @@ function setSaleInfo() {
 
 function getSellerReputation(){
 	$.ajax({
-		url: "../../309/T11/getCurrentSales",
+		url: "../../309/T11/getReputation/" + unescape(getURLParameter("saleSeller")),
 		type: "GET",
 		datatype: 'json',
+		headers: {
+			"Authorization" : getCredentials(),
+		},
 		success: function(result){
-			var sellerRep = document.getElementById("traderReputation");
-			sellerRep.innerText = "Reputation: " + result.Result[1].Repuation;
 			console.log(result);
+			var sellerRep = document.getElementById("traderReputation");
+			sellerRep.innerText = "Reputation: " + result.Result[1].Reputation;
 		},
 		error: function(dc, status, err){
 			console.log(err);
