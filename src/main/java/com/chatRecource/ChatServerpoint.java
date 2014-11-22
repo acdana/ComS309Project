@@ -13,7 +13,7 @@ import javax.websocket.server.ServerEndpoint;
 
 //creates a new endpoint for each new connection to the chat page
 //is to eventually be connected to specific users not just random numbers
-@ServerEndpoint(value = "/chat/{username}")
+@ServerEndpoint(value = "/chat/{saleID}/{username}")
 public class ChatServerpoint {
 		
 	//list of unique sessions
@@ -30,44 +30,81 @@ public class ChatServerpoint {
 
 	//adds new session to the connection and sends the new connection to all users
 	@OnOpen
-	public void start(Session session, @PathParam("username") String username) {
+	public void start(Session session, @PathParam("username") String username, @PathParam("saleID") String saleID) {
 		name = username;
 		sess = session;
+		sess.getUserProperties().put("saleID", saleID);
 		connect.add(this);
 		String msg = name + " has joined.";
-		transmit(msg);
+		try {
+			for (Session s : session.getOpenSessions()) {
+				if (s.isOpen()
+						&& saleID.equals(s.getUserProperties().get("saleID"))) {
+					s.getBasicRemote().sendText(msg);
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	//removes the user from the connection and sends the disconnection to all users
 	@OnClose
-	public void end() {
+	public void end(Session session) {
 		connect.remove(this);
 		String msg = name + " has disconnected.";
-		transmit(msg);
+		String saleID = (String) session.getUserProperties().get("saleID");
+		try {
+			for (Session s : session.getOpenSessions()) {
+				if (s.isOpen()
+						&& saleID.equals(s.getUserProperties().get("saleID"))) {
+					s.getBasicRemote().sendText(msg);
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	//server gets a message and sends it to all connections
 	@OnMessage
-	public void incoming(String msg) {
-		transmit(name + ": " + msg);
+	public void incoming(final Session session, String msg) {
+		
+		String saleID = (String) session.getUserProperties().get("saleID");
+		try {
+			for (Session s : session.getOpenSessions()) {
+				if (s.isOpen()
+						&& saleID.equals(s.getUserProperties().get("saleID"))) {
+					s.getBasicRemote().sendText(name + ": " + msg);
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
+		
+		
+		
+		//transmit(name + ": " + msg);
 	}
 	
 	//checks and sends message to each connection
-	private static void transmit(String msg) {
-		for (ChatServerpoint client : connect) {
-			try {
-				synchronized (client) {
-					client.sess.getBasicRemote().sendText(msg);
-				}
-			} catch (IOException e) {
-				connect.remove(client);
-				try {
-					client.sess.close();
-				} catch (IOException e1) {
-				}
-				String message = client.name + " has been disconnected.";
-				transmit(message);
-			}
-		}
-	}
+//	private static void transmit(String msg) {
+//		for (ChatServerpoint client : connect) {
+//			try {
+//				synchronized (client) {
+//					client.sess.getBasicRemote().sendText(msg);
+//				}
+//			} catch (IOException e) {
+//				connect.remove(client);
+//				try {
+//					client.sess.close();
+//				} catch (IOException e1) {
+//				}
+//				String message = client.name + " has been disconnected.";
+//				transmit(message);
+//			}
+//		}
+//	}
 }

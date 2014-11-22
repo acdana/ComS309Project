@@ -86,3 +86,7 @@ function getSellerReputation(){
 	});
 };
 
+
+$("#beginTradeButton").click(function () {
+	 window.location.href = '../instantTrade/tradePage.jsp?saleID=' + getURLParameter("saleID");
+});

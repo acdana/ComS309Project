@@ -18,6 +18,18 @@ function getUsername() {
 	return username.substr(username.indexOf(' ')+1);
 }
 
+function getURLParameter(sParam) {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) 
+    {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam) 
+        {
+            return sParameterName[1];
+        }
+    }
+}
 
 
 
@@ -62,9 +74,9 @@ Chat.connect = (function(host) {
 Chat.initialize = function() {
 	// incase we have https
 	if (window.location.protocol == "http:") {
-		Chat.connect('ws://' + window.location.host + "/ComS309Project/chat/" + getUsername());
+		Chat.connect('ws://' + window.location.host + "/ComS309Project/chat/" + getURLParameter("saleID") + "/" + getUsername());
 	} else {
-		Chat.connect('wss://' + window.location.host + "/ComS309Project/chat/" + getUsername());
+		Chat.connect('wss://' + window.location.host + "/ComS309Project/chat/" + getURLParameter("saleID") + "/" + getUsername());
 	}
 };
 // when a messege is sent
