@@ -39,7 +39,7 @@ function displayCurrentSales(description, seller, date, saleID) {
     var dateRow = row.insertCell(2);
     descriptionRow.innerHTML = description;
     descriptionRow.addEventListener('click', function(){
-        window.location.href = '../tradeDetails/index.html?saleID=' + saleID + "&saleDescription=" + description + "&saleSeller=" + seller + "&saleDate=" + date;
+        window.location.href = '../tradeDetails/tradeDetails.html?saleID=' + saleID + "&saleDescription=" + description + "&saleSeller=" + seller + "&saleDate=" + date;
     }); 
     userRow.innerHTML = seller;
     userRow.addEventListener('click', function(){

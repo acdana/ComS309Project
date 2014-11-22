@@ -1,5 +1,6 @@
 window.onload = function(){
 	setSaleInfo();
+	getSellerReputation();
 }
 
 
@@ -63,4 +64,22 @@ function setSaleInfo() {
 	var sellerName = document.getElementById("traderName");
 	sellerName.innerText = "Trader: " + unescape(getURLParameter("saleSeller"));	
 }
+
+
+function getSellerReputation(){
+	$.ajax({
+		url: "../../309/T11/getCurrentSales",
+		type: "GET",
+		datatype: 'json',
+		success: function(result){
+			var sellerRep = document.getElementById("traderReputation");
+			sellerRep.innerText = "Reputation: " + result.Result[1].Repuation;
+			console.log(result);
+		},
+		error: function(dc, status, err){
+			console.log(err);
+			console.log(status);
+		}
+	});
+};
 
