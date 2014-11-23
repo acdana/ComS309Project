@@ -1,7 +1,6 @@
 package com.restResource;
 
 import java.awt.geom.Point2D;
-
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.DELETE;
@@ -12,9 +11,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-
-import org.apache.openjpa.persistence.RollbackException;
-
 import com.persistenceResource.DataController;
 import com.persistenceResource.FactoryStartup;
 
@@ -580,15 +576,16 @@ public class RestController {
 	}
 	
 	@POST
-	@Path("/updateProfile/{username}/{bio}/{profilePicture}")
+	@Path("/updateProfilePic/{username}/{pic}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String updateProfile(@Context HttpServletRequest req, @PathParam("username") String username, @PathParam("bio") String bio, @PathParam("profilePicture") String profPic) {
+	public String updateProfilePic(@Context HttpServletRequest req, @PathParam("username") String username, @PathParam("pic") String profPic) {
+		System.out.println(profPic);
 		
 		if (dataController.verifyCredentials(em, req) == true) {
 			
 			try {
-				
-				boolean success = dataController.updateProfile(em, username, bio, profPic);
+				profPic = profPic.replaceAll("~", "/");
+				boolean success = dataController.updateProfilePic(em, username, profPic);
 				if (success) {
 					
 					return "{\"Result\":[{\"Status\":\"Success\"}]}";
@@ -600,7 +597,6 @@ public class RestController {
 				}
 				
 			} catch (Exception e) {
-				
 				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 				
 			}
@@ -610,6 +606,7 @@ public class RestController {
 			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
 			
 		}
+
 		
 	}
 	

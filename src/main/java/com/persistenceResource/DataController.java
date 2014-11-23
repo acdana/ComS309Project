@@ -654,14 +654,13 @@ public class DataController implements AbstractDataController {
     	}
 	}
 	
-	public boolean updateProfile(EntityManager em, String username, String bio, String profPic) throws Exception {
+	public boolean updateProfile(EntityManager em, String username, String bio) throws Exception {
 		
 		try {
 			
 			Profile p = em.find(Profile.class, username);
 			em.getTransaction().begin();
 			p.setBio(bio);
-			p.setProfilePicture(profPic);
 			em.getTransaction().commit();
 			em.close();
 			return true;
@@ -674,13 +673,12 @@ public class DataController implements AbstractDataController {
 		
 	}
 	
-	public boolean updateProfile(EntityManager em, String username, String bio) throws Exception {
+	public boolean updateProfilePic(EntityManager em, String username, String pic) throws Exception {
 		
 		try {
-			
 			Profile p = em.find(Profile.class, username);
 			em.getTransaction().begin();
-			p.setBio(bio);
+			p.setProfilePicture(pic);
 			em.getTransaction().commit();
 			em.close();
 			return true;

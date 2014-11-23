@@ -30,9 +30,8 @@ function getUsername() {
 }
 
 function setUsername() {
-	var userText = document.getElementById("logout")
+	var userText = document.getElementById("usernameDisplay")
 	userText.innerText = getUsername();
-	userText.style.textAlign="right";
 }
 
 function getURLParameter(sParam) {
@@ -47,3 +46,4 @@ function getURLParameter(sParam) {
         }
     }
 }
+
