@@ -42,11 +42,35 @@ function displayMessages(message, sender, date) {
     var dateRow = row.insertCell(2);
     messageRow.innerHTML = message;
     messageRow.addEventListener('click', function(){
-       
+       var messageToSend = prompt("Enter your message to send to " + sender, "Message...");
+       if(messageToSend != null && messageToSend != '') {
+       sendMessage(sender, messageToSend);
+       }
+       else {
+    	   alert("Blank messages are not allowed!");
+       }
     }); 
     senderRow.innerHTML = sender;
     senderRow.addEventListener('click', function(){
-        
+    	window.location.href = '../profilePage/index.html?username=' + sender;
     }); 
     dateRow.innerHTML = date;
+}
+
+function sendMessage(sendTo, message) {
+    $.ajax({
+        url: "../../309/T11/createNewMessage/" + sendTo + "/" + message + "/" + getUsername(),
+        type: "POST",
+        headers: {
+        	"Authorization" : getCredentials(),
+        },
+        success: function (result) {
+            console.log(result);
+            alert("Message has been sent...");
+        },
+        error: function (dc, status, err) {
+            console.log(err);
+            console.log(status);
+        }
+    });
 }
