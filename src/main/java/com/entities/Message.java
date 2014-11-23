@@ -12,7 +12,7 @@ import java.util.Date;
  */
 @Entity
 @NamedQueries ({
-	@NamedQuery(name="getMessages", query="SELECT M.message, M.sender FROM Message M WHERE M.username = :username"),
+	@NamedQuery(name="getMessages", query="SELECT M.message, M.sender, M.dateSent FROM Message M WHERE M.username = :username"),
 	@NamedQuery(name="getAllMessages", query="SELECT M.message FROM Message M")
 })
 public class Message implements Serializable {

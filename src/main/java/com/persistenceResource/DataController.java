@@ -159,11 +159,9 @@ public class DataController implements AbstractDataController {
 		try {
 			Query query = em.createNamedQuery("getMessages").setParameter("username", username);
 			List<Object[]> rawMessages = query.getResultList();
-			if (rawMessages.size() == 0) {
-				return "{\"Messages\":\"No messages\"}";
-			} else {
+
 				return ObjectMapper.mapMessages(rawMessages).toString();
-			}
+			
 
 		} catch (Exception e) {
 			throw e;

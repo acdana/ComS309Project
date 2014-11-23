@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>View Messages</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="viewMessagesPage.js"></script>
+	<script src="../include/credentials.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    
+    
+    <script> 
+    $(function(){
+      $("#navbar").load("../include/navbar.html"); 
+    });
+	</script>
+
+
+
+
+</head>
+<body>
+<div id="navbar"></div>
+
+
+<div id="messagesArea">
+<table id="messagesTable" border="1">
+<tr>
+<th>Message</th>
+<th>Sender</th>
+<th>Date Sent</th>
+</tr>
+</table>
+</div>
+
+
+</body>
+</html>

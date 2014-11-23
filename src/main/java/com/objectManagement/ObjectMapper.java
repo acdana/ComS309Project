@@ -52,7 +52,9 @@ public class ObjectMapper {
 		for(Object[] rawMessage : rawMessages) {
 			String content = (String) rawMessage[0]; 
 			String name = (String) rawMessage[1];
-			String tempMessage = "{\"Sender\":\"" + name + "\",\"Message\":\"" + content + "\"},";
+			Date rawDateCreated = (Date) rawMessage[2];
+			String dateCreated = rawDateCreated.toString();
+			String tempMessage = "{\"Sender\":\"" + name + "\",\"Message\":\"" + content + "\",\"dateCreated\":\"" + dateCreated + "\"},";
 			allMessages += tempMessage;
 		}
 		if(rawMessages.size() > 0) {
