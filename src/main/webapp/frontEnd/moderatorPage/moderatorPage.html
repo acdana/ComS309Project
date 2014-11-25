@@ -7,7 +7,10 @@
 	<script src="moderatorPage.js"></script>
     <script src="../include/credentials.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <link href="../bootstrap/bootstrap.css" rel="stylesheet">
+    <link href="../bootstrap/bootstrap-responsive.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
     <script> 
     $(function(){
       $("#navbar").load("../include/navbar.html"); 
@@ -16,15 +19,18 @@
 </head>
 <body>
 <div id="navbar"></div>
-
-	<div id="submit" style="font-family: 'trebuchet ms', sans-serif;">
-		Penalize User: <input type="text" id="userPenalize" />
-		<button id="penalizeButton">Confirm Penalize</button><br/>
-		Get User Penalty Count: <input type="text" id="userPenaltyCount" />
-		<button id="userPenaltyButton">Confirm</button><br/>
-		Get User Type: <input type="text" id="userType" />
-		<button id="userTypeButton">Confirm</button><br/>
+<div class="container">
+	<div class="row">
+		<div id="submit" style="font-family: 'trebuchet ms', sans-serif;">
+			Penalize User: <input type="text" id="userPenalize" />
+			<button id="penalizeButton">Confirm Penalize</button><br/>
+			Get User Penalty Count: <input type="text" id="userPenaltyCount" />
+			<button id="userPenaltyButton">Confirm</button><br/>
+			Get User Type: <input type="text" id="userType" />
+			<button id="userTypeButton">Confirm</button><br/>
+		</div>
 	</div>
+</div>
 </body>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="moderatorPage.js"></script>

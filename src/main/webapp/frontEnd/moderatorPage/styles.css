@@ -1,0 +1,56 @@
+body{
+    margin-top:5%;
+    background-image:url(../assets/jpg/campanile.jpg);
+    background-repeat:no-repeat;
+}
+h1{
+    font-size: 20px;
+    margin: 5px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+#logoutButton{
+	width: 120px;
+	height: 50px;
+	font-size: 25px;
+}
+
+#logoutCol{
+	text-align: right;
+	padding-right: 20px;
+}
+
+#itembox{
+    border: solid;
+    border-width: 3px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 10px;
+    background-color:#fbfaf6;
+    -webkit-border-radius: 2px 2px 2px 2px;
+    border-radius: 2px 2px 2px 2px;
+}
+
+#profInfo{
+	font-family: 'trebuchet ms', sans-serif;
+    background-color:#fbfaf6;
+    border: solid;
+    border-width: 3px;
+}
+
+#submit{
+	font-size: 20px;
+	text-align: center;
+}
+
+.container{
+    padding: 40px;
+    background-color:rgba(255, 255, 255, 0.65);
+    -webkit-box-shadow: 2px 3px 3px 0 #1C1A19;
+    box-shadow: 2px 3px 3px 0 #1C1A19;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+}
