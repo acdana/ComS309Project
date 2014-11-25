@@ -3,9 +3,6 @@ window.onload = function(){
 	getCurrentSales();
 }
 
-
-
-
 // Find number of trades the user has made
 function getCurrentSales(){
 	$.ajax({
@@ -38,23 +35,15 @@ function filter(input) {
 		success: function(result){
 
 			var rows = result.Result[1].Sales;
-
-			console.log(rows.length);
-
 			var weight = new Array(rows.length);
 			var enums = new Array(rows.length);
 			var strings = input.toLowerCase().split(" ");
-
-			console.log(strings);
-	
+			
 			for (var i = 0; i < rows.length; i++) {
 		
 				weight[i] = 0;
 				enums[i] = i;
 				var description = rows[i].saleDescription.toLowerCase();
-
-				console.log(description);
-
 				for (j = 0; j < strings.length; j++) {
 
 					if (description.indexOf(strings[j]) !== -1) {
@@ -64,22 +53,14 @@ function filter(input) {
 					}
 			
 				}
-
-				console.log(weight[i]);
 		
 			}
 
-			console.log(weight);
-
 			sort(weight, enums);
-
-			console.log(weight);
-			console.log(enums);
 
 			var table = document.getElementById("currentSalesTable");
 			for (var i = table.rows.length - 1; i > 0; i--) {
-
-				console.log("Deleting row of index: " + i + " from table size: " + table.rows.length);
+				
 				table.deleteRow(i);
 
 			}
