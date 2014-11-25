@@ -77,7 +77,11 @@ function filter(input) {
 			// Add sales to the table.
 			for (var i = 0; i < enums.length; i++) {
 
-				displayCurrentSales(rows[enums[i]].saleDescription, rows[enums[i]].Seller, rows[enums[i]].dateCreated);
+				if (weight[i] > 0) {
+					
+					displayCurrentSales(rows[enums[i]].saleDescription, rows[enums[i]].Seller, rows[enums[i]].dateCreated);
+					
+				}
 
 			}
 			
