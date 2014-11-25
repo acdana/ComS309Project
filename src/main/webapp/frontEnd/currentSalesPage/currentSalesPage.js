@@ -16,8 +16,8 @@ function getCurrentSales(){
 			
 			var i = 0;
 			while(result.Result[1].Sales[i] != null) {
-			displayCurrentSales(result.Result[1].Sales[i].saleDescription, result.Result[1].Sales[i].Seller, result.Result[1].Sales[i].dateCreated, result.Result[1].Sales[i].saleID);
-			i++;
+				displayCurrentSales(result.Result[1].Sales[i].saleDescription, result.Result[1].Sales[i].Seller, result.Result[1].Sales[i].dateCreated, result.Result[1].Sales[i].saleID);
+				i++;
 			}
 			console.log(result);
 			
@@ -28,6 +28,115 @@ function getCurrentSales(){
 		}
 	});
 };
+
+function filter(input) {
+	
+	$.ajax({
+		url: "../../309/T11/getCurrentSales",
+		type: "GET",
+		datatype: 'json',
+		success: function(result){
+
+			var rows = result.Result[1].Sales;
+
+			console.log(rows.length);
+
+			var weight = new Array(rows.length);
+			var enums = new Array(rows.length);
+			var strings = input.toLowerCase().split(" ");
+
+			console.log(strings);
+	
+			for (var i = 0; i < rows.length; i++) {
+		
+				weight[i] = 0;
+				enums[i] = i;
+				var description = rows[i].saleDescription.toLowerCase();
+
+				console.log(description);
+
+				for (j = 0; j < strings.length; j++) {
+
+					if (description.indexOf(strings[j]) !== -1) {
+				
+						weight[i] = weight[i] + 1;
+				
+					}
+			
+				}
+
+				console.log(weight[i]);
+		
+			}
+
+			console.log(weight);
+
+			sort(weight, enums);
+
+			console.log(weight);
+			console.log(enums);
+
+			var table = document.getElementById("currentSalesTable");
+			for (var i = table.rows.length - 1; i > 0; i--) {
+
+				console.log("Deleting row of index: " + i + " from table size: " + table.rows.length);
+				table.deleteRow(i);
+
+			}
+
+			for (var i = 0; i < enums.length; i++) {
+
+				displayCurrentSales(rows[enums[i]].saleDescription, rows[enums[i]].Seller, rows[enums[i]].dateCreated);
+
+			}
+			
+		},
+		error: function(dc, status, err){
+			console.log(err);
+			console.log(status);
+		}
+
+	});
+	
+}
+
+function sort(weight, enums) {
+
+	for (var i = 0; i < weight.length; i++) {
+
+        var max = i;
+
+        for (var j = i + 1; j < weight.length; j++) {
+
+            if (weight[max] < weight[j]) {
+
+				max = j;
+
+            }
+        
+        }
+        
+        if (max !== i) {
+
+			swap(i, max, weight, enums)
+
+        }
+        
+    }
+
+}
+
+function swap(i, max, weight, enums) {
+
+	var tmp = weight[i];
+	weight[i] = weight[max];
+	weight[max] = tmp;
+
+	var enumstmp = enums[i];
+	enums[i] = enums[max];
+	enums[max] = enumstmp;
+
+}
 
 
 function displayCurrentSales(description, seller, date, saleID) {
