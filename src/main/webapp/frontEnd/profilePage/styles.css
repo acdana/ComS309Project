@@ -41,6 +41,10 @@ h1{
     border-width: 3px;
 }
 
+#message{
+	margin-top:15px;
+}
+
 .container{
     padding: 40px;
     background-color:rgba(255, 255, 255, 0.45);
