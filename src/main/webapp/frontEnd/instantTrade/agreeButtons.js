@@ -1,5 +1,27 @@
 // the websocket
 var agreeBut = {};
+var secondSeller = null;
+
+$.ajax({
+    url: "../../309/T11/getPrimarySeller/" + getURLParameter("saleID"),
+    type: "GET",
+	headers: {
+		"Authorization" : getCredentials(),
+	},
+    success: function (result) {
+        console.log(result);
+        if(result.Result[1].Seller != getUsername()) {
+        	secondSeller = getUsername();
+        }
+        
+    },
+    error: function (dc, status, err) {
+        console.log(err);
+        console.log(status);
+    }
+});
+
+
 agreeBut.socket = null;
 
 // for the button listeners
@@ -59,6 +81,29 @@ agreeBut.connect = function(host) {
 					//redirect to another page
 				} else if (fStr == "-*") {
 					fStr = "**";
+
+					
+					if(document.getElementById("yourStar").firstChild.innerHTML == "**") {
+						var firstCoordUpload = document.getElementById("yourPos").innerHTML;
+						var secondCoordUpload = document.getElementById("othersPos").innerHTML;
+						var firstLatUpload = parseFloat(firstCoord.split(",")[0]);
+						var firstLonUpload = parseFloat(firstCoord.split(",")[1]);
+					    
+					    
+						$.ajax({
+					        url: "../../309/T11/setSaleData/" + getURLParameter("saleID") + "/" + firstLatUpload + "/" + firstLonUpload + "/" + firstCoordUpload + "/" + secondCoordUpload + "/" + secondSeller,
+					        type: "POST",
+					        success: function (result) {
+					            console.log(result);
+					        },
+					        error: function (dc, status, err) {
+					            console.log(err);
+					            console.log(status);
+					        }
+					    });						
+
+					} 
+
 					window.location.href = '../../frontEnd/profilePage/index.html?username='+ getUsername();
 				}
 				agreeBut.socket.send("a,f");

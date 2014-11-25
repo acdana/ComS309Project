@@ -760,4 +760,47 @@ public class DataController implements AbstractDataController {
 		
 	}
 	
+	
+	public String getPrimarySeller(EntityManager em, String saleID) throws Exception {
+		
+		try {
+			
+			Query q = em.createNamedQuery("getPrimarySeller").setParameter("saleID", saleID);
+			List rawSeller = q.getResultList();
+			return (String) rawSeller.get(0);
+			
+		} catch (Exception e) {
+			
+			throw e;
+			
+		}
+		
+	}
+	
+	
+	
+	public boolean setSaleData(EntityManager em, String saleID, String lat, String lon, String primLocation, String secLocation, String secSeller) throws Exception {
+		
+		try {
+			
+			Sale s = em.find(Sale.class, saleID);
+			em.getTransaction().begin();
+			s.setLatitude(Double.parseDouble(lat));
+			s.setLongitude(Double.parseDouble(lon));
+			s.setPrimarySellerLocation(primLocation);
+			s.setSecondarySellerLocation(secLocation);
+			s.setSecondarySeller(secSeller);
+			em.getTransaction().commit();
+			em.close();
+			return true;
+			
+		} catch (Exception e) {
+			
+			throw e;
+			
+		}
+		
+	}
+
+	
 }

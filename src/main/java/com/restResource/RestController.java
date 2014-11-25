@@ -715,5 +715,67 @@ public class RestController {
 		}
 		
 	}
+	
+	
+	
+	
+	
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getPrimarySeller/{saleID}")
+	public String getPrimarySeller(@Context HttpServletRequest req, @PathParam("saleID") String saleID) {
+		
+		if (dataController.verifyCredentials(em, req)) {
+			
+			try {
+				
+				String result = dataController.getPrimarySeller(em, saleID);
+				return "{\"Result\":[{\"Status\":\"Success\"}, " + "{\"Seller\":\"" + result + "\"}]}";
 
+			} catch (Exception e) {
+				
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
+				
+			}
+			
+		} else {
+
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
+			
+		}
+		
+	}
+
+	
+	
+	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/setSaleData/{saleID}/{lat}/{lon}/{primarySellerLocation}/{secondarySellerLocation}/{secondarySeller}")
+	public String setSaleData(@Context HttpServletRequest req, @PathParam("saleID") String saleID, @PathParam("lat") String lat, @PathParam("lon") String lon, @PathParam("primarySellerLocation") String primarySellerLocation, @PathParam("secondarySellerLocation") String secondarySellerLocation, @PathParam("secondarySeller") String secondarySeller) {
+		
+		if (dataController.verifyCredentials(em, req) == true) {
+			
+			try {
+				
+				boolean output = dataController.setSaleData(em, saleID, lat, lon, primarySellerLocation, secondarySellerLocation, secondarySeller);
+				return "{\"Result\":[{\"Status\":\"" + output + "\"}]}";
+				
+			} catch (Exception e) {
+				
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
+				
+			}
+			
+		} else {
+			
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
+			
+		}
+		
+	}
+	
+	
+	
 }
