@@ -4,7 +4,7 @@
 var marker = null;
 var mark = null;
 var map = null;
-
+var suggestedMarker = null;
 
 function getURLParameter(sParam) {
     var sPageURL = window.location.search.substring(1);
@@ -129,7 +129,8 @@ function init() {
 							yoursPos.removeChild(yoursPos.firstChild);
 						}
 						// adds new locations data
-						yoursPos.appendChild(p);
+						var childP = yoursPos.appendChild(p);
+						childP.id = "yourPos";
 						msg = "m," + msg;
 						othMark.socket.send(msg);
 					});
@@ -165,7 +166,9 @@ function init() {
 				// resets final agree if this was selected
 
 				// adds new location data
-				otherPos.appendChild(p);
+				var otherP = otherPos.appendChild(p);
+				otherP.id = "othersPos";
+				
 				var newPos = new google.maps.LatLng(y, x);
 				mark = setMarker(mark, newPos);
 				mark.setOpacity(.5);
@@ -213,5 +216,8 @@ function init() {
 	});
 
 }
+
+
+
 
 google.maps.event.addDomListener(window, 'load', init);

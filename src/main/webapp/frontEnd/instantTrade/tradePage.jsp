@@ -7,6 +7,10 @@
 	<script src="../include/credentials.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> 
+    <script src="suggestedLocation.js"></script>
+    
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+    
     <script> 
     $(function(){
       $("#navbar").load("../include/navbar.html"); 
@@ -144,13 +148,20 @@ things needed
 
 		</div>
 	</div>
+	
+	
+	<button id="suggestedLocationButton">Suggest Location</button>
+	<div id="suggestDiv"></div>
+	
 	<%--idk what this does yet.
 --%>
 	<script src="locationButtons.js"></script>
+	<script src="suggestedLocation.js"></script>
 	<script src="trade.js"></script>
 	<script src="agreeButtons.js"></script>
 	<script src="cancelButton.js"></script>
     <script src="../include/credentials.js"></script>
+    
 
 </body>
 </html>
