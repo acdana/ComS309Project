@@ -26,6 +26,11 @@ function getCurrentSales(){
 	});
 };
 
+// Grabs all current sales and then sorts them based on a weight corresponding to the presence of input keywords.
+// input is a string of words like: "book calculus textbook math 165"
+// Function will sort the sales based on the weight of the descriptions matching those words.
+// Weight max is equal to the number of words.
+// The top of the returned/displayed table will have the highest weight and it decreases as you go down the table.
 function filter(input) {
 	
 	$.ajax({
@@ -34,11 +39,13 @@ function filter(input) {
 		datatype: 'json',
 		success: function(result){
 
+			// variables
 			var rows = result.Result[1].Sales;
 			var weight = new Array(rows.length);
 			var enums = new Array(rows.length);
 			var strings = input.toLowerCase().split(" ");
 			
+			// check if keywords are present in each sale description
 			for (var i = 0; i < rows.length; i++) {
 		
 				weight[i] = 0;
@@ -56,8 +63,10 @@ function filter(input) {
 		
 			}
 
+			// Sort the enumeration/index array and weight array the same way.
 			sort(weight, enums);
 
+			// Clear table 
 			var table = document.getElementById("currentSalesTable");
 			for (var i = table.rows.length - 1; i > 0; i--) {
 				
@@ -65,6 +74,7 @@ function filter(input) {
 
 			}
 
+			// Add sales to the table.
 			for (var i = 0; i < enums.length; i++) {
 
 				displayCurrentSales(rows[enums[i]].saleDescription, rows[enums[i]].Seller, rows[enums[i]].dateCreated);
@@ -81,6 +91,7 @@ function filter(input) {
 	
 }
 
+// Sort function (selection sort) that sorts both arrays simultaneously based on the weight values.
 function sort(weight, enums) {
 
 	for (var i = 0; i < weight.length; i++) {
@@ -107,6 +118,7 @@ function sort(weight, enums) {
 
 }
 
+// Swaps the i and max values of the weight and enums arrays.
 function swap(i, max, weight, enums) {
 
 	var tmp = weight[i];
