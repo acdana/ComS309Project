@@ -579,7 +579,6 @@ public class RestController {
 	@Path("/updateProfilePic/{username}/{pic}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String updateProfilePic(@Context HttpServletRequest req, @PathParam("username") String username, @PathParam("pic") String profPic) {
-		System.out.println(profPic);
 		
 		if (dataController.verifyCredentials(em, req) == true) {
 			
@@ -763,7 +762,6 @@ public class RestController {
 				return "{\"Result\":[{\"Status\":\"" + output + "\"}]}";
 				
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
 				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 				
 			}
@@ -776,6 +774,30 @@ public class RestController {
 		
 	}
 	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/setSaleData/{saleID}/{secondarySeller}")
+	public String setSaleData(@Context HttpServletRequest req, @PathParam("saleID") String saleID, @PathParam("secondarySeller") String secondarySeller) {
+		
+		if (dataController.verifyCredentials(em, req) == true) {
+			
+			try {
+				
+				boolean output = dataController.setSaleSecondarySeller(em, saleID, secondarySeller);
+				return "{\"Result\":[{\"Status\":\"" + output + "\"}]}";
+				
+			} catch (Exception e) {
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
+				
+			}
+			
+		} else {
+			
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
+			
+		}
+		
+	}
 	
 	
 }

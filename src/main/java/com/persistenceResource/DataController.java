@@ -804,4 +804,46 @@ public class DataController implements AbstractDataController {
 	}
 
 	
+	public boolean setSaleSecondarySeller(EntityManager em, String saleID, String secSeller) throws Exception {
+		
+		try {
+			
+			Sale s = em.find(Sale.class, saleID);
+			em.getTransaction().begin();
+			s.setSecondarySeller(secSeller);
+			em.getTransaction().commit();
+			em.close();
+			return true;
+			
+		} catch (Exception e) {
+			
+			throw e;
+			
+		}
+		
+	}
+	
+	
+	
+	public boolean setSaleDataWithoutSecondarySeller(EntityManager em, String saleID, String lat, String lon, String primLocation, String secLocation) throws Exception {
+		
+		try {
+			
+			Sale s = em.find(Sale.class, saleID);
+			em.getTransaction().begin();
+			s.setLatitude(Double.parseDouble(lat));
+			s.setLongitude(Double.parseDouble(lon));
+			s.setPrimarySellerLocation(primLocation);
+			s.setSecondarySellerLocation(secLocation);
+			em.getTransaction().commit();
+			em.close();
+			return true;
+			
+		} catch (Exception e) {
+			
+			throw e;
+			
+		}
+		
+	}
 }

@@ -83,29 +83,86 @@ agreeBut.connect = function(host) {
 					fStr = "**";
 
 					
+					
+					
+					
+				if(secondSeller != null && secondSeller != "") {
 					if(document.getElementById("yourStar").firstChild.innerHTML == "**") {
+
 						var firstCoordUpload = document.getElementById("yourPos").innerHTML;
 						var secondCoordUpload = document.getElementById("othersPos").innerHTML;
 						var firstLatUpload = parseFloat(firstCoordUpload.split(",")[0]);
 						var firstLonUpload = parseFloat(firstCoordUpload.split(",")[1]);
-					    
-					    
+											    
 						$.ajax({
 					        url: "../../309/T11/setSaleData/" + getURLParameter("saleID") + "/" + firstLatUpload + "/" + firstLonUpload + "/" + firstCoordUpload + "/" + secondCoordUpload + "/" + secondSeller,
 					        type: "POST",
+					        headers: {
+					        	"Authorization" : getCredentials(),
+					        },
+					        success: function (result) {
+					        	window.location.href = '../../frontEnd/profilePage/index.html?username='+ getUsername();
+					            console.log(result);
+					        },
+					        error: function (dc, status, err) {
+					            console.log(err);
+					            console.log(status);
+					        }
+					    });						
+
+					} 
+					else if(document.getElementById("otherStar") == "**") {
+
+						$.ajax({
+					        url: "../../309/T11/setSaleData/" + secondSeller,
+					        type: "POST",
+					        headers: {
+					        	"Authorization" : getCredentials(),
+					        },
 					        success: function (result) {
 					            console.log(result);
 					        },
 					        error: function (dc, status, err) {
 					            console.log(err);
 					            console.log(status);
-					            alert(status)
+					        }
+					    });			
+					}
+					
+				}//////
+				else {
+					if(document.getElementById("yourStar").firstChild.innerHTML == "**") {
+						var firstCoordUpload = document.getElementById("yourPos").innerHTML;
+						var secondCoordUpload = document.getElementById("othersPos").innerHTML;
+						var firstLatUpload = parseFloat(firstCoordUpload.split(",")[0]);
+						var firstLonUpload = parseFloat(firstCoordUpload.split(",")[1]);
+						alert(getURLParameter("saleID") + " " + firstLatUpload + " " + firstLonUpload + " " + firstCoordUpload + " " + secondCoordUpload + " " + secondSeller);
+					    
+						$.ajax({
+					        url: "../../309/T11/setSaleData/" + getURLParameter("saleID") + "/" + firstLatUpload + "/" + firstLonUpload + "/" + firstCoordUpload + "/" + secondCoordUpload + "/!null!",
+					        type: "POST",
+					        headers: {
+					        	"Authorization" : getCredentials(),
+					        },
+					        success: function (result) {
+					            console.log(result);
+					            window.location.href = '../../frontEnd/profilePage/index.html?username='+ getUsername();
+					        },
+					        error: function (dc, status, err) {
+					            console.log(err);
+					            console.log(status);
 					        }
 					    });						
 
 					} 
+					
 
-					window.location.href = '../../frontEnd/profilePage/index.html?username='+ getUsername();
+					
+					
+				}
+				
+				
+				
 				}
 				agreeBut.socket.send("a,f");
 				htmlChange(fStr, fStar);
@@ -140,7 +197,7 @@ agreeBut.connect = function(host) {
 					//redirect
 				} else if (fStr == "*-") {
 					fStr = "**";
-					window.location.href = '../../frontEnd/profilePage/index.html?username='+ getUsername();
+					//window.location.href = '../../frontEnd/profilePage/index.html?username='+ getUsername();
 				}
 				htmlChange(fStr, fStar);
 			}
