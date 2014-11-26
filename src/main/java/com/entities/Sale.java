@@ -39,6 +39,8 @@ public class Sale implements Serializable {
 	private String secondarySeller;
 
 	private String secondarySellerLocation;
+	
+	private String tags;
 
 	public Sale() {
 	}
@@ -113,6 +115,14 @@ public class Sale implements Serializable {
 
 	public void setSaleDescription(String saleDescription) {
 		this.saleDescription = saleDescription;
+	}
+
+	public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tags) {
+		this.tags = tags;
 	}
 
 }

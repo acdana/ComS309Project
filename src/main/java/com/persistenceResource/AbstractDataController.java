@@ -31,5 +31,5 @@ public interface AbstractDataController {
 	public String getProfPic(EntityManager em, String username) throws Exception;
 	public boolean verifyCredentials(EntityManager em, HttpServletRequest req);
 	public String getCurrentSales(EntityManager em) throws Exception;
-	public String createSale(EntityManager em, HttpServletRequest req, String description) throws Exception;
+	public String createSale(EntityManager em, HttpServletRequest req, String description, String tags) throws Exception;
 }

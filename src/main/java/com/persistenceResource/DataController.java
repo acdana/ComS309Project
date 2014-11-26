@@ -607,7 +607,7 @@ public class DataController implements AbstractDataController {
 
 	
 	
-	public String createSale(EntityManager em, HttpServletRequest req, String description) throws Exception {
+	public String createSale(EntityManager em, HttpServletRequest req, String description, String tags) throws Exception {
     	
 		String[] credentials = req.getHeader("Authorization").split(":");
     	if(credentials.length == 1) {
@@ -620,6 +620,7 @@ public class DataController implements AbstractDataController {
 		saleToCreate.setSaleID(SecureIDGenerator.nextSecureId());
 		saleToCreate.setPrimarySeller(primarySeller);
 		saleToCreate.setSaleDescription(description);
+		saleToCreate.setTags(tags);
 		java.util.Date utilDate = new java.util.Date();
 		java.sql.Date currentDate = new java.sql.Date(utilDate.getTime());
 		saleToCreate.setDateCreated(currentDate);

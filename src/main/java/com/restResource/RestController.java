@@ -517,14 +517,14 @@ public class RestController {
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/createSale/{description}")
-	public String createSale(@Context HttpServletRequest req, @PathParam("description") String description) {
+	@Path("/createSale/{description}/{tags}")
+	public String createSale(@Context HttpServletRequest req, @PathParam("description") String description, @PathParam("tags") String tags) {
 		
 		if (dataController.verifyCredentials(em, req) == true) {
 		
 			try {
 				
-				String output = dataController.createSale(em, req, description);
+				String output = dataController.createSale(em, req, description, tags);
 				return "{\"Result\":[{\"Status\":\"" + output + "\"}]}";
 				
 			} catch (Exception e) {
@@ -763,7 +763,7 @@ public class RestController {
 				return "{\"Result\":[{\"Status\":\"" + output + "\"}]}";
 				
 			} catch (Exception e) {
-				
+				System.out.println(e.getMessage());
 				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
 				
 			}

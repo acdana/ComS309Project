@@ -86,8 +86,8 @@ agreeBut.connect = function(host) {
 					if(document.getElementById("yourStar").firstChild.innerHTML == "**") {
 						var firstCoordUpload = document.getElementById("yourPos").innerHTML;
 						var secondCoordUpload = document.getElementById("othersPos").innerHTML;
-						var firstLatUpload = parseFloat(firstCoord.split(",")[0]);
-						var firstLonUpload = parseFloat(firstCoord.split(",")[1]);
+						var firstLatUpload = parseFloat(firstCoordUpload.split(",")[0]);
+						var firstLonUpload = parseFloat(firstCoordUpload.split(",")[1]);
 					    
 					    
 						$.ajax({
@@ -99,6 +99,7 @@ agreeBut.connect = function(host) {
 					        error: function (dc, status, err) {
 					            console.log(err);
 					            console.log(status);
+					            alert(status)
 					        }
 					    });						
 
