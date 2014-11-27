@@ -3,6 +3,6 @@
 <script src="map.js"></script>
 </head>
 <body>
-	<div id="map" style="width: 404px; height: 350px;"></div>
+	<div id="map" style="width: 800px; height: 650px;"></div>
 </body>
 </html>
