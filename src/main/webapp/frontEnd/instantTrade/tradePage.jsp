@@ -26,10 +26,12 @@
 #right {
 	float: left;
 	width: 150px;
+	padding-right: 20px;
 }
 
 #rightright {
 	float: left;
+	padding-left: 30px;
 }
 
 #yours {
@@ -81,6 +83,10 @@ input#items {
 	padding: 0;
 	margin: 0;
 }
+
+#landmarkDD{
+	padding-bottom: 10px;
+}
 </style>
 
 </head>
@@ -110,6 +116,14 @@ things needed
 			<button id="yoursBut">Your location</button>
 		</div>
 		<p id="yourStar">--</p>
+		<div class="dropdown" id="landmarkDD">
+			<div class="btn-group">
+            <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">Choose a Landmark <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li><a href="#">Memorial Union</a></li>
+            </ul>
+        </div>
+		</div>
 		<div id="yoursPos"></div>
 		<div id="other">
 			<br>
