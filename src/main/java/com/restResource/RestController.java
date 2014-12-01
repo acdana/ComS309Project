@@ -611,14 +611,14 @@ public class RestController {
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/createItem/{itemName}")
-	public String createItem(@Context HttpServletRequest req, @PathParam("itemName") String itemName) {
+	@Path("/createItem/{saleID}/{sellerName}/{itemName}")
+	public String createItem(@Context HttpServletRequest req, @PathParam("saleID") String saleID, @PathParam("sellerName") String sellerName, @PathParam("itemName") String itemName) {
 		
 		if (dataController.verifyCredentials(em, req) == true) {
 			
 			try {
 				
-				String output = dataController.createItem(em, req.getHeader("Autorization").split(":")[0], itemName);
+				String output = dataController.createItem(em, sellerName, itemName, saleID);
 				return "{\"Result\":[{\"Status\":\"" + output + "\"}]}";
 				
 			} catch (Exception e) {
@@ -665,7 +665,7 @@ public class RestController {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/tradeItem/{itemID}/{saleID}")
-	public String tradeItem(@Context HttpServletRequest req, @PathParam("itemID") int itemID, @PathParam("saleID") int saleID) {
+	public String tradeItem(@Context HttpServletRequest req, @PathParam("itemID") String itemID, @PathParam("saleID") String saleID) {
 		
 		if (dataController.verifyCredentials(em, req)) {
 			
