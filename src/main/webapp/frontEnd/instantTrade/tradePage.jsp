@@ -116,12 +116,11 @@ things needed
 			<button id="yoursBut">Your location</button>
 		</div>
 		<p id="yourStar">--</p>
-		<div class="dropdown" id="landmarkDD">
-			<div class="btn-group">
-            <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">Choose a Landmark <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-                <li><a href="#">Memorial Union</a></li>
-            </ul>
+		<div id="landmarkDD">
+			<select id="locSelect">
+				<option value="base">Choose a Location</option>
+				<option value="MU">Memorial Union</option>
+			</select>
         </div>
 		</div>
 		<div id="yoursPos"></div>

@@ -6,6 +6,8 @@ var mark = null;
 var map = null;
 var suggestedMarker = null;
 
+
+
 function getURLParameter(sParam) {
     var sPageURL = window.location.search.substring(1);
     var sURLVariables = sPageURL.split('&');
@@ -42,6 +44,12 @@ function init() {
 		mapTypeId : google.maps.MapTypeId.ROADMAP
 	});
 
+	// Variables for the chooseLM function
+	var ls = document.getElementById("locSelect");
+	var lsVal = ls.options[ls.selectedIndex].value;
+
+	// Listen for dropdown selection
+	document.getElementById("locSelect").addEventListener("click", chooseLM(lsVal));
 	// make new marker or change marker position
 	function setMarker(mar, fixPos) {
 		if (mar) {
@@ -54,6 +62,18 @@ function init() {
 			});
 		}
 		return mar;
+	}
+	
+	// If a landmark is selected in the dropdown menu, place the marker on the cordinates for the landmark.
+	function chooseLM(val){
+		if(val == "MU"){
+			// MU's coordinates on map
+			var ddMarker = new google.maps.Marker({
+				position: new google.maps.LatLng(42.02348260903262,-93.64573359489441),
+				draggable: false
+			});
+			marker = setMarker(ddPos, fixPos);
+		}
 	}
 
 	// pos is checked for being in boundrys
