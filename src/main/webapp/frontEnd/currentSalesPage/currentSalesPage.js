@@ -1,6 +1,6 @@
 // Run calls on page load
 window.onload = function(){
-	getCurrentSales();
+	filter();
 }
 
 // Find number of trades the user has made
@@ -11,6 +11,12 @@ function getCurrentSales(){
 		datatype: 'json',
 		success: function(result){
 			
+			var table = document.getElementById("currentSalesTable");
+			for (var i = table.rows.length - 1; i > 0; i--) {
+				
+				table.deleteRow(i);
+
+			}
 			var i = 0;
 			while(result.Result[1].Sales[i] != null) {
 				displayCurrentSales(result.Result[1].Sales[i].saleDescription, result.Result[1].Sales[i].Seller, result.Result[1].Sales[i].dateCreated, result.Result[1].Sales[i].saleID);
@@ -31,67 +37,81 @@ function getCurrentSales(){
 // Function will sort the sales based on the weight of the descriptions matching those words.
 // Weight max is equal to the number of words.
 // The top of the returned/displayed table will have the highest weight and it decreases as you go down the table.
-function filter(input) {
+function filter() {
 	
-	$.ajax({
-		url: "../../309/T11/getCurrentSales",
-		type: "GET",
-		datatype: 'json',
-		success: function(result){
-
-			// variables
-			var rows = result.Result[1].Sales;
-			var weight = new Array(rows.length);
-			var enums = new Array(rows.length);
-			var strings = input.toLowerCase().split(" ");
-			
-			// check if keywords are present in each sale description
-			for (var i = 0; i < rows.length; i++) {
+	var strings = document.getElementById("search").value.toLowerCase().split(",");
+	
+	if (strings.length == 1 && strings[0] == "") {
 		
-				weight[i] = 0;
-				enums[i] = i;
-				var description = rows[i].saleDescription.toLowerCase();
-				for (j = 0; j < strings.length; j++) {
+		getCurrentSales();
+		
+	} else {
+	
+		$.ajax({
+			url: "../../309/T11/getCurrentSales",
+			type: "GET",
+			datatype: 'json',
+			success: function(result){
 
-					if (description.indexOf(strings[j]) !== -1) {
+				// variables
+				var rows = result.Result[1].Sales;
+				var weight = new Array(rows.length);
+				var enums = new Array(rows.length);
+				var strings = document.getElementById("search").value.toLowerCase().split(",");
 				
-						weight[i] = weight[i] + 1;
+				// check if keywords are present in each sale description
+				for (var i = 0; i < rows.length; i++) {
+		
+					weight[i] = 0;
+					enums[i] = i;
+					var tags = rows[i].Tags.toLowerCase().split(",");
+					for (j = 0; j < strings.length; j++) {
+						
+						for (k = 0; k < tags.length; k++) {
+							
+							if (tags[k].trim() === strings[j].trim()) {
+								
+								weight[i] = weight[i] + 1;
+						
+							}
+							
+						}
 				
 					}
 			
 				}
-		
-			}
-
-			// Sort the enumeration/index array and weight array the same way.
-			sort(weight, enums);
-
-			// Clear table 
-			var table = document.getElementById("currentSalesTable");
-			for (var i = table.rows.length - 1; i > 0; i--) {
-				
-				table.deleteRow(i);
-
-			}
-
-			// Add sales to the table.
-			for (var i = 0; i < enums.length; i++) {
-
-				if (weight[i] > 0) {
+	
+				// Sort the enumeration/index array and weight array the same way.
+				sort(weight, enums);
+	
+				// Clear table 
+				var table = document.getElementById("currentSalesTable");
+				for (var i = table.rows.length - 1; i > 0; i--) {
 					
-					displayCurrentSales(rows[enums[i]].saleDescription, rows[enums[i]].Seller, rows[enums[i]].dateCreated);
-					
+					table.deleteRow(i);
+	
 				}
-
+	
+				// Add sales to the table.
+				for (var i = 0; i < enums.length; i++) {
+	
+					if (weight[i] > 0) {
+						
+						displayCurrentSales(rows[enums[i]].saleDescription, rows[enums[i]].Seller, rows[enums[i]].dateCreated);
+						
+					}
+	
+				}
+				
+			},
+			error: function(dc, status, err){
+				console.log(err);
+				console.log(status);
 			}
-			
-		},
-		error: function(dc, status, err){
-			console.log(err);
-			console.log(status);
-		}
-
-	});
+	
+		});
+		
+	}
 	
 }
 

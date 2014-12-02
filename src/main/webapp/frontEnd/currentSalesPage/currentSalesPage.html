@@ -16,7 +16,7 @@
 </head>
 <body>
 <div id="navbar"></div>
-
+Search (separate with commas ","): <input type="text" id="search" onkeydown="if (event.keyCode == 13) document.getElementById('submit').click()"> <input type="button" value="Submit" id="submit" onClick="filter()">
 <div id="currentSales">
 	<button id ="createSale1" onClick="createSale()">Create Sale</button>
 <table id="currentSalesTable" border="1">

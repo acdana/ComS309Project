@@ -845,4 +845,34 @@ public class DataController implements AbstractDataController {
 		}
 		
 	}
+	
+	public String getSaleTags(EntityManager em, String saleID) throws Exception {
+		
+		try {
+			
+			Query q = em.createNamedQuery("getSaleTags").setParameter("saleID", saleID);
+			List<String> result = q.getResultList();
+			int success = result.size();
+			
+			if (success == 0) {
+
+				em.close();
+				return null;
+				
+			} else {
+
+				em.close();
+				return result.get(0);
+				
+			}
+
+		} catch (Exception e) {
+			
+			em.close();
+			throw e;
+			
+		}
+		
+	}
+	
 }
