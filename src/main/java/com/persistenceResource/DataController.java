@@ -690,16 +690,15 @@ public class DataController implements AbstractDataController {
 		
 	}
 	
-	public String createItem(EntityManager em, String username, String itemName) throws Exception {
+	public String createItem(EntityManager em, String username, String itemName, String saleID) throws Exception {
     	
     	EntityTransaction et = em.getTransaction();
     	et.begin();
     	Item i = new Item();
-    	//TODO Change this so we generate unique item IDs
-    	i.setItemID(0);
+    	i.setItemID(SecureIDGenerator.nextSecureId());
     	i.setUsername(username);
     	i.setItemName(itemName);
-    	i.setSaleID(0);
+    	i.setSaleID(saleID);
     	em.persist(i);
     	et.commit();
     	em.close();
@@ -722,7 +721,7 @@ public class DataController implements AbstractDataController {
 		
 	}
 	
-	public String tradeItem(EntityManager em, int itemID, int saleID) throws Exception {
+	public String tradeItem(EntityManager em, String itemID, String saleID) throws Exception {
 		
 		try {
 

@@ -34,6 +34,7 @@ public class MapServerpoint {
 	@OnOpen
 	public void start(Session session, @PathParam("saleID") String saleID) {
 		sess = session;
+		sess.setMaxIdleTimeout(0);
 		sess.getUserProperties().put("saleID", saleID);
 		connect.add(this);
 	}
@@ -57,7 +58,7 @@ public class MapServerpoint {
 					}
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+
 				connect.remove(client);
 			}
 		}

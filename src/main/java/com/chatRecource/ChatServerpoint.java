@@ -33,6 +33,7 @@ public class ChatServerpoint {
 	public void start(Session session, @PathParam("username") String username, @PathParam("saleID") String saleID) {
 		name = username;
 		sess = session;
+		sess.setMaxIdleTimeout(0);
 		sess.getUserProperties().put("saleID", saleID);
 		connect.add(this);
 		String msg = name + " has joined.";
@@ -44,7 +45,7 @@ public class ChatServerpoint {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+
 		}
 	}
 	
@@ -62,7 +63,7 @@ public class ChatServerpoint {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+
 		}
 	}
 
@@ -79,7 +80,7 @@ public class ChatServerpoint {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+
 		}
 		
 	}

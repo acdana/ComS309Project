@@ -19,12 +19,12 @@ public class EntitiesTests extends TestCase {
 	
 	@Test
 	public void testItem() {
-		item.setItemID(15);
+		item.setItemID("15");
 		item.setItemName("Test Item");
-		item.setSaleID(21);
+		item.setSaleID("21");
 		item.setUsername("TestUser");
 		
-		assertEquals("15Test Item21TestUser", Integer.toString(item.getItemID()) + item.getItemName() + Integer.toString(item.getSaleID()) + item.getUsername());
+		assertEquals("15Test Item21TestUser", item.getItemID() + item.getItemName() + item.getSaleID() + item.getUsername());
 	}
 	
 	@SuppressWarnings("deprecation")

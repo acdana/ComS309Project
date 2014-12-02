@@ -18,22 +18,22 @@ public class Item implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private int itemID;
+	private String itemID;
 
 	private String itemName;
 
-	private int saleID;
+	private String saleID;
 
 	private String username;
 
 	public Item() {
 	}
 
-	public int getItemID() {
+	public String getItemID() {
 		return this.itemID;
 	}
 
-	public void setItemID(int ID) {
+	public void setItemID(String ID) {
 		this.itemID = ID;
 	}
 
@@ -45,12 +45,12 @@ public class Item implements Serializable {
 		this.itemName = itemName;
 	}
 
-	public int getSaleID() {
+	public String getSaleID() {
 		return this.saleID;
 	}
 
-	public void setSaleID(int ID) {
-		this.saleID = ID;
+	public void setSaleID(String saleID2) {
+		this.saleID = saleID2;
 	}
 
 	public String getUsername() {
