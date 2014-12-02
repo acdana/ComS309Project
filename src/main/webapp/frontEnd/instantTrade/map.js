@@ -6,31 +6,24 @@ var mark = null;
 var map = null;
 var suggestedMarker = null;
 
-
-
 function getURLParameter(sParam) {
-    var sPageURL = window.location.search.substring(1);
-    var sURLVariables = sPageURL.split('&');
-    for (var i = 0; i < sURLVariables.length; i++) 
-    {
-        var sParameterName = sURLVariables[i].split('=');
-        if (sParameterName[0] == sParam) 
-        {
-            return sParameterName[1];
-        }
-    }
+	var sPageURL = window.location.search.substring(1);
+	var sURLVariables = sPageURL.split('&');
+	for (var i = 0; i < sURLVariables.length; i++) {
+		var sParameterName = sURLVariables[i].split('=');
+		if (sParameterName[0] == sParam) {
+			return sParameterName[1];
+		}
+	}
 }
-
-
 
 function init() {
 	// marks between users
 	var othMark = {};
 	othMark.socket = null;
 
-	// this marker
-
-	// other persons marker
+	// Variables for the chooseLM function
+	var ls = document.getElementById("locSelect");
 
 	// for displaying location of both markers
 	var yoursPos = document.getElementById("yoursPos");
@@ -44,12 +37,6 @@ function init() {
 		mapTypeId : google.maps.MapTypeId.ROADMAP
 	});
 
-	// Variables for the chooseLM function
-	var ls = document.getElementById("locSelect");
-	var lsVal = ls.options[ls.selectedIndex].value;
-
-	// Listen for dropdown selection
-	document.getElementById("locSelect").addEventListener("click", chooseLM(lsVal));
 	// make new marker or change marker position
 	function setMarker(mar, fixPos) {
 		if (mar) {
@@ -62,19 +49,6 @@ function init() {
 			});
 		}
 		return mar;
-	}
-	
-	// If a landmark is selected in the dropdown menu, place the marker on the cordinates for the landmark.
-	function chooseLM(val){
-		Console.log("works");
-		if(val == "MU"){
-			// MU's coordinates on map
-			var ddMarker = new google.maps.Marker({
-				position: new google.maps.LatLng(42.02348260903262,-93.64573359489441),
-				draggable: false
-			});
-			marker = setMarker(ddPos, fixPos);
-		}
 	}
 
 	// pos is checked for being in boundrys
@@ -119,42 +93,64 @@ function init() {
 		// when a connection is made
 
 		othMark.socket.onopen = function() {
-			google.maps.event.addListener(map, 'dblclick',
-					function(clickLatLng) {
-						// force marker into boundrys
-						var fixPos = posFix(clickLatLng.latLng);
 
-						// change marker pos or make new marker
-						marker = setMarker(marker, fixPos);
+			// Listen for dropdown selection
 
-						// resets final agree if this location was selected
-						if (yStr == "**") {
-							fStr = "--";
-							htmlChange(fStr, fStar);
-						}
-						// resets the selection under your button if change
-						// happens
-						yStr = "--";
-						htmlChange(yStr, YourStar);
+			ls.addEventListener('change', chooseLM);
 
-						var msg = marker.getPosition().lat() + ","
-								+ marker.getPosition().lng();
+			// If a landmark is selected in the dropdown menu, place the marker
+			// on the cordinates for the landmark.
+			function chooseLM() {
+				var val = ls.options[ls.selectedIndex].value;
+				var pos = null;
+				if (val == "MU") {
+					// MU's coordinates on map
+					pos = new google.maps.LatLng(42.02348260903262,
+							-93.64573359489441);
+				}
+				if (pos) {
+					changeMarker(pos);
+				}
+			}
 
-						// taks msg and maeks into html displayable
-						var p = document.createElement('p');
-						p.style.wordWrap = "break-word";
-						p.innerHTML = msg;
+			google.maps.event.addListener(map, 'dblclick', clickChange);
+			
+			function clickChange(clickLatLng){
+				var pos = clickLatLng.latLng;
+				changeMarker(pos)
+				
+			}
+			
+			function changeMarker(pos) {
+				// force marker into boundrys
+				var fixPos = posFix(pos);
 
-						// removes old location information
-						if (yoursPos.childNodes.length > 0) {
-							yoursPos.removeChild(yoursPos.firstChild);
-						}
-						// adds new locations data
-						var childP = yoursPos.appendChild(p);
-						childP.id = "yourPos";
-						msg = "m," + msg;
-						othMark.socket.send(msg);
-					});
+				// change marker pos or make new marker
+				marker = setMarker(marker, fixPos);
+
+				// resets final agree if this location was selected
+				if (yStr == "**") {
+					fStr = "--";
+					htmlChange(fStr, fStar);
+				}
+				// resets the selection under your button if change
+				// happens
+				yStr = "--";
+				htmlChange(yStr, YourStar);
+
+				var msg = marker.getPosition().lat() + ","
+						+ marker.getPosition().lng();
+
+				// removes old location information
+				if (yoursPos.childNodes.length > 0) {
+					yoursPos.removeChild(yoursPos.firstChild);
+				}
+				// adds new locations data
+				var childP = yoursPos.appendChild(p);
+				childP.id = "yourPos";
+				msg = "m," + msg;
+				othMark.socket.send(msg);
+			}
 		};
 
 		// when a message is submitted
@@ -166,10 +162,6 @@ function init() {
 
 				// makes a string out of location info
 				msg = arrStr[1] + "," + arrStr[2];
-				// make msg html displayable
-				var p = document.createElement('p');
-				p.style.wordWrap = "break-word";
-				p.innerHTML = msg;
 
 				// removes old location data
 				if (otherPos.childNodes.length > 0) {
@@ -189,7 +181,7 @@ function init() {
 				// adds new location data
 				var otherP = otherPos.appendChild(p);
 				otherP.id = "othersPos";
-				
+
 				var newPos = new google.maps.LatLng(y, x);
 				mark = setMarker(mark, newPos);
 				mark.setOpacity(.5);
@@ -200,11 +192,11 @@ function init() {
 	// endpoint initialization
 	// incase we have https
 	if (window.location.protocol == "http:") {
-		othMark.connect('ws://' + window.location.host + "/ComS309Project/map/" + getURLParameter("saleID"));
+		othMark.connect('ws://' + window.location.host + "/ComS309Project/map/"
+				+ getURLParameter("saleID"));
 	} else {
-		othMark
-				.connect('wss://' + window.location.host
-						+ "/ComS309Project/map/" + getURLParameter("saleID"));
+		othMark.connect('wss://' + window.location.host
+				+ "/ComS309Project/map/" + getURLParameter("saleID"));
 	}
 
 	// map boundrys
@@ -237,8 +229,5 @@ function init() {
 	});
 
 }
-
-
-
 
 google.maps.event.addDomListener(window, 'load', init);
