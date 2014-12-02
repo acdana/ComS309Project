@@ -33,9 +33,7 @@ function getCurrentSales(){
 };
 
 // Grabs all current sales and then sorts them based on a weight corresponding to the presence of input keywords.
-// input is a string of words like: "book calculus textbook math 165"
-// Function will sort the sales based on the weight of the descriptions matching those words.
-// Weight max is equal to the number of words.
+// Function will sort the sales based on their weight in regards to tags that match given keywords.
 // The top of the returned/displayed table will have the highest weight and it decreases as you go down the table.
 function filter() {
 	
@@ -59,15 +57,15 @@ function filter() {
 				var enums = new Array(rows.length);
 				var strings = document.getElementById("search").value.toLowerCase().split(",");
 				
-				// check if keywords are present in each sale description
+				// check if keywords are equivalent to a tag
 				for (var i = 0; i < rows.length; i++) {
 		
 					weight[i] = 0;
 					enums[i] = i;
 					var tags = rows[i].Tags.toLowerCase().split(",");
-					for (j = 0; j < strings.length; j++) {
+					for (k = 0; k < tags.length; k++) {
 						
-						for (k = 0; k < tags.length; k++) {
+						for (j = 0; j < strings.length; j++) {
 							
 							if (tags[k].trim() === strings[j].trim()) {
 								
