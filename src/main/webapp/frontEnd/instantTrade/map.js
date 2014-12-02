@@ -66,6 +66,7 @@ function init() {
 	
 	// If a landmark is selected in the dropdown menu, place the marker on the cordinates for the landmark.
 	function chooseLM(val){
+		Console.log("works");
 		if(val == "MU"){
 			// MU's coordinates on map
 			var ddMarker = new google.maps.Marker({
