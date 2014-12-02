@@ -3,23 +3,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Instant Trade</title>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="../include/credentials.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-<script src="suggestedLocation.js"></script>
-
-<script type="text/javascript"
-	src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
-
-<script>
-	$(function() {
-		$("#navbar").load("../include/navbar.html");
-	});
-</script>
-<div id="navbar"></div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="../include/credentials.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> 
+    <script src="suggestedLocation.js"></script>
+    
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+    
+    <script> 
+    $(function(){
+      $("#navbar").load("../include/navbar.html"); 
+    });
+	</script>
+	 <div id="navbar"></div>
 <style>
 #left {
 	float: left;
@@ -87,7 +84,7 @@ input#items {
 	margin: 0;
 }
 
-#landmarkDD {
+#landmarkDD{
 	padding-bottom: 10px;
 }
 </style>
@@ -106,6 +103,14 @@ input#items {
 	</div>
 
 
+
+
+	<%--
+things needed
+
+-final agree redirect
+-cancel trade redirect
+ --%>
 	<div id="right">
 		<div id="yours">
 			<button id="yoursBut">Your location</button>
@@ -116,15 +121,15 @@ input#items {
 				<option value="base">Choose a Location</option>
 				<option value="MU">Memorial Union</option>
 			</select>
+        </div>
 		</div>
-
-
+		<div id="yoursPos"></div>
 		<div id="other">
 			<br>
 			<button id="otherBut">Other location</button>
 		</div>
 		<p id="otherStar">--</p>
-
+		<div id="otherPos"></div>
 		<br> <br>
 
 		<button id="fAgree">Final Agree</button>
@@ -156,11 +161,11 @@ input#items {
 
 		</div>
 	</div>
-
-
+	
+	
 	<button id="suggestedLocationButton">Suggest Location</button>
 	<div id="suggestDiv"></div>
-
+	
 	<%--idk what this does yet.
 --%>
 	<script src="locationButtons.js"></script>
@@ -168,8 +173,8 @@ input#items {
 	<script src="trade.js"></script>
 	<script src="agreeButtons.js"></script>
 	<script src="cancelButton.js"></script>
-	<script src="../include/credentials.js"></script>
-
+    <script src="../include/credentials.js"></script>
+    
 
 </body>
 </html>
