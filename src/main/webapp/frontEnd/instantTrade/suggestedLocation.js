@@ -150,7 +150,8 @@ function callback(results, status) {
         		  	suggestedMarker = new google.maps.Marker({
         	  		position: myLatLng,
         	  		map: map,
-        	  		icon: image
+        	  		icon: image,
+        	  		animation: google.maps.Animation.DROP
         	  	});
         	  }
         }
