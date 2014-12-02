@@ -87,6 +87,28 @@ agreeBut.connect = function(host) {
 					
 					
 					
+					var selectLength = 0;
+					var tradeBox = document.getElementById("tradeBox").options;
+					while(selectLength < document.getElementById("tradeBox").options.length) {
+						$.ajax({
+					        url: "../../309/T11/createItem/" + getURLParameter("saleID") + "/" + getUsername() + "/" + tradeBox[selectLength].value,
+					        type: "POST",
+					        async: false,
+					        headers: {
+					        	"Authorization" : getCredentials(),
+					        },
+					        success: function (result) {
+					        	console.log(result);
+					        },
+					        error: function (dc, status, err) {
+					            console.log(err);
+					            console.log(status);
+					        }
+					    });	
+						selectLength++;
+					}
+				
+					
 				if(secondTransaction == false) {
 						var firstCoordUpload = document.getElementById("yourPos").innerHTML;
 						var secondCoordUpload = document.getElementById("othersPos").innerHTML;
@@ -151,6 +173,29 @@ agreeBut.connect = function(host) {
 					//redirect
 				} else if (fStr == "*-") {
 					fStr = "**";
+					
+					
+
+					var selectLength = 0;
+					var tradeBox = document.getElementById("tradeBox").options;
+					while(selectLength < document.getElementById("tradeBox").options.length) {
+						$.ajax({
+					        url: "../../309/T11/createItem/" + getURLParameter("saleID") + "/" + getUsername() + "/" + tradeBox[selectLength].value,
+					        type: "POST",
+					        async: false,
+					        headers: {
+					        	"Authorization" : getCredentials(),
+					        },
+					        success: function (result) {
+					        	console.log(result);
+					        },
+					        error: function (dc, status, err) {
+					            console.log(err);
+					            console.log(status);
+					        }
+					    });	
+						selectLength++;
+					}
 					
 					
 					if(secondTransaction == false) {
