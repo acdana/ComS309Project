@@ -32,4 +32,16 @@ public interface AbstractDataController {
 	public boolean verifyCredentials(EntityManager em, HttpServletRequest req);
 	public String getCurrentSales(EntityManager em) throws Exception;
 	public String createSale(EntityManager em, HttpServletRequest req, String description, String tags) throws Exception;
+	public String getSaleTags(EntityManager em, String saleID) throws Exception;
+	public boolean setSaleSecondarySeller(EntityManager em, String saleID, String secSeller) throws Exception;
+	public boolean setSaleData(EntityManager em, String saleID, String lat, String lon, String primLocation, String secLocation, String secSeller) throws Exception;
+	public String getPrimarySeller(EntityManager em, String saleID) throws Exception;
+	public String getReputation(EntityManager em, String username) throws Exception;
+	public String tradeItem(EntityManager em, String itemID, String saleID) throws Exception;
+	public String getUsersItems(EntityManager em, String username) throws Exception;
+	public String createItem(EntityManager em, String username, String itemName, String saleID) throws Exception;
+	public boolean updateProfilePic(EntityManager em, String username, String pic) throws Exception;
+	public boolean updateProfile(EntityManager em, String username, String bio) throws Exception;
+	public String getUserType(EntityManager em, HttpServletRequest req);
+	
 }

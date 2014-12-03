@@ -69,7 +69,7 @@ public class ObjectMapper {
 	 * This method is used to translate raw sale location coordinates into
 	 * readable Point2D coordinates for us to analyze.
 	 * 
-	 * @param rawCoordinates
+	 * @param rawCoordinates   The raw coordinate data to be translated
 	 * @return an ArrayList of Point2D.Double coordinates
 	 */
 	public static ArrayList<Point2D.Double> mapCoordinates(List<Object[]> rawCoordinates) {
@@ -85,6 +85,13 @@ public class ObjectMapper {
 		return coordinateList;
 	}
 	
+	/**
+	 * This method is used to translate raw sale data into JSON strings
+	 * containing info about all open sales.
+	 * 
+	 * @param rawSales	The raw sale data to be translated
+	 * @return A JSON String containing all of the open sales info that we want
+	 */
 	public static String mapCurrentSales(List<Object[]> rawSales) {
 		String currentSales = "{\"Result\":[{\"Status\":\"Success\"}, {\"Sales\":[";
 		
@@ -106,6 +113,13 @@ public class ObjectMapper {
 		
 	}
 	
+	/**
+	 * This method is used to translate raw item data into
+	 * a JSON String that contains item info for a user
+	 * 
+	 * @param rawItems
+	 * @return A JSON String containing the item details for a user
+	 */
 	public static String mapUsersItems(List<Object> rawItems) {
 		
 		String out = "{\"Items\":[";

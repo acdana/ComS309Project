@@ -596,7 +596,13 @@ public class DataController implements AbstractDataController {
 	}
 	
 	
-	
+	/**
+	 * This method is used to get the current open sales
+	 * 
+	 * @param em Our instance of EntityManager used for persistence.
+	 * 
+	 * @return A JSON String containing the open sales and their data
+	 */
 	public String getCurrentSales(EntityManager em) {
 		
 		Query query = em.createNamedQuery("getCurrentSales");
@@ -606,7 +612,17 @@ public class DataController implements AbstractDataController {
 	}
 
 	
-	
+	/**
+	 * This method is used to get the current open sales
+	 * 
+	 * @param em Our instance of EntityManager used for persistence.
+	 * @param req	An HttpServletRequest containing header data used for authentication
+	 * @param description	The description of the sale
+	 * @param tags	The tags associated with the sale (for searches)
+	 * 
+	 * @return A JSON String indicating success or failure of the operation
+	 * @throws Exception
+	 */
 	public String createSale(EntityManager em, HttpServletRequest req, String description, String tags) throws Exception {
     	
 		String[] credentials = req.getHeader("Authorization").split(":");
@@ -631,6 +647,14 @@ public class DataController implements AbstractDataController {
 
 	}
 	
+	/**
+	 * This method is used to get the user type of a user by their authentication header
+	 * 
+	 * @param em Our instance of EntityManager used for persistence.
+	 * @param req	An HttpServletRequest containing header data used for authentication
+	 * 
+	 * @return A JSON String indicating the user type of the user
+	 */
 	public String getUserType(EntityManager em, HttpServletRequest req) {
     	String[] credentials = req.getHeader("Authorization").split(":");
     	if(credentials.length == 1) {
@@ -653,6 +677,16 @@ public class DataController implements AbstractDataController {
     	}
 	}
 	
+	/**
+	 * This method is used to update the given users profile bio
+	 * 
+	 * @param em Our instance of EntityManager used for persistence.
+	 * @param username	The username of the user who's bio will be updated
+	 * @param bio	The new bio to be updated
+	 * 
+	 * @return A boolean indicating whether or not the operation was a success
+	 * @throws Exception
+	 */
 	public boolean updateProfile(EntityManager em, String username, String bio) throws Exception {
 		
 		try {
@@ -672,6 +706,16 @@ public class DataController implements AbstractDataController {
 		
 	}
 	
+	/**
+	 * This method is used to update the given users profile picture
+	 * 
+	 * @param em Our instance of EntityManager used for persistence.
+	 * @param username	The username of the user who's picture will be updated
+	 * @param pic	The URL of the photo to be used
+	 * 
+	 * @return A boolean indicating whether or not the operation was a success
+	 * @throws Exception
+	 */
 	public boolean updateProfilePic(EntityManager em, String username, String pic) throws Exception {
 		
 		try {
@@ -690,6 +734,16 @@ public class DataController implements AbstractDataController {
 		
 	}
 	
+	/**
+	 * This method is used to update the given users profile bio
+	 * 
+	 * @param em Our instance of EntityManager used for persistence.
+	 * @param itemName	The name of the item to be created.
+	 * @param saleID	The unique saleID of the sale in which the item was created from.
+	 * 
+	 * @return A String indicating whether or not the operation was a success
+	 * @throws Exception
+	 */
 	public String createItem(EntityManager em, String username, String itemName, String saleID) throws Exception {
     	
     	EntityTransaction et = em.getTransaction();
@@ -706,6 +760,15 @@ public class DataController implements AbstractDataController {
 		
 	}
 	
+	/**
+	 * This method is used to retrieve all items of a given user
+	 * 
+	 * @param em Our instance of EntityManager used for persistence.
+	 * @param username	The username of the user who's bio items are to be retrieved
+	 * 
+	 * @return A JSON String containing the items and their details.
+	 * @throws Exception
+	 */
 	public String getUsersItems(EntityManager em, String username) throws Exception {
 		
 		try {
@@ -721,6 +784,17 @@ public class DataController implements AbstractDataController {
 		
 	}
 	
+	/**
+	 * This method is used to trade an item
+	 * 
+	 * @param em Our instance of EntityManager used for persistence.
+	 * @param itemID	The unique itemID of the item being traded
+	 * @param saleID	The unique saleID in which the item is being traded
+	 * 
+	 * @return A String indicating whether or not the operation was a success
+	 * @throws Exception
+	 */
+	@Deprecated
 	public String tradeItem(EntityManager em, String itemID, String saleID) throws Exception {
 		
 		try {
@@ -743,7 +817,15 @@ public class DataController implements AbstractDataController {
 	
 	
 	
-	
+	/**
+	 * This method is used to get the reputation of a given user
+	 * 
+	 * @param em Our instance of EntityManager used for persistence.
+	 * @param username	The username of the user who's reputation will be retrieved
+	 * 
+	 * @return An integer indicating the given user's reputation
+	 * @throws Exception
+	 */
 	public String getReputation(EntityManager em, String username) throws Exception {
 		
 		try {
@@ -760,7 +842,15 @@ public class DataController implements AbstractDataController {
 		
 	}
 	
-	
+	/**
+	 * This method is used to get the username of the primarySeller of a sale
+	 * 
+	 * @param em Our instance of EntityManager used for persistence.
+	 * @param saleID	The unique saleID of the sale
+	 * 
+	 * @return A String containing the username of the primarySeller of the sale
+	 * @throws Exception
+	 */
 	public String getPrimarySeller(EntityManager em, String saleID) throws Exception {
 		
 		try {
@@ -778,7 +868,19 @@ public class DataController implements AbstractDataController {
 	}
 	
 	
-	
+	/**
+	 * This method is used to update the data associated with the given saleID
+	 * 
+	 * @param em Our instance of EntityManager used for persistence.
+	 * @param saleID	The unique saleID of the sale
+	 * @param lat	The latitude of the chosen location
+	 * @param lon	The longitude of the chosen location
+	 * @param primLocation	The coordinates chosen by the primarySeller
+	 * @param secLocation	The coordinates chosen by the secondarySeller
+	 * 
+	 * @return A boolean indicating whether or not the operation was a success
+	 * @throws Exception
+	 */
 	public boolean setSaleData(EntityManager em, String saleID, String lat, String lon, String primLocation, String secLocation, String secSeller) throws Exception {
 		
 		try {
@@ -802,7 +904,16 @@ public class DataController implements AbstractDataController {
 		
 	}
 
-	
+	/**
+	 * This method is used to update the secondarySeller of a given sale based on saleID
+	 * 
+	 * @param em Our instance of EntityManager used for persistence.
+	 * @param saleID	The unique saleID of the sale
+	 * @param secSeller	The username of the secondarySeller for the sale
+	 * 
+	 * @return A boolean indicating whether or not the operation was a success
+	 * @throws Exception
+	 */
 	public boolean setSaleSecondarySeller(EntityManager em, String saleID, String secSeller) throws Exception {
 		
 		try {
@@ -824,28 +935,15 @@ public class DataController implements AbstractDataController {
 	
 	
 	
-	public boolean setSaleDataWithoutSecondarySeller(EntityManager em, String saleID, String lat, String lon, String primLocation, String secLocation) throws Exception {
-		
-		try {
-			
-			Sale s = em.find(Sale.class, saleID);
-			em.getTransaction().begin();
-			s.setLatitude(Double.parseDouble(lat));
-			s.setLongitude(Double.parseDouble(lon));
-			s.setPrimarySellerLocation(primLocation);
-			s.setSecondarySellerLocation(secLocation);
-			em.getTransaction().commit();
-			em.close();
-			return true;
-			
-		} catch (Exception e) {
-			
-			throw e;
-			
-		}
-		
-	}
-	
+	/**
+	 * This method is used to retrieve sale tags associated with a given saleID
+	 * 
+	 * @param em Our instance of EntityManager used for persistence.
+	 * @param saleID	The unique saleID of the sale
+	 * 
+	 * @return A String containing raw tag data
+	 * @throws Exception
+	 */
 	public String getSaleTags(EntityManager em, String saleID) throws Exception {
 		
 		try {
