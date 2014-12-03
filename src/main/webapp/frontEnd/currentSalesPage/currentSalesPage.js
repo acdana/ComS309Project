@@ -63,13 +63,16 @@ function filter() {
 					weight[i] = 0;
 					enums[i] = i;
 					var tags = rows[i].Tags.toLowerCase().split(",");
-					for (k = 0; k < tags.length; k++) {
+					var desc = rows[i].saleDescription.toLowerCase().split(" ");
+					var cat = tags.concat(desc);
+					for (k = 0; k < cat.length; k++) {
 						
 						for (j = 0; j < strings.length; j++) {
 							
-							if (tags[k].trim() === strings[j].trim()) {
+							if (cat[k].trim() === strings[j].trim()) {
 								
 								weight[i] = weight[i] + 1;
+								break;
 						
 							}
 							
@@ -95,7 +98,7 @@ function filter() {
 	
 					if (weight[i] > 0) {
 						
-						displayCurrentSales(rows[enums[i]].saleDescription, rows[enums[i]].Seller, rows[enums[i]].dateCreated);
+						displayCurrentSales(rows[enums[i]].saleDescription, rows[enums[i]].Seller, rows[enums[i]].dateCreated, rows[enums[i]].saleID);
 						
 					}
 	
