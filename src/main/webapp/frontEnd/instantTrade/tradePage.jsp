@@ -38,21 +38,8 @@
 	padding: 10px;
 }
 
-#yoursPos {
-	padding: 10px;
-	width: 100px;
-	border: 1px solid #000000;
-	width: 100px;
-}
-
 #other {
 	padding: 10px;
-}
-
-#otherPos {
-	padding: 10px;
-	width: 100px;
-	border: 1px solid #000000;
 }
 
 input#items {
@@ -127,13 +114,13 @@ things needed
 			</select>
         </div>
 		</div>
-		<div id="yoursPos"></div>
+		<div id="yoursPos" style="display: none;"></div>
 		<div id="other">
 			<br>
 			<button id="otherBut">Other location</button>
 		</div>
 		<p id="otherStar">--</p>
-		<div id="otherPos"></div>
+		<div id="otherPos" style="display: none;"></div>
 		<br> <br>
 
 		<button id="fAgree">Final Agree</button>
