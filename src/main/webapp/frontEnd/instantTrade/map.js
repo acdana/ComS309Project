@@ -80,8 +80,25 @@ function init() {
 			// Beardshear Hall's coordinates
 			pos = new google.maps.LatLng(42.02614457873918, -93.64842116832733);
 
+		}else if (val == "udcc") {
+			// UDCC's coordinates
+			pos = new google.maps.LatLng(42.0249251872884, -93.65148961544037);
+		}else if (val == "stateGym") {
+			// State Gym's coordinates
+			pos = new google.maps.LatLng(42.025032781592465, -93.65390628576279);
+		}else if (val == "library") {
+			// Library's coordinates
+			pos = new google.maps.LatLng(42.028104123687534, -93.64865250885487);
+		}else if (val == "coover") {
+			// Coover Hall's coordinates
+			pos = new google.maps.LatLng(42.028340221365696, -93.65134209394455);
+		}else if (val == "lied") {
+			// Lied Red Center coordinates
+			pos = new google.maps.LatLng(42.02676622028182, -93.63777816295624);
+		}else if (val == "curtiss") {
+			// Curtiss Hall's coordinates
+			pos = new google.maps.LatLng(42.02615852589172, -93.64484712481499);
 		}
-
 		// if something has been selected the marker will be moved and info sent
 		// to other user
 		if (pos) {

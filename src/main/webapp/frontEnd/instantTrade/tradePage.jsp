@@ -111,6 +111,11 @@ things needed
 				<option value="carver">Carver Hall</option>
 				<option value="beardshear">Beardshear Hall</option>
 				<option value="udcc">Union Drive Marketplace</option>
+				<option value="stateGym">State Gymnasium</option>
+				<option value="library">Parks Library</option>
+				<option value="coover">Coover Hall</option>
+				<option value="lied">Lied Rec Center</option>
+				<option value="curtiss">Curtiss Hall</option>
 			</select>
         </div>
 		</div>
