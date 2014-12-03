@@ -6,22 +6,16 @@ var mark = null;
 var map = null;
 var suggestedMarker = null;
 
-
-
 function getURLParameter(sParam) {
-    var sPageURL = window.location.search.substring(1);
-    var sURLVariables = sPageURL.split('&');
-    for (var i = 0; i < sURLVariables.length; i++) 
-    {
-        var sParameterName = sURLVariables[i].split('=');
-        if (sParameterName[0] == sParam) 
-        {
-            return sParameterName[1];
-        }
-    }
+	var sPageURL = window.location.search.substring(1);
+	var sURLVariables = sPageURL.split('&');
+	for (var i = 0; i < sURLVariables.length; i++) {
+		var sParameterName = sURLVariables[i].split('=');
+		if (sParameterName[0] == sParam) {
+			return sParameterName[1];
+		}
+	}
 }
-
-
 
 function init() {
 	// marks between users
@@ -37,18 +31,20 @@ function init() {
 
 	var maxZoomOut = 14;
 
+	//creation of the map object
 	map = new google.maps.Map(document.getElementById('map'), {
 		zoom : maxZoomOut,
 		center : new google.maps.LatLng(42.026652, -93.646420),
 		mapTypeId : google.maps.MapTypeId.ROADMAP
 	});
 
-
 	// make new marker or change marker position
 	function setMarker(mar, fixPos) {
 		if (mar) {
+			//resets the current marker
 			mar.setPosition(fixPos);
 		} else {
+			//makes a new marker
 			mar = new google.maps.Marker({
 				position : fixPos,
 				map : map
@@ -57,140 +53,74 @@ function init() {
 		}
 		return mar;
 	}
-	
-	// If a landmark is selected in the dropdown menu, place the marker on the cordinates for the landmark.
-/*	function chooseLM(val){
-		Console.log("works");
-		if(val == "MU"){
+
+	//if an object is selected in the drop down menu, the fucntino is activated.
+	ls.addEventListener('change', chooseLM);
+
+	// If a landmark is selected in the dropdown menu, place the marker
+	// on the cordinates for the landmark.
+	function chooseLM() {
+		//gets the value of the drop down selection
+		var val = ls.options[ls.selectedIndex].value;
+		//initializing eventual position holder of drop down selection
+		var pos = null;
+		
+		if (val == "MU") {
 			// MU's coordinates on map
-			var ddMarker = new google.maps.Marker({
-				position: new google.maps.LatLng(42.02348260903262,-93.64573359489441),
-				draggable: false
-			});
-			marker = setMarker(ddPos, fixPos);
-		}else if(val == "musicHall"){
+			pos = new google.maps.LatLng(42.02348260903262, -93.64573359489441);
+		} else if (val == "musicHall") {
 			// Music Hall's coordinates
-			var ddMarker = new google.maps.Marker({
-				position: new google.maps.LatLng(42.024614358276004, -93.64817440509796),
-				draggable: false
-			});
-		}else if(val == "carver"){
-			// Carver Hall's coords
-			var ddMarker = new google.maps.Marker({
-				position: new google.maps.LatLng(42.02522007494668, -93.64832729101181),
-				draggable: false
-			});
-		}else if(val == "beardshear"){
-			// Beardshear Hall's coords
-			var ddMarker = new google.maps.Marker({
-				position: new google.maps.LatLng(42.02614457873918, -93.64842116832733),
-				draggable: false
-			});
+			pos = new google.maps.LatLng(42.024614358276004, -93.64817440509796);
+
+		} else if (val == "carver") {
+			// Carver Hall's coordinates
+			pos = new google.maps.LatLng(42.02522007494668, -93.64832729101181);
+
+		} else if (val == "beardshear") {
+			// Beardshear Hall's coordinates
+			pos = new google.maps.LatLng(42.02614457873918, -93.64842116832733);
+
 		}
-	}*/
-	
-	
-	
-	
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
-				ls.addEventListener('change', chooseLM);
-	
-				// If a landmark is selected in the dropdown menu, place the marker
-				// on the cordinates for the landmark.
-				function chooseLM() {
-					var val = ls.options[ls.selectedIndex].value;
-					var pos = null;
-					if (val == "MU") {
-						// MU's coordinates on map
-						pos = new google.maps.LatLng(42.02348260903262,
-								-93.64573359489441);
-					}
-					else if(val == "musicHall"){
-						// Music Hall's coordinates
-						pos = new google.maps.LatLng(42.024614358276004, -93.64817440509796);
-						
-					}
-					else if(val == "carver"){
-						// Carver Hall's coordinates
-						pos = new google.maps.LatLng(42.02522007494668, -93.64832729101181);
-						
-					}
-					else if(val == "beardshear"){
-						// Beardshear Hall's coordinates
-						pos = new google.maps.LatLng(42.02614457873918, -93.64842116832733);
-						
-					}
-					if (pos) {
-						changeMarker(pos);
-					}
-				}
-	
-				
-				
-				
-				
-							function changeMarker(pos) {
-									// force marker into boundrys
-									var fixPos = posFix(pos);
-					
-									// change marker pos or make new marker
-									marker = setMarker(marker, fixPos);
-					
-									// resets final agree if this location was selected
-									if (yStr == "**") {
-										fStr = "--";
-									htmlChange(fStr, fStar);
-									}
-									// resets the selection under your button if change
-									// happens
-									yStr = "--";
-									htmlChange(yStr, YourStar);
-									var p = document.createElement('p');
-									var msg = marker.getPosition().lat() + ","
-										+ marker.getPosition().lng();
-									p.innerHTML = msg;
-									// removes old location information
-									if (yoursPos.childNodes.length > 0) {
-										yoursPos.removeChild(yoursPos.firstChild);
-									}
-								// adds new locations data
-									var childP = yoursPos.appendChild(p);
-									childP.id = "yourPos";
-									msg = "m," + msg;
-									othMark.socket.send(msg);
-									}
-	
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+		// if something has been selected the marker will be moved and info sent
+		// to other user
+		if (pos) {
+			changeMarker(pos);
+		}
+	}
+
+	function changeMarker(pos) {
+		// force marker into boundrys
+		var fixPos = posFix(pos);
+
+		// change marker pos or make new marker
+		marker = setMarker(marker, fixPos);
+
+		// resets final agree if this location was selected
+		if (yStr == "**") {
+			fStr = "--";
+			htmlChange(fStr, fStar);
+		}
+
+		// resets the selection under your button if change
+		// happens
+		yStr = "--";
+		htmlChange(yStr, YourStar);
+		var p = document.createElement('p');
+		var msg = marker.getPosition().lat() + "," + marker.getPosition().lng();
+		p.innerHTML = msg;
+
+		// removes old location information
+		if (yoursPos.childNodes.length > 0) {
+			yoursPos.removeChild(yoursPos.firstChild);
+		}
+
+		// adds new locations data
+		var childP = yoursPos.appendChild(p);
+		childP.id = "yourPos";
+		msg = "m," + msg;
+		othMark.socket.send(msg);
+	}
 
 	// pos is checked for being in boundrys
 	// new lnglat returned with fixed cords
@@ -217,6 +147,8 @@ function init() {
 		if (y > maxY) {
 			y = maxY;
 		}
+
+		// makes a new latlng object with corrected cords
 		var newPos = new google.maps.LatLng(y, x);
 		return newPos;
 	}
@@ -232,8 +164,8 @@ function init() {
 		}
 
 		// when a connection is made
-
 		othMark.socket.onopen = function() {
+			// listens for double click to create a marker
 			google.maps.event.addListener(map, 'dblclick',
 					function(clickLatLng) {
 						// force marker into boundrys
@@ -252,10 +184,11 @@ function init() {
 						yStr = "--";
 						htmlChange(yStr, YourStar);
 
+						// creates message to send
 						var msg = marker.getPosition().lat() + ","
 								+ marker.getPosition().lng();
 
-						// taks msg and maeks into html displayable
+						// takes msg and makes it into html displayable
 						var p = document.createElement('p');
 						p.style.wordWrap = "break-word";
 						p.innerHTML = msg;
@@ -304,7 +237,7 @@ function init() {
 				// adds new location data
 				var otherP = otherPos.appendChild(p);
 				otherP.id = "othersPos";
-				
+
 				var newPos = new google.maps.LatLng(y, x);
 				mark = setMarker(mark, newPos);
 				mark.setOpacity(.5);
@@ -315,11 +248,11 @@ function init() {
 	// endpoint initialization
 	// incase we have https
 	if (window.location.protocol == "http:") {
-		othMark.connect('ws://' + window.location.host + "/ComS309Project/map/" + getURLParameter("saleID"));
+		othMark.connect('ws://' + window.location.host + "/ComS309Project/map/"
+				+ getURLParameter("saleID"));
 	} else {
-		othMark
-				.connect('wss://' + window.location.host
-						+ "/ComS309Project/map/" + getURLParameter("saleID"));
+		othMark.connect('wss://' + window.location.host
+				+ "/ComS309Project/map/" + getURLParameter("saleID"));
 	}
 
 	// map boundrys
@@ -352,8 +285,5 @@ function init() {
 	});
 
 }
-
-
-
 
 google.maps.event.addDomListener(window, 'load', init);
