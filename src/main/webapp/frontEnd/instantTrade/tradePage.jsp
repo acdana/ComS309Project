@@ -120,6 +120,10 @@ things needed
 			<select id="locSelect">
 				<option value="base">Choose a Location</option>
 				<option value="MU">Memorial Union</option>
+				<option value="musicHall">Music Hall</option>
+				<option value="carver">Carver Hall</option>
+				<option value="beardshear">Beardshear Hall</option>
+				<option value="udcc">Union Drive Marketplace</option>
 			</select>
         </div>
 		</div>

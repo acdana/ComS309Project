@@ -74,6 +74,24 @@ function init() {
 				draggable: false
 			});
 			marker = setMarker(ddPos, fixPos);
+		}else if(val == "musicHall"){
+			// Music Hall's coordinates
+			var ddMarker = new google.maps.Marker({
+				position: new google.maps.LatLng(42.024614358276004, -93.64817440509796),
+				draggable: false
+			});
+		}else if(val == "carver"){
+			// Carver Hall's coords
+			var ddMarker = new google.maps.Marker({
+				position: new google.maps.LatLng(42.02522007494668, -93.64832729101181),
+				draggable: false
+			});
+		}else if(val == "beardshear"){
+			// Beardshear Hall's coords
+			var ddMarker = new google.maps.Marker({
+				position: new google.maps.LatLng(42.02614457873918, -93.64842116832733),
+				draggable: false
+			});
 		}
 	}
 
