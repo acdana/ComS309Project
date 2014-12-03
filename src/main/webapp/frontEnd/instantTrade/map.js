@@ -28,9 +28,8 @@ function init() {
 	var othMark = {};
 	othMark.socket = null;
 
-	// this marker
-
-	// other persons marker
+	// Variables for the chooseLM function
+	var ls = document.getElementById("locSelect");
 
 	// for displaying location of both markers
 	var yoursPos = document.getElementById("yoursPos");
@@ -44,12 +43,7 @@ function init() {
 		mapTypeId : google.maps.MapTypeId.ROADMAP
 	});
 
-	// Variables for the chooseLM function
-	var ls = document.getElementById("locSelect");
-	var lsVal = ls.options[ls.selectedIndex].value;
 
-	// Listen for dropdown selection
-	document.getElementById("locSelect").addEventListener("click", chooseLM(lsVal));
 	// make new marker or change marker position
 	function setMarker(mar, fixPos) {
 		if (mar) {
@@ -65,7 +59,7 @@ function init() {
 	}
 	
 	// If a landmark is selected in the dropdown menu, place the marker on the cordinates for the landmark.
-	function chooseLM(val){
+/*	function chooseLM(val){
 		Console.log("works");
 		if(val == "MU"){
 			// MU's coordinates on map
@@ -93,7 +87,110 @@ function init() {
 				draggable: false
 			});
 		}
-	}
+	}*/
+	
+	
+	
+	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	
+				ls.addEventListener('change', chooseLM);
+	
+				// If a landmark is selected in the dropdown menu, place the marker
+				// on the cordinates for the landmark.
+				function chooseLM() {
+					var val = ls.options[ls.selectedIndex].value;
+					var pos = null;
+					if (val == "MU") {
+						// MU's coordinates on map
+						pos = new google.maps.LatLng(42.02348260903262,
+								-93.64573359489441);
+					}
+					else if(val == "musicHall"){
+						// Music Hall's coordinates
+						pos = new google.maps.LatLng(42.024614358276004, -93.64817440509796);
+						
+					}
+					else if(val == "carver"){
+						// Carver Hall's coordinates
+						pos = new google.maps.LatLng(42.02522007494668, -93.64832729101181);
+						
+					}
+					else if(val == "beardshear"){
+						// Beardshear Hall's coordinates
+						pos = new google.maps.LatLng(42.02614457873918, -93.64842116832733);
+						
+					}
+					if (pos) {
+						changeMarker(pos);
+					}
+				}
+	
+				
+				
+				
+				
+							function changeMarker(pos) {
+									// force marker into boundrys
+									var fixPos = posFix(pos);
+					
+									// change marker pos or make new marker
+									marker = setMarker(marker, fixPos);
+					
+									// resets final agree if this location was selected
+									if (yStr == "**") {
+										fStr = "--";
+									htmlChange(fStr, fStar);
+									}
+									// resets the selection under your button if change
+									// happens
+									yStr = "--";
+									htmlChange(yStr, YourStar);
+									var p = document.createElement('p');
+									var msg = marker.getPosition().lat() + ","
+										+ marker.getPosition().lng();
+									p.innerHTML = msg;
+									// removes old location information
+									if (yoursPos.childNodes.length > 0) {
+										yoursPos.removeChild(yoursPos.firstChild);
+									}
+								// adds new locations data
+									var childP = yoursPos.appendChild(p);
+									childP.id = "yourPos";
+									msg = "m," + msg;
+									othMark.socket.send(msg);
+									}
+	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// pos is checked for being in boundrys
 	// new lnglat returned with fixed cords
