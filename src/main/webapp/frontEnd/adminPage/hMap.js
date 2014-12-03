@@ -1,4 +1,5 @@
 var hmap = null;
+var averageMarker = null;
 
 function init() {
 
@@ -12,3 +13,29 @@ function init() {
 	
 }
 google.maps.event.addDomListener(window, 'load', init);
+
+
+
+$("#averageLocationButton").click(function () {
+    $.ajax({
+        url: "../../309/T11/getAverageSaleLocation",
+        type: "GET",
+        headers: {
+        	"Authorization" : getCredentials(),
+        },
+        success: function (result) {
+            console.log(result);
+            
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(result.Result[1].Location[0].latitude, result.Result[1].Location[0].longitude),
+                map: hmap,
+                title:"Average Sale Location"
+            });
+            
+        },
+        error: function (dc, status, err) {
+            console.log(err);
+            console.log(status);
+        }
+    });
+});

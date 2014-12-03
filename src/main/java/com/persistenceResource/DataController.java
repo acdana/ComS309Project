@@ -342,13 +342,18 @@ public class DataController implements AbstractDataController {
 			Point2D.Double averageLocation = new Point2D.Double();
 			double averageLatitude = 0.0;
 			double averageLongitude = 0.0;
-			int setSize = coordinateList.size();
+			int aveSize = coordinateList.size();
 			for(Point2D.Double coordinate : coordinateList) {
-				averageLatitude += coordinate.getY();
-				averageLongitude += coordinate.getX();
+				if(coordinate.getY() != 0.0 && coordinate.getX() != 0.0) {
+					averageLatitude += coordinate.getY();
+					averageLongitude += coordinate.getX();
+				}
+				else {
+					aveSize--;
+				}
 			}
-			averageLatitude = averageLatitude/setSize;
-			averageLongitude = averageLongitude/setSize;
+			averageLatitude = averageLatitude/aveSize;
+			averageLongitude = averageLongitude/aveSize;
 			
 			averageLocation.setLocation(averageLongitude, averageLatitude);
 			return averageLocation;
