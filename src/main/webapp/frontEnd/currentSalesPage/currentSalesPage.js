@@ -95,7 +95,7 @@ function filter() {
 	
 					if (weight[i] > 0) {
 						
-						displayCurrentSales(rows[enums[i]].saleDescription, rows[enums[i]].Seller, rows[enums[i]].dateCreated);
+						displayCurrentSales(rows[enums[i]].saleDescription, rows[enums[i]].Seller, rows[enums[i]].dateCreated, rows[enums[i]].saleID);
 						
 					}
 	
