@@ -8,6 +8,8 @@
 	<script src="../include/credentials.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+    
     <script> 
     $(function(){
       $("#navbar").load("../include/navbar.html"); 
@@ -32,7 +34,10 @@
 		</select>
 		<button id="changeUserTypeButton">Confirm</button><br/>
 	</div>
+	
+	<div id="map" style="width: 400px; height: 400px;"></div>
 </body>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="adminPage.js"></script>
+    <script src="hMap.js"></script>
 </html>
