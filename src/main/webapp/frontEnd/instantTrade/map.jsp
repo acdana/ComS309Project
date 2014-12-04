@@ -3,6 +3,7 @@
 <script src="map.js"></script>
 </head>
 <body>
-	<div id="map" style="width: 500px; height: 500px;"></div>
+	<!-- Set map size here -->
+	<div id="map" style="width: 500px; height: 400px;"></div>
 </body>
 </html>

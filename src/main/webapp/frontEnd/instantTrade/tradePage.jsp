@@ -121,7 +121,6 @@ things needed
 		</div>
 		<div id="yoursPos" style="display: none;"></div>
 		<div id="other">
-			<br>
 			<button id="otherBut">Other location</button>
 		</div>
 		<p id="otherStar">--</p>
@@ -140,6 +139,7 @@ things needed
 	<div id="rightright">
 		<div>
 			<p>
+				<h5 style="font-weight: bold; font-size:13px;">Don't forget to decide a meeting time with your trading partner!</h5>
 				<input type="text" placeholder="type and press enter to add an item"
 					id="items" />
 			</p>
