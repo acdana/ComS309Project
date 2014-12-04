@@ -43,5 +43,6 @@ public interface AbstractDataController {
 	public boolean updateProfilePic(EntityManager em, String username, String pic) throws Exception;
 	public boolean updateProfile(EntityManager em, String username, String bio) throws Exception;
 	public String getUserType(EntityManager em, HttpServletRequest req);
+	public String getAllSaleLocations(EntityManager em) throws Exception;
 	
 }
