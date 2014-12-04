@@ -1,5 +1,6 @@
 //javascript for chat abilities
 
+//function used to get the credentials of the current user based on cookie
 function getCredentials() {
 	   var authorization = "Authorization=Basic ";
 	   var idx = document.cookie.indexOf(authorization)
@@ -13,11 +14,13 @@ function getCredentials() {
 	  }
 }
 
+//function to get the username of the current user
 function getUsername() {
 	var username = getCredentials().substr(0, getCredentials().indexOf(':'));
 	return username.substr(username.indexOf(' ')+1);
 }
 
+//helper method to parse URL parameters for us
 function getURLParameter(sParam) {
     var sPageURL = window.location.search.substring(1);
     var sURLVariables = sPageURL.split('&');

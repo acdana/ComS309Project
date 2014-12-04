@@ -156,8 +156,11 @@ function swap(i, max, weight, enums) {
 
 }
 
-
+//this function is called on page load and displays all of the currently open sales
 function displayCurrentSales(description, seller, date, saleID) {
+	
+	//here we create a new html element that will be added to the table
+	//the description, seller, date, and saleID are all passed in via ajax result
     var sale = document.createElement("p");
     var table = document.getElementById("currentSalesTable");
     var row = table.insertRow(-1);
@@ -175,7 +178,7 @@ function displayCurrentSales(description, seller, date, saleID) {
     dateRow.innerHTML = date;
 }
 
-
+//function that is called to create a new sale
 function createSale()	 {
 	window.location.href = '../createSale/createSale.html';
 }

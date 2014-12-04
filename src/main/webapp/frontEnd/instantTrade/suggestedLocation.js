@@ -1,4 +1,4 @@
-
+//If the suggestedLocationButton is pressed we call this function which places a marker on a place on the map that is between the two users chosen locations
 $("#suggestedLocationButton").click(function () {
 	
 	try {
@@ -19,9 +19,12 @@ $("#suggestedLocationButton").click(function () {
    getSuggestedLocation(averageLat, averageLon);
 });
 
-
+//function that gets the suggested location based on the two users given locations
 function getSuggestedLocation(lat, lon) {
 var request = {
+		//location is the average location between the two users
+		//rankBy states that we want the closest location
+		//types are all the possible types of establishments we can choose
     location: new google.maps.LatLng(lat, lon),
     rankBy: google.maps.places.RankBy.DISTANCE,
     types: ['accounting',
@@ -122,15 +125,17 @@ var request = {
             'zoo']
 };
 
+//set suggest to a blank div to hold it
 suggest = document.getElementById('suggestDiv');
 
+//get the nearby place
 var service = new google.maps.places.PlacesService(suggest);
 service.nearbySearch(request, callback);
 
 }
 
 
-
+//called to place the marker
 function callback(results, status) {
 
     if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -142,7 +147,7 @@ function callback(results, status) {
         	  var image = '../assets/png/beachflag.png';
         	  var myLatLng = new google.maps.LatLng(rawCoord[0], rawCoord[1]);
         
-        	  
+        	  //if the marker exists, replace it, otherwise create it
         	  if(suggestedMarker) {
         		  suggestedMarker.setPosition(myLatLng);
         	  }

@@ -1,4 +1,4 @@
-
+//when penalizeButton is pressed this method is called to penalize the given user
 $("#penalizeButton").click(function () {
     $.ajax({
         url: "../../309/T11/penalizeUser/" + $("#userPenalize").val(),
@@ -17,6 +17,7 @@ $("#penalizeButton").click(function () {
     });
 });
 
+//when userPenaltyButton is pressed this function is called to return the current penalty count of the given user
 $("#userPenaltyButton").click(function () {
     $.ajax({
         url: "../../309/T11/getPenaltyCount/" + $("#userPenaltyCount").val(),
@@ -35,7 +36,7 @@ $("#userPenaltyButton").click(function () {
     });
 });
 
-
+//when userTypeButton is pressed this method gets the user type of the given user
 $("#userTypeButton").click(function () {
     $.ajax({
         url: "../../309/T11/getUserType/" + $("#userType").val(),

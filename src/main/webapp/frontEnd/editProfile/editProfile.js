@@ -1,5 +1,5 @@
 
-// Submit Bio Function
+// when subBio is clicked this function is called that updates the current users bio
 $('#subBio').click(function(){
 	var bio = document.getElementById("uploadBio").value;
 	var response = "";
@@ -23,7 +23,7 @@ $('#subBio').click(function(){
 	return false;
 });
 
-
+//when subPP is clicked this function is called which updates the profile picture of the currently logged in user
 $('#subPP').click(function(){
 	var pic = document.getElementById("uploadProfPic").value;
 	pic = pic.replace(/\//g, '~');

@@ -30,7 +30,7 @@ function getProfPic(){
 	
 };
 
-
+//this function gets the users profile pic (from an ajax call) and displays it in a previously generated html image tag
 function displayProfilePic(path, width, height) {
     var pic = document.getElementById("profPic");
     pic.src = path;
@@ -39,7 +39,7 @@ function displayProfilePic(path, width, height) {
 
 }
 
-// Find user's bio
+// this function gets the given users bio
 function getBio(){
 	getUsername();
 	var path = $.ajax({
@@ -60,7 +60,7 @@ function getBio(){
 	});
 }
 
-// userBio helper function
+// userBio helper function used to display the bio in the element with the given id
 function displayBio(path){
 	var bio = document.getElementById("userBio");
 	bio.innerHTML = path;
@@ -87,12 +87,12 @@ function getTotTrades(){
 	});
 };
 
-
+//this is a helper method that displays the total number of trades a user has made
 function displayTotalTrades(trades) {
     document.getElementById("totalTradesMade").innerHTML = "Total Trades: " + trades;
 }
 
-// Find number of items currently for sale
+// Find number of sales open for a give user
 function getOpenSales(){
 	$.ajax({
 		url: "../../309/T11/getOpenSales/" + getURLParameter("username"),
@@ -115,7 +115,7 @@ function getOpenSales(){
 
 
 
-
+//when sendMessageButton is clicked a message is sent to the user with the given message
 $("#sendMessageButton").click(function () {
     $.ajax({
         url: "../../309/T11/createNewMessage/" + getURLParameter("username") + "/" + $("#message").val() + "/" + getUsername(),
@@ -134,6 +134,7 @@ $("#sendMessageButton").click(function () {
     });
 });
 
+//helper method for displaying the amount of sales a user has open
 function displaySales(sales) {
 	document.getElementById("currentUserSales").innerHTML = "Current User Sales: " + sales;
 }

@@ -2,11 +2,13 @@
 	setUsername();
 </script>
 <script>
+//when logoutButton is clicked the logout() function is called to log the user out
 	$("#logoutButton").click(function() {
 		logout();
 	});
 </script>
 <script>
+//When usernameDisplay is clicked the user is taken to their own profile
 	$("#usernameDisplay").click(
 			function() {
 				window.location.href = '../profilePage/index.html?username='
@@ -14,16 +16,22 @@
 			});
 </script>
 <script>
+//When quickCreateSaleButton is pressed the user is taken to the createSale page
 	$("#quickCreateSaleButton").click(function() {
 		window.location.href = '../createSale/createSale.html';
 	});
 </script>
 <script>
+//when quickCurrentSalesButton is pressed the user is taken to the currentSalesPage
 	$("#quickCurrentSalesButton").click(function() {
 		window.location.href = '../currentSalesPage/currentSalesPage.html';
 	});
 </script>
 <script>
+//when otherButton is pressed the current users usertype is analyzed to decide what to do
+//if the user is an admin they are taken to the admin page
+//if the user is a moderator they are taken to the moderator page
+//if the user is a Basic user they are taken to the admin profile page to contact him
 	$("#otherButton")
 			.click(
 					function() {
@@ -57,12 +65,14 @@
 					});
 </script>
 <script>
+//when editProfileButton is pressed the user is taken to the edit profile page
 $("#editProfileButton").click(
 		function() {
 			window.location.href = '../editProfile/index.html';
 		});
 </script>
 <script>
+//when quickMessagesButton is pressed the user is taken to their messages
 $("#quickMessagesButton").click(
 		function() {
 			window.location.href = '../viewMessagesPage/viewMessagesPage.html';

@@ -3,6 +3,8 @@ var agreeBut = {};
 var secondSeller = null;
 var secondTransaction = true;
 
+//this gets the primary seller of the sale and sets secondTransaction based on whether or not the current user is the primary seller
+//this is used later in the sale to determine who will upload data
 $.ajax({
     url: "../../309/T11/getPrimarySeller/" + getURLParameter("saleID"),
     type: "GET",
@@ -89,6 +91,7 @@ agreeBut.connect = function(host) {
 					
 					var selectLength = 0;
 					var tradeBox = document.getElementById("tradeBox").options;
+					//for all items in the trade box, add the items to the database
 					while(selectLength < document.getElementById("tradeBox").options.length) {
 						$.ajax({
 					        url: "../../309/T11/createItem/" + getURLParameter("saleID") + "/" + getUsername() + "/" + tradeBox[selectLength].value,
@@ -108,12 +111,13 @@ agreeBut.connect = function(host) {
 						selectLength++;
 					}
 				
-					
+				//if the current user is not the primary seller
 				if(secondTransaction == false) {
 						var firstCoordUpload = document.getElementById("yourPos").innerHTML;
 						var secondCoordUpload = document.getElementById("othersPos").innerHTML;
 						var firstLatUpload = parseFloat(firstCoordUpload.split(",")[0]);
-						var firstLonUpload = parseFloat(firstCoordUpload.split(",")[1]);					    
+						var firstLonUpload = parseFloat(firstCoordUpload.split(",")[1]);
+						//add the sale details to the database
 						$.ajax({
 					        url: "../../309/T11/setSaleData/" + getURLParameter("saleID") + "/" + firstLatUpload + "/" + firstLonUpload + "/" + firstCoordUpload + "/" + secondCoordUpload + "/" + secondSeller,
 					        type: "POST",
@@ -132,6 +136,7 @@ agreeBut.connect = function(host) {
 
 				}
 				else {
+					//if the current user is the primary seller we will instead have the other user upload the data
 					agreeBut.socket.send("a,f");
 					window.location.href = '../../frontEnd/profilePage/index.html?username='+ getUsername();
 				}
@@ -178,6 +183,7 @@ agreeBut.connect = function(host) {
 
 					var selectLength = 0;
 					var tradeBox = document.getElementById("tradeBox").options;
+					//for each item in the trade, upload the item to the database
 					while(selectLength < document.getElementById("tradeBox").options.length) {
 						$.ajax({
 					        url: "../../309/T11/createItem/" + getURLParameter("saleID") + "/" + getUsername() + "/" + tradeBox[selectLength].value,
@@ -197,14 +203,14 @@ agreeBut.connect = function(host) {
 						selectLength++;
 					}
 					
-					
+					//if the current user is not the primary seller
 					if(secondTransaction == false) {
 
 							var firstCoordUpload = document.getElementById("yourPos").innerHTML;
 							var secondCoordUpload = document.getElementById("othersPos").innerHTML;
 							var firstLatUpload = parseFloat(firstCoordUpload.split(",")[0]);
 							var firstLonUpload = parseFloat(firstCoordUpload.split(",")[1]);
-												    
+							//upload the details from the sale to the database				    
 							$.ajax({
 						        url: "../../309/T11/setSaleData/" + getURLParameter("saleID") + "/" + firstLatUpload + "/" + firstLonUpload + "/" + firstCoordUpload + "/" + secondCoordUpload + "/" + secondSeller,
 						        type: "POST",

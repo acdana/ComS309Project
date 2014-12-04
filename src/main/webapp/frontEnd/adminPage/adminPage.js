@@ -1,7 +1,7 @@
 /**
  * 
  */
-
+//when deleteButton is pressed this method is called to delete the given user
 $("#deleteButton").click(function () {
     $.ajax({
         url: "../../309/T11/deleteUser/" + $("#userDelete").val(),
@@ -20,7 +20,7 @@ $("#deleteButton").click(function () {
     });
 });
 
-
+//when penalizeButton is pressed this method is called to penalize the given user
 $("#penalizeButton").click(function () {
     $.ajax({
         url: "../../309/T11/penalizeUser/" + $("#userPenalize").val(),
@@ -39,6 +39,7 @@ $("#penalizeButton").click(function () {
     });
 });
 
+//when userPenaltyButton is pressed this function is called to return the current penalty count of the given user
 $("#userPenaltyButton").click(function () {
     $.ajax({
         url: "../../309/T11/getPenaltyCount/" + $("#userPenaltyCount").val(),
@@ -57,6 +58,7 @@ $("#userPenaltyButton").click(function () {
     });
 });
 
+//when userTypeButton is pressed this method gets the user type of the given user
 $("#userTypeButton").click(function () {
     $.ajax({
         url: "../../309/T11/getUserType/" + $("#userType").val(),
@@ -75,6 +77,7 @@ $("#userTypeButton").click(function () {
     });
 });
 
+//when changeUserTypeButton is pressed this function changed the type of the given user to the given type
 $("#changeUserTypeButton").click(function () {
     $.ajax({
         url: "../../309/T11/changeUserType/" + $("#usernameToChange").val() + "/" + $("#changeUserType").val(),

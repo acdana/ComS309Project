@@ -114,7 +114,7 @@ function checkLogin() {
 
 
 
-
+//gets the credentials of the currently logged in user
 function getCredentials() {
 	   var authorization = "Authorization=Basic ";
 	   var idx = document.cookie.indexOf(authorization)
@@ -129,7 +129,7 @@ function getCredentials() {
 }
 
 
-
+//when loginButton is pressed this logon function is called
 $('#loginButton').click(function() {
     var username = document.forms["loginForm"]["logUsername"].value;
     var password = document.forms["loginForm"]["logPassword"].value;
@@ -161,25 +161,10 @@ $('#loginButton').click(function() {
     return false;
 });
 
-
+//this is a helper method used to get the username of the currently logged in user
 function getUsername() {
 	var username = getCredentials().substr(0, getCredentials().indexOf(':'));
 	return username.substr(username.indexOf(' ')+1);
 }
 
-//$("#testButton").click(function () {
-  //  $.ajax({
-    //    url: "309/T11/getAllUsernames",
-      //  type: "GET",
-        //headers: {
-        	//"Authorization" : getCredentials(),
-//        },
-  //      success: function (result) {
-    //        console.log(result);
-      //  },
-        //error: function (dc, status, err) {
-//            console.log(err);
-  //          console.log(status);
-    //    }
-//    });
-//});
+

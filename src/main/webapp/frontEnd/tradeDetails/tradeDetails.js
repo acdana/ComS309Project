@@ -1,10 +1,11 @@
+//on page load we call these functions to populate the page
 window.onload = function(){
 	setSaleInfo();
 	getSellerReputation();
 	getSaleTags();
 }
 
-
+//this function sets the sale description for the given sale
 function setSaleInfo() {
 	var saleID = document.getElementById("saleID");
 	saleID.innerText = "Sale ID: " + getURLParameter("saleID");
@@ -14,7 +15,7 @@ function setSaleInfo() {
 	sellerName.innerText = "Trader: " + unescape(getURLParameter("saleSeller"));	
 }
 
-
+//this function sets the sellers reputation on the page
 function getSellerReputation(){
 	$.ajax({
 		url: "../../309/T11/getReputation/" + unescape(getURLParameter("saleSeller")),
@@ -35,6 +36,7 @@ function getSellerReputation(){
 	});
 };
 
+//this function gets the tags for a given sale
 function getSaleTags(){
 	$.ajax({
 		url: "../../309/T11/getSaleTags/" + getURLParameter("saleID"),
@@ -72,6 +74,7 @@ function getSaleTags(){
 };
 
 
+//when beginTradeButton is pressed the user is taken to the sales instantTrade page
 $("#beginTradeButton").click(function () {
 	 window.location.href = '../instantTrade/tradePage.jsp?saleID=' + getURLParameter("saleID");
 });

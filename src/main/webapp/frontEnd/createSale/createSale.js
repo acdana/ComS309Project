@@ -1,5 +1,5 @@
 
-
+//when submitButton is clicked this function creates a sale with the given description and tags
 $("#submitButton").click(function () {
 	if($("#tags").val() == null || $("#tags").val() == "") {
 	    $.ajax({

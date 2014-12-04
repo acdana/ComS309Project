@@ -6,7 +6,7 @@ window.onload = function(){
 
 
 
-// Find number of trades the user has made
+// This function is used to make an ajax call that gets a users messages
 function getMessages(){
 	$.ajax({
 		url: "../../309/T11/getMessages/" + getUsername(),
@@ -18,6 +18,7 @@ function getMessages(){
 		success: function(result){
 			console.log(result);
 			var i = 0;
+			//for every message we call the displayMessages function to set the message on the page
 			while(result.Result[1].Messages[i] != null) {
 			displayMessages(result.Result[1].Messages[i].Message, result.Result[1].Messages[i].Sender, result.Result[1].Messages[i].dateCreated);
 			i++;
@@ -32,7 +33,7 @@ function getMessages(){
 	});
 };
 
-
+//this helper method creates a table with rows containing the message data provided via ajax call
 function displayMessages(message, sender, date) {
     var sale = document.createElement("p");
     var table = document.getElementById("messagesTable");
@@ -57,6 +58,7 @@ function displayMessages(message, sender, date) {
     dateRow.innerHTML = date;
 }
 
+//this is a function used for a quick reply to a message. It makes an ajax call that sends a message to the given user
 function sendMessage(sendTo, message) {
     $.ajax({
         url: "../../309/T11/createNewMessage/" + sendTo + "/" + message + "/" + getUsername(),
