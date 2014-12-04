@@ -825,4 +825,29 @@ public class RestController {
 		
 	}
 	
+	
+	
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getAllSaleLocations")
+	public String getAllSaleLocations(@Context HttpServletRequest req) {
+		
+		if(dataController.verifyCredentials(em, req) == true) {
+		
+			try {
+				String allLocations = dataController.getAllSaleLocations(em);
+				em.close();
+				return allLocations;
+
+			} catch (Exception e) {
+				em.close();
+				return "{\"Result\":[{\"Status\":\"Exception Failure\"}]}";
+			}
+		
+		}
+		else {
+			return "{\"Result\":[{\"Status\":\"Credential Failure\"}]}";
+		}
+	}
 }

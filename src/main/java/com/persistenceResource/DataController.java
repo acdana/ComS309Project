@@ -977,5 +977,33 @@ public class DataController implements AbstractDataController {
 		}
 		
 	}
+
+	public String getAllSaleLocations(EntityManager em) throws Exception {
+		
+		try{
+			Query query = em.createNamedQuery("getAllCoordinates");
+			ArrayList<Point2D.Double> coordinateList = ObjectMapper.mapCoordinates(query.getResultList());
+			
+			String allCoordinates = "{\"Result\":[{\"Status\":\"Success\"}, {\"Locations\":[";
+			for(Point2D.Double coordinate : coordinateList) {
+				String lat = Double.toString(coordinate.getY());
+				String lon = Double.toString(coordinate.getX());
+				if(!lat.equals("0.0") && !lon.equals("0.0")) {
+					String tempCoord = "{\"Lat\":\"" + lat + "\",\"Lon\":\"" + lon + "\"},";
+					allCoordinates += tempCoord;
+				}
+			}
+			if(coordinateList.size() > 0) {
+				allCoordinates = allCoordinates.substring(0, allCoordinates.length()-1);
+			}
+			allCoordinates += "]}]}";
+			
+			return allCoordinates;
+		}
+		catch(Exception e) {
+			throw e;
+		}
+		
+	}
 	
 }
