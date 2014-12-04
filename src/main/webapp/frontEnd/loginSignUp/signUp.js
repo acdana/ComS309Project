@@ -35,6 +35,7 @@ function checkForm() {
         type: "POST",
         success: function (result) {
             console.log(result);
+            
         }
     })
 }
@@ -48,6 +49,47 @@ $("#submitButton").click(function () {
         type: "POST",
         success: function (result) {
             console.log(result);
+            
+            
+            if(result.Result[0].Status == "Success") {
+            $.ajax({
+                url: "../../309/T11/userLogin/" + document.getElementById("username").value + "/" + document.getElementById("pass").value,
+                type: "GET",
+                datatype: 'json',
+                headers: {
+                	"Authorization" : getCredentials(),
+                },
+                success: function (result) {
+                	if(result.Result[0].Status == "Login Success") {
+                		
+                		var un = document.getElementById("username").value;
+                	    var passw = document.getElementById("pass").value;
+                	    
+                	    var header = "Basic " + un + ":" + passw;
+
+                	    document.cookie = "ourCookie=expires=;Authorization=; path=/";
+                	    
+                	    document.cookie = "ourCookie=Authorization=" + header + "; path=/";
+
+                		
+                		
+                	    window.location.href = '../../frontEnd/profilePage/index.html?username=' + document.getElementById("username").value;
+                	}
+                	else {
+                		alert("Incorrect Username/Password")
+                	}
+                    console.log(result);
+
+                },
+                error: function (dc, status, err) {
+                    console.log(err);
+                    console.log(status);
+                }
+            });
+            
+            }
+                
+            
         },
         error: function (dc, status, err) {
             console.log(err);
