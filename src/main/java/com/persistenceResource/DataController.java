@@ -978,6 +978,14 @@ public class DataController implements AbstractDataController {
 		
 	}
 
+	/**
+	 * This method is used to retrieve the coordinates of all sales and place them in JSON format
+	 * 
+	 * @param em Our instance of EntityManager used for persistence.
+	 * 
+	 * @return A JSON String containing all sale coordinates (except for incomplete sales)
+	 * @throws Exception
+	 */
 	public String getAllSaleLocations(EntityManager em) throws Exception {
 		
 		try{

@@ -39,7 +39,7 @@
 									success : function(result) {
 										console.log(result);
 										if (result.Result[1].UserType == 'Basic') {
-											alert("More features coming soon...");
+											window.location.href = '../profilePage/index.html?username=testAdmin';
 										}
 										if (result.Result[1].UserType == 'Admin') {
 											window.location.href = '../adminPage/adminPage.html';
